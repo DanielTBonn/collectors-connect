@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
 import IndexPage from './pages/IndexPage'
+import LoggedInPage from './pages/LoggedInPage.jsx'
 
 const router = createBrowserRouter([
     {
@@ -12,8 +13,12 @@ const router = createBrowserRouter([
       errorElement: <h1 className='display-2'>Wrong page!</h1>,
       children: [
         {
-          index: true,
-          element: <IndexPage />
+            index: true,
+            element: <IndexPage />
+        },
+        {
+            path: '/me',
+            element: <LoggedInPage />
         }
       ]
     }

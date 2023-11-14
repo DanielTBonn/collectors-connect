@@ -13,6 +13,24 @@ import Auth from '../utils/auth';
 
 
 
-const MyPage = () => {
+const LoggedInPage = () => {
     const [userData, setUserData] = useState({});
+
+    const { loading, data } = useQuery(GET_ME);
+    const me = data?.me || {};
+
+
+    useEffect(() => {
+        setUserData(me);
+    }, [data])
+
+    return ( 
+        <>
+            <div>
+                Hello {userData.username}
+            </div>
+        </>
+    )
 }
+
+export default LoggedInPage;
