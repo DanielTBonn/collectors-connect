@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
+import IndexPage from './pages/IndexPage'
 
 const router = createBrowserRouter([
     {
@@ -12,10 +13,7 @@ const router = createBrowserRouter([
       children: [
         {
           index: true,
-          element: <SearchBooks />
-        }, {
-          path: '/saved',
-          element: <SavedBooks />
+          element: <IndexPage />
         }
       ]
     }
