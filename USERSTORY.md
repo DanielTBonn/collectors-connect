@@ -59,3 +59,14 @@ Is installable.
 Let's make a user story asap, it's a struggle coming up with issues in github but I think it would be a good call to take some time to make them as soon as we get started too. Since we already have the shell of the application working we can hit the ground running on creating pages and getting styling to work after we come up with a solid game plan. I think we should divy up tasks where people feel they could make the most impact but since we all need to learn I'm down to pair program or do some type of work swapping. 
 
 First day will be all about figuring out what we're doing and coming up with a good structure for an MVP and maybe extra goals, if possible even do some server side work for our schemas. Second day we can go over ideas for theme and design and start putting it into action. 
+
+## Random Ideas
+
+Real-time chat app
+Music Streaming app
+Video Streaming app
+Blog/Social Media Type app
+Task Management/Project Management App
+Data Analytics App
+News App
+Groceries/Food Delivery app
