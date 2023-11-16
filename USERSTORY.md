@@ -68,5 +68,23 @@ Real-time chat app
 Ecommerce Website/Baby swap
 Groceries/Food Delivery app
 News App
-Music Streaming 
+Music Streaming
 
+# USER STORY
+
+When I view the header with a navbar,
+Then I am presented with a our website name, a search bar, a home page button a login or logout button, and a profile button,
+When I view the main page, 
+then I am presented with a list of different collections
+When I click on any collection, 
+Then I am taken to that specific collections page 
+When I am on the collection page,
+Then I can view all the items in that collection, and a link to the user's profile
+
+
+
+
+Random button for random collection
+Messaging between people users 
+When signing up, you can pick popular tags you might like
+When looking up in the searchbar, you get autofilled results from the databases 
