@@ -72,16 +72,35 @@ Music Streaming
 
 # USER STORY
 
+As a collector who enjoys 
+
 ## ACCEPTANCE CRITERIA
 
 When I view the header with a navbar,
 Then I am presented with a our website name, a search bar, a home page button a login or logout button, and a profile button,
 When I view the main page, 
-then I am presented with a list of different collections
-When I click on any collection, 
-Then I am taken to that specific collections page 
-When I am on the collection page,
-Then I can view all the items in that collection, and a link to the user's profile
+Then I am presented with a list of different collections
+When I click on any collection while logged out, 
+Then I am redirected to a login pagem
+When I am on that login page,
+Then I have the option to enter in my email and password to login or go to a sign up page,
+When I am on the sign up page, 
+Then I have the option to enter in an email, username, and password to sign up for the application,  
+When I am on the collection page while logged in,
+Then I can view all the items in that collection, and a link to the user's profile,
+When I am on that user's profile page,
+Then I can see a list of their different collections (and other user info?),
+When I am logged in,
+Then a profile icon that links to my user page shows up on the navbar as well as a logout icon,
+When I am logged in on my profile page,
+Then I am able to add a collection with a name and a tag or edit one of my existing collections,
+When I wish to edit my existing collection,
+Then I can change the name, the tag, or add/delete photos from the list,
+When I wish to search for a collection,
+Then I can search the collection by it's tag,
+When I click the log out option,
+Then I am redirected to the home page
+
 
 ## extra ideas
 
@@ -89,3 +108,6 @@ Random button for random collection
 Messaging between people users 
 When signing up, you can pick popular tags you might like
 When looking up in the searchbar, you get autofilled results from the databases 
+Future a user will be able to add multiple tags 
+Implement colorblind mode 
+Change the order the photos are presented
