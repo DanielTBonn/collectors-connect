@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
 
-import Cards from "../components/Cards";
 
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -21,7 +20,6 @@ const LoggedInPage = () => {
     <>
       <div>
         Hello {userData.username}
-        <Cards />
       </div>
     </>
   );
