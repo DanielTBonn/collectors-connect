@@ -1,9 +1,28 @@
 const typeDefs = `
     type User {
-        _id: ID
+        _id: ID!
         username: String
         email: String
         password: String
+        collectionCount: Int
+        collections: [Collection]
+    }
+
+    type Collection {
+        _id: ID!
+        name: String
+        description: String
+        image: String
+        items: [Items]
+        tag: String
+    }
+
+    type Items {
+        _id: ID!
+        name: String
+        description: String
+        image: String
+        tag: String
     }
 
     type Auth {
@@ -14,6 +33,9 @@ const typeDefs = `
     type Query {
         users: [User]
         me: User
+        collections: [Collection]
+        collection: [Items]
+        item: Item
     }
 
     type Mutation {
