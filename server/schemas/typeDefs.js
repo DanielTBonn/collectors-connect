@@ -13,11 +13,11 @@ const typeDefs = `
         name: String
         description: String
         image: String
-        items: [Items]
+        items: [Item]
         tag: String
     }
 
-    type Items {
+    type Item {
         _id: ID!
         name: String
         description: String
@@ -34,7 +34,7 @@ const typeDefs = `
         users: [User]
         me: User
         collections: [Collection]
-        collection: [Items]
+        collection: [Item]
         item: Item
     }
 
