@@ -1,5 +1,5 @@
-const IndexPage = () => {
 
+const IndexPage = () => {
   return (
     <>
       <div>
