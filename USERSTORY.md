@@ -76,19 +76,19 @@ As a collector who enjoys
 
 ## ACCEPTANCE CRITERIA
 
+When I view the main page, 
+Then I am presented with a list of different collections,
 When I view the header with a navbar,
 Then I am presented with a our website name, a search bar, a home page button a login or logout button, and a profile button,
-When I view the main page, 
-Then I am presented with a list of different collections
 When I click on any collection while logged out, 
-Then I am redirected to a login pagem
+Then I am redirected to a login page,
 When I am on that login page,
 Then I have the option to enter in my email and password to login or go to a sign up page,
 When I am on the sign up page, 
 Then I have the option to enter in an email, username, and password to sign up for the application,  
 When I am on the collection page while logged in,
 Then I can view all the items in that collection, and a link to the user's profile,
-When I am on that user's profile page,
+When I am on that user's profile page while logged in,
 Then I can see a list of their different collections (and other user info?),
 When I am logged in,
 Then a profile icon that links to my user page shows up on the navbar as well as a logout icon,
