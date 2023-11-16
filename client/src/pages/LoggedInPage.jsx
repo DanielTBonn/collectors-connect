@@ -1,36 +1,30 @@
-import { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
-import {
-  Container,
-  Card,
-  Button,
-  Row,
-  Col
-} from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { Container, Card, Button, Row, Col } from "react-bootstrap";
 
-import { GET_ME } from '../utils/queries';
-import Auth from '../utils/auth';
+import Cards from "../components/Cards";
 
-
+import { GET_ME } from "../utils/queries";
+import Auth from "../utils/auth";
 
 const LoggedInPage = () => {
-    const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
 
-    const { loading, data } = useQuery(GET_ME);
-    const me = data?.me || {};
+  const { loading, data } = useQuery(GET_ME);
+  const me = data?.me || {};
 
+  useEffect(() => {
+    setUserData(me);
+  }, [data]);
 
-    useEffect(() => {
-        setUserData(me);
-    }, [data])
-
-    return ( 
-        <>
-            <div>
-                Hello {userData.username}
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div>
+        Hello {userData.username}
+        <Cards />
+      </div>
+    </>
+  );
+};
 
 export default LoggedInPage;
