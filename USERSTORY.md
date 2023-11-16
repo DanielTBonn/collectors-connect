@@ -62,11 +62,11 @@ First day will be all about figuring out what we're doing and coming up with a g
 
 ## Random Ideas
 
+Pin Pintrest - collectors connect
+Clothing Swap website/ebay maybe? 
 Real-time chat app
-Music Streaming app
-Video Streaming app
-Blog/Social Media Type app
-Task Management/Project Management App
-Data Analytics App
-News App
+Ecommerce Website/Baby swap
 Groceries/Food Delivery app
+News App
+Music Streaming 
+
