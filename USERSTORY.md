@@ -72,7 +72,7 @@ Music Streaming
 
 # USER STORY
 
-As a collector who enjoys 
+As a collector of special objects, I want to be able to store my collection(s) and see what other collectors are collecting, so that I can connect with a larger community of collectors.
 
 ## ACCEPTANCE CRITERIA
 
