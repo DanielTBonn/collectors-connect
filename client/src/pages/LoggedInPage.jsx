@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
-import Cards from '../components/Cards';
+import FeedCards from '../components/Cards';
 
 
 import { GET_ME } from "../utils/queries";
@@ -20,10 +20,10 @@ const LoggedInPage = () => {
   return (
     <>
       <div>
-        Hello {userData.username}
+        <h1 style={{marginTop: "50px"}}>My Collections</h1>
       </div>
       <div>
-        <Cards />
+        <FeedCards />
       </div>
     </>
   );

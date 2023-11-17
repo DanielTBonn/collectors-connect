@@ -19,6 +19,7 @@
   .feed-ul {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .feed-ul > li {
@@ -33,13 +34,15 @@
   
   .cards__items {
     margin-bottom: 24px;
+    flex-wrap: wrap;
   }
   
   .cards__item {
     display: flex;
     flex: 1;
-    margin: 0 1rem;
+    margin: 20px 1rem;
     border-radius: 10px;
+    min-width: 300px;
   }
   
   .cards__item__link {
@@ -113,17 +116,20 @@
     .content__blog__container {
       width: 100%;
     }
+
   }
   
   @media only screen and (min-width: 1024px) {
     .cards__items {
       display: flex;
     }
+
   }
   
   @media only screen and (max-width: 1024px) {
     .cards__item {
       margin-bottom: 2rem;
     }
+
   }
   
