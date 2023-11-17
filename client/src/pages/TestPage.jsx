@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { uploadFile } from '../utils/uploadFile'
 
+const dummy = 'test';
+
 const TestPage = () => {
   const [file, setFile] = useState(null);
   const handleFileChange = (e) => {
