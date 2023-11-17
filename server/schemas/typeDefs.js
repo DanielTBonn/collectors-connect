@@ -34,13 +34,16 @@ const typeDefs = `
         users: [User]
         me: User
         collections: [Collection]
-        collection: [Item]
+        collection: Collection
         item: Item
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
+        addCollection(username: String!): User
+        editCollection(username: String!, collectionId: ID): User
+        deleteCollection(collectionId: ID): User
     }
 `;
 
