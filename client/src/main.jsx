@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
 import IndexPage from './pages/IndexPage'
 import LoggedInPage from './pages/LoggedInPage.jsx'
+import TestPage from './pages/TestPage';
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         {
             path: '/me',
             element: <LoggedInPage />
+        },
+        {
+            path: '/testpage',
+            element: <TestPage />
         }
       ]
     }
