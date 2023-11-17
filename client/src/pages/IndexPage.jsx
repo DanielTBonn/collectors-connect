@@ -1,10 +1,13 @@
-
+import FeedCards from '../components/FeedCards';
 
 const IndexPage = () => {
   return (
     <>
       <div>
-        Hello World!
+        <h1 style={{marginTop: "50px"}}>Collections Feed</h1>
+      </div>
+      <div>
+        <FeedCards />
       </div>
     </>
   );
