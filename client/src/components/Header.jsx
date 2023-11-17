@@ -8,20 +8,17 @@ const styles = {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundImage: "url(../../assets/eran-menashri-Ae7pSsfzEHs-unsplash.jpg)",
-        position: "absolute",
-        top: "-50px",
+        position: "relative",
+        backgroundPosition: "center 20%"
     },
 }
 
 
 function Header() {
     return (
-      <div className="header d-flex align-items-center">
-        <div className="background-image" style={styles.header}></div>
+      <div className="header d-flex align-items-center" style={styles.header}>
         <div className="container text-center">
-          <div>
             <Navbar />
-          </div>
         </div>
       </div>
     );
