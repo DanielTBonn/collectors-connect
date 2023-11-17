@@ -24,7 +24,7 @@ function Cards() {
               src="https://i.etsystatic.com/25352708/r/il/25032d/3631422808/il_fullxfull.3631422808_fq5q.jpg"
               text="Come see my collection of rare anime pins."
               label="Anime Pins"
-              path="/animePins"
+              path="/me"
             />
             <CardItem
               src="https://cdn-cahdg.nitrocdn.com/qibYFaeYzHTHZvJqjkkfoDkalZtVaNMR/assets/static/optimized/rev-322d5f6/blog/wp-content/uploads/2021/04/Speedway-vinyl.jpeg"
