@@ -51,7 +51,7 @@ const resolvers = {
                 const collection = await Collection.create({...args})
                 console.log(collection);
                 await User.findOneAndUpdate(
-                    { _id: "6558310a08fa851ee7eb9106" },
+                    { _id: "65586efaa835577f06233283" },
                     { $addToSet: { collections: collection._id }},
                     );
                 // console.log(updateUser);
