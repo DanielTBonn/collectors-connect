@@ -9,12 +9,12 @@ const typeDefs = `
     }
 
     type Collection {
-        _id: ID!
+        _id: ID
         name: String
         description: String
+        tag: String
         image: String
         items: [Item]
-        tag: String
     }
 
     type Item {
@@ -33,7 +33,7 @@ const typeDefs = `
     type Query {
         users: [User]
         me: User
-        collections: [Collection]
+        collections(username: String!): [Collection]
         collection: Collection
         item: Item
     }
@@ -41,7 +41,7 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addCollection(username: String!): User
+        addCollection(name: String!, description: String!, image: String!, tag: String!, items: [String]!): Collection
         editCollection(username: String!, collectionId: ID): User
         deleteCollection(collectionId: ID): User
     }

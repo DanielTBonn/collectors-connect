@@ -7,12 +7,18 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
+const AWS = require('aws-sdk');
+
+
+const { getImage } = require('./controllers/image-controller');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers
 });
+
 
 const startApolloServer = async () => {
   await server.start();
@@ -41,3 +47,7 @@ const startApolloServer = async () => {
 }
 
 startApolloServer();
+
+// db.once('open', () => {
+//   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+// });
