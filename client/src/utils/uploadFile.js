@@ -1,22 +1,15 @@
-import AWS from 'aws-sdk';
-// import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION } from 'dotenv';
-// const AWS = require('../../../server/aws.config');
+import AWS from '../../aws.config'
+
+const S3_BUCKET = import.meta.env.VITE_S3_BUCKET
 
 export const uploadFile = async (file) => {
-    // const S3_BUCKET = process.env.S3_BUCKET
 
-  // below we need to get the process.env files working or manually replace the info in the config
-    // AWS.config.update({
-    //   accessKeyId: AWS_ACCESS_KEY_ID,
-    //   secretAccessKey: AWS_SECRET_ACCESS_KEY,
-    //   region: AWS_REGION,
-    // });
     const s3 = new AWS.S3({
-      // params: { Bucket: S3_BUCKET },
+      params: { Bucket: S3_BUCKET },
     });
 
     const params = {
-      // Bucket: S3_BUCKET,
+      Bucket: S3_BUCKET,
       Key: file.name,
       Body: file,
     };

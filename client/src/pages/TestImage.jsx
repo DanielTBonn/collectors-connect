@@ -1,15 +1,8 @@
 import { useState, useEffect } from "react";
-// import { uploadFile } from '../utils/uploadFile'
-import AWS from 'aws-sdk';
+import AWS from '../../aws.config'
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
-
-
-// AWS.config.update({
-//   accessKeyId: AWS_ACCESS_KEY_ID,
-//   secretAccessKey: AWS_SECRET_ACCESS_KEY,
-//   region: AWS_REGION,
-// });
+const S3_BUCKET = import.meta.env.VITE_S3_BUCKET
 
 const s3 = new AWS.S3();
 
@@ -21,22 +14,20 @@ async function urlResult (params) {
         }, function(err) { console.log(err) })}
 
 
-console.log()
-
-console.log(urlResult())
 
 const TestImage = () => {
     const { loading: userLoading, data: userData } = useQuery(GET_ME);
     console.log(userData)
     const user = userData?.me || {};
     console.log(user)
-    // console.log(user.collections[0].image)
+
 
     const params = {
         Bucket: S3_BUCKET,
         Key: null
       }
       console.log(user)
+
     const [picture, setPicture] = useState('');
 
     useEffect(() => {
