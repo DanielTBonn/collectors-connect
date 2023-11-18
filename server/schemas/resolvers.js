@@ -11,7 +11,7 @@ const resolvers = {
         },
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id })
+                return await User.findOne({ _id: context.user._id }).populate('collections')
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -44,14 +44,14 @@ const resolvers = {
             console.log(parent);
             // console.log(args.username);
 
-            console.log(mongoose.Types.ObjectId.isValid('6552f78058a084dbcde2edde'));
+            console.log(mongoose.Types.ObjectId.isValid('6558310a08fa851ee7eb9106'));
 // true
             console.log(mongoose.Types.ObjectId.isValid('whatever'));
 
                 const collection = await Collection.create({...args})
                 console.log(collection);
                 await User.findOneAndUpdate(
-                    { _id: "6552f78058a084dbcde2edde" },
+                    { _id: "6558310a08fa851ee7eb9106" },
                     { $addToSet: { collections: collection._id }},
                     );
                 // console.log(updateUser);

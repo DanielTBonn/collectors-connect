@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 // import { uploadFile } from '../utils/uploadFile'
 import AWS from 'aws-sdk';
-
+import { useQuery } from "@apollo/client";
+import { GET_ME, GET_USER_COLLECTIONS } from "../utils/queries";
+import UserProfile from "../components/UserProfile";
+import Cards from "../components/Cards";
 
 const dummy = 'test';
 
@@ -17,10 +20,7 @@ AWS.config.update({
 });
 const s3 = new AWS.S3();
 
-const params = {
-  Bucket: S3_BUCKET,
-  Key: 'Example.jpg'
-}
+
 
 // const getImageData = async (req, res) => {
 //   console.log("Hello")
@@ -40,8 +40,8 @@ const params = {
 //   res.send(imageData.Body);
 // };
 
-var promise = s3.getSignedUrlPromise('getObject', params);
-async function urlResult () {
+async function urlResult (params) {
+    const promise = s3.getSignedUrlPromise('getObject', params);
     return promise
         .then((url) => {
             return url
@@ -54,11 +54,23 @@ console.log
 console.log(urlResult())
 
 const TestImage = () => {
+    const { loading: userLoading, data: userData } = useQuery(GET_ME);
+    
+    const user = userData?.me || {};
+    console.log(user)
+    console.log(user.collections[0].image)
+
+    
+
+    const params = {
+        Bucket: S3_BUCKET,
+        Key: user.collections[0].image,
+      }
 
     const [picture, setPicture] = useState('');
 
     useEffect(() => {
-        urlResult()
+        urlResult(params)
         .then(picture => setPicture(picture))
         .catch(error => {
             console.log(error);
