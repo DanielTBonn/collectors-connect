@@ -15,12 +15,7 @@ AWS.config.update({
   secretAccessKey: AWS_SECRET_ACCESS_KEY,
   region: AWS_REGION,
 });
-const s3 = new AWS.S3({
-//   params: { 
-//     Bucket: S3_BUCKET,
-// },
-//   region: AWS_REGION,
-});
+const s3 = new AWS.S3();
 
 const params = {
   Bucket: S3_BUCKET,
