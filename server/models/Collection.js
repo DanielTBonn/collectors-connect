@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const dateFormat = require('../utils/dateFormat');
+const dateFormat = require('../../client/src/utils/dateFormat.cjs');
 
 const itemSchema = new Schema(
   {
