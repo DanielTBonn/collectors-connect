@@ -33,7 +33,7 @@ const typeDefs = `
     type Query {
         users: [User]
         me: User
-        collections(username: String!): [Collection]
+        collections: [Collection]
         collection: Collection
         item: Item
     }
