@@ -43,3 +43,11 @@ export const GET_USER_COLLECTIONS = gql`
     }
   }
 `;
+
+//query for all users? will this be necessary?
+
+//query to get collections to be used on main page and via search form
+
+//query for a single collection
+
+//query for a single item in a collection-to be accessed while viewing all items in a collection
