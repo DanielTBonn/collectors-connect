@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 // import { uploadFile } from '../utils/uploadFile'
 import AWS from 'aws-sdk';
 import { useQuery } from "@apollo/client";
-import { GET_ME} from "../utils/queries";
-
+import { GET_ME, GET_USER_COLLECTIONS } from "../utils/queries";
+import UserProfile from "../components/UserProfile";
+import Cards from "../components/Cards";
 
 const dummy = 'test';
 
@@ -18,6 +19,26 @@ AWS.config.update({
   region: AWS_REGION,
 });
 const s3 = new AWS.S3();
+
+
+
+// const getImageData = async (req, res) => {
+//   console.log("Hello")
+//   const imageData = await s3.getObject(params, function(err,data) {
+//     if (err) console.log(err, err.stack);
+//     else {
+//         console.log(data)
+//         console.log(data.Body)
+//         return data;
+//     };
+// }).promise();
+
+//   console.log(imageData)
+//   console.log('hmm')
+//   res.contentType('image/jpeg');
+//   res.setHeader('Content-Type', imageData.ContentType);
+//   res.send(imageData.Body);
+// };
 
 async function urlResult (params) {
     const promise = s3.getSignedUrlPromise('getObject', params);
@@ -38,6 +59,8 @@ const TestImage = () => {
     const user = userData?.me || {};
     console.log(user)
     console.log(user.collections[0].image)
+
+    
 
     const params = {
         Bucket: S3_BUCKET,
