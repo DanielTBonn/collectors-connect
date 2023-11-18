@@ -19,7 +19,11 @@ const router = createBrowserRouter([
         {
             path: '/me',
             element: <LoggedInPage />
-        }
+        },
+        // {
+        //   path: '/search',
+        //   element: <Search />
+        // },
       ]
     }
   ])

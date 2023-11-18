@@ -23,3 +23,13 @@ export const ADD_USER = gql`
         }
     }
 `;
+
+//write mutations for:
+
+//add a collection
+
+//edit a collection
+
+//delete a collection
+
+//suspect we will need mutations also for add an item, edit an item and delete an item? if so we'll need to add those to typedefs as well
