@@ -6,18 +6,12 @@ import { GET_ME, GET_USER_COLLECTIONS } from "../utils/queries";
 import UserProfile from "../components/UserProfile";
 import Cards from "../components/Cards";
 
-const dummy = 'test';
-
-const S3_BUCKET='collectors-connect-collections-bucket'
-const AWS_ACCESS_KEY_ID='AKIAX4RHXPPRDWUOPLMV'
-const AWS_SECRET_ACCESS_KEY='gztooStbkdZ542T7HWDNq/Yt7ejDekWi5WU/YNDD'
-const AWS_REGION='us-east-1'
-
 AWS.config.update({
   accessKeyId: AWS_ACCESS_KEY_ID,
   secretAccessKey: AWS_SECRET_ACCESS_KEY,
   region: AWS_REGION,
 });
+
 const s3 = new AWS.S3();
 
 
@@ -48,34 +42,37 @@ async function urlResult (params) {
         }, function(err) { console.log(err) })}
 
 
-
-console.log
+console.log()
 
 console.log(urlResult())
 
 const TestImage = () => {
     const { loading: userLoading, data: userData } = useQuery(GET_ME);
-    
+    console.log(userData)
     const user = userData?.me || {};
     console.log(user)
-    console.log(user.collections[0].image)
+    // console.log(user.collections[0].image)
 
     
 
     const params = {
         Bucket: S3_BUCKET,
-        Key: user.collections[0].image,
+        Key: null
       }
-
+      console.log(user)
     const [picture, setPicture] = useState('');
 
     useEffect(() => {
-        urlResult(params)
-        .then(picture => setPicture(picture))
-        .catch(error => {
+        if (user.collections) {
+          params.Key = user.collections[0].image
+          console.log('Helloworld')
+          urlResult(params)
+          .then(picture => setPicture(picture))
+          .catch(error => {
             console.log(error);
-        })
-    }, [])
+          })
+        }
+    }, [user])
 
   const [file, setFile] = useState(null);
   const handleFileChange = (e) => {
@@ -88,7 +85,11 @@ const TestImage = () => {
       return  (
           <div className="TestPage">
       <div>
+        {userLoading ? (
+          <p>Loading User...</p>
+        ):
         <img src={picture}></img>
+        }
       </div>
     </div>
   );

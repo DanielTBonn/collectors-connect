@@ -2,13 +2,6 @@ import AWS from 'aws-sdk';
 // import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION } from 'dotenv';
 // const AWS = require('../../../server/aws.config');
 
-
-const S3_BUCKET='collectors-connect-collections-bucket'
-const AWS_ACCESS_KEY_ID='AKIAX4RHXPPRJGIUV3RX'
-const AWS_SECRET_ACCESS_KEY='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'
-const AWS_REGION='us-east-1'
-
-
 export const uploadFile = async (file) => {
     // const S3_BUCKET = process.env.S3_BUCKET
 
