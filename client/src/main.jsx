@@ -6,6 +6,7 @@ import App from './App.jsx'
 import IndexPage from './pages/IndexPage'
 import LoggedInPage from './pages/LoggedInPage.jsx'
 import TestPage from './pages/TestPage';
+import TestImage from './pages/TestImage.jsx'
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         {
             path: '/testpage',
             element: <TestPage />
+        },
+        {
+          path: '/testimage',
+          element: <TestImage />
         }
       ]
     }

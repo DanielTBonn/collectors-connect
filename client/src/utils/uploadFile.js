@@ -1,5 +1,7 @@
 import AWS from 'aws-sdk';
 // import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION } from 'dotenv';
+// const AWS = require('../../../server/aws.config');
+
 
 const S3_BUCKET='collectors-connect-collections-bucket'
 const AWS_ACCESS_KEY_ID='AKIAX4RHXPPRJGIUV3RX'
@@ -10,8 +12,6 @@ const AWS_REGION='us-east-1'
 export const uploadFile = async (file) => {
     // const S3_BUCKET = process.env.S3_BUCKET
 
-    
-
   // below we need to get the process.env files working or manually replace the info in the config
     AWS.config.update({
       accessKeyId: AWS_ACCESS_KEY_ID,
@@ -20,7 +20,6 @@ export const uploadFile = async (file) => {
     });
     const s3 = new AWS.S3({
       params: { Bucket: S3_BUCKET },
-      region: AWS_REGION,
     });
 
     const params = {
