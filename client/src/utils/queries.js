@@ -25,7 +25,7 @@ export const GET_ME = gql`
   }
 `;
 
-export const GET_USER_COLLECTIONS = gql`
+export const QUERY_USER_COLLECTIONS = gql`
   query getUserCollections($userId: ID!) {
     userCollections(userId: $userId) {
       _id
@@ -47,6 +47,25 @@ export const GET_USER_COLLECTIONS = gql`
 //query for all users? will this be necessary?
 
 //query to get collections to be used on main page and via search form
+export const QUERY_COLLECTIONS = gql`
+  query getCollections {
+    collections {
+      _id
+      name
+      description
+      username
+      image
+      items {
+        _id
+        name
+        description
+        image
+        tag
+      }
+      tag
+    }
+  }
+`;
 
 //query for a single collection
 

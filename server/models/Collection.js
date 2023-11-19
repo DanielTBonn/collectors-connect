@@ -53,6 +53,10 @@ const collectionSchema = new Schema(
     image: {
       type: String,
     },
+    username: {
+      type: String,
+      required: true,
+    },
     items: [itemSchema],
     comments: [
       {

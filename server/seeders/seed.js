@@ -1,23 +1,45 @@
-const mongoose = require('mongoose');
-const { User } = require('../models');
-
-// Load seed data
+const { User, Collection } = require('../models');
+const models = require('../models');
+const db = require('../config/connection');
 const userData = require('./seedUser.json');
+const collectionData = require('./seedCollection.json');
 
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/group-project-3-db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Clear the database before seeding it
+const cleanDB = async (modelName, collectionName) => {
+  try {
+    let modelExists = await models[modelName].db.db.listCollections({
+      name: collectionName
+    }).toArray()
 
-// Seed Users
-User.insertMany(userData)
-  .then(() => {
-    console.log('Users seeded successfully');
-  })
-  .catch((err) => {
-    console.error('Error seeding users:', err);
-  })
-  .finally(() => {
-    mongoose.disconnect();
-  });
+    if (modelExists.length) {
+      await db.dropCollection(collectionName);
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+db.once('open', async () => {
+  try {
+    await cleanDB('Collection', 'collections');
+
+    await cleanDB('User', 'users');
+
+    await User.create(userData);
+
+    // await Collection.create(collectionData);
+    for (let i = 0; i < collectionData.length; i++) {
+      const { _id, username } = await Collection.create(collectionData[i]);
+      const user = await User.findOneAndUpdate(
+        { username: username },
+        { $addToSet: { collections: _id }},
+      );
+    };
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  console.log('Users and Collections seeded successfully!');
+  process.exit(0);
+})
