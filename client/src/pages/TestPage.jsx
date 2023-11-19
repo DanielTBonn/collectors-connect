@@ -26,7 +26,15 @@ const TestPage = () => {
 
   const [editCollection, { error }] = useMutation(EDIT_COLLECTION)
 
-  const key = 'users/' + user.username + '/collections/' + user.collection + '/' + 'file'
+  let key = 'users/' + user.username + '/collections/'
+  
+  useEffect(() => {
+    if(user.collections) {
+      key = 'users/' + user.username + '/collections/' + user.collections[0].name + '/' + file.name
+    }
+
+  }, [file])
+
   
   const handleFileUpload = () => {
     try {
