@@ -3,6 +3,7 @@ const models = require('../models');
 const db = require('../config/connection');
 const userData = require('./seedUser.json');
 const collectionData = require('./seedCollection.json');
+const itemData = require('./seedItems.json');
 
 // Clear the database before seeding it
 const cleanDB = async (modelName, collectionName) => {
@@ -25,14 +26,38 @@ db.once('open', async () => {
 
     await cleanDB('User', 'users');
 
-    await User.create(userData);
+    const createdUsers = await User.create(userData);
 
-    // await Collection.create(collectionData);
-    for (let i = 0; i < collectionData.length; i++) {
-      const { _id, username } = await Collection.create(collectionData[i]);
-      const user = await User.findOneAndUpdate(
-        { username: username },
-        { $addToSet: { collections: _id }},
+    
+    for (let i = 0; i < createdUsers.length; i++) {
+      const currentUser = createdUsers[i];
+      // Create a collection for the current user
+      const createdCollection = await Collection.create({
+        ...collectionData[i],
+        userId: currentUser._id, // Associate the collection with the current user
+        items: [], // Initialize an empty array for items
+      });
+      // Add an item from seed items array to collection
+      await Collection.findOneAndUpdate(
+        createdCollection._id,
+        {
+          $addToSet: {
+            items: {
+              ...itemData[i],
+              collectionId: createdCollection._id,
+            },
+          },
+        },
+      );
+      // Add the collection to the user's collections array
+      await User.findByIdAndUpdate(
+        currentUser._id,
+        {
+          $addToSet: {
+            collections: createdCollection._id,
+          },
+        },
+        { new: true }
       );
     };
   } catch (err) {
@@ -40,6 +65,6 @@ db.once('open', async () => {
     process.exit(1);
   }
 
-  console.log('Users and Collections seeded successfully!');
+  console.log('Data seeded successfully!');
   process.exit(0);
 })

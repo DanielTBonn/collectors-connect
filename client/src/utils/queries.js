@@ -20,12 +20,13 @@ export const GET_ME = gql`
           tag
         }
         tag
+        userId
       }
     }
   }
 `;
 
-export const QUERY_USER_COLLECTIONS = gql`
+export const GET_USER_COLLECTIONS = gql`
   query getUserCollections($userId: ID!) {
     userCollections(userId: $userId) {
       _id
@@ -40,6 +41,7 @@ export const QUERY_USER_COLLECTIONS = gql`
         tag
       }
       tag
+      userId
     }
   }
 `;
@@ -47,9 +49,9 @@ export const QUERY_USER_COLLECTIONS = gql`
 //query for all users? will this be necessary?
 
 //query to get collections to be used on main page and via search form
-export const QUERY_COLLECTIONS = gql`
+export const GET_COLLECTIONS = gql`
   query getCollections {
-    collections {
+    collection {
       _id
       name
       description
@@ -63,6 +65,7 @@ export const QUERY_COLLECTIONS = gql`
         tag
       }
       tag
+      userId
     }
   }
 `;
