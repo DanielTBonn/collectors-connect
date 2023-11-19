@@ -16,7 +16,7 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         collections: async (parent, args) => {
-            return await Collection.find()
+            return await Collection.find();
         }
     },
 
