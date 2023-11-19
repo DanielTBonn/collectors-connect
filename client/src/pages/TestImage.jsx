@@ -32,8 +32,7 @@ const TestImage = () => {
 
     useEffect(() => {
         if (user.collections) {
-          params.Key = user.collections[0].image
-          console.log('Helloworld')
+          params.Key = user.collections[0].items[5].itemImage
           urlResult(params)
           .then(picture => setPicture(picture))
           .catch(error => {

@@ -32,7 +32,6 @@ const TestPage = () => {
     if(user.collections) {
       key = 'users/' + user.username + '/collections/' + user.collections[0].name + '/' + file.name
     }
-
   }, [file])
 
   
