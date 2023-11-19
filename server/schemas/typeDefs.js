@@ -19,10 +19,10 @@ const typeDefs = `
 
     type Item {
         _id: ID!
-        name: String
-        description: String
-        image: String
-        tag: String
+        itemName: String
+        itemDescription: String
+        itemImage: String
+        itemTag: String
     }
 
     type Auth {
@@ -41,8 +41,8 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addCollection(name: String!, description: String!, image: String!, tag: String!, items: [String]!): Collection
-        editCollection(username: String!, collectionId: ID): User
+        addCollection(name: String!, description: String!, image: String!, tag: String!): Collection
+        editCollection(itemName: String!, itemDescription: String!, itemImage: String!, itemTag: String!): Collection
         deleteCollection(collectionId: ID): User
     }
 `;

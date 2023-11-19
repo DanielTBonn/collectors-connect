@@ -3,20 +3,20 @@ const dateFormat = require('../../client/src/utils/dateFormat.cjs');
 
 const itemSchema = new Schema(
   {
-  name: {
+  itemName: {
     type: String,
     required: true,
   },
-  description: {
+  itemDescription: {
     type: String,
   },
-  image: {
+  itemImage: {
     type: String,
   },
-  tag: {
+  itemTag: {
     type: String,
   },
-  comments: [
+  itemComments: [
     {
       commentText: {
         type: String,

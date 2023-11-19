@@ -44,12 +44,10 @@ const resolvers = {
             return { token, user };
         },
         addCollection: async (parent, args, context) => {
-            console.log(parent);
             // console.log(args.username);
 
             console.log(mongoose.Types.ObjectId.isValid('6558310a08fa851ee7eb9106'));
 // true
-            console.log(mongoose.Types.ObjectId.isValid('whatever'));
 
                 const collection = await Collection.create({...args})
                 console.log(collection);
@@ -64,6 +62,16 @@ const resolvers = {
 
                     return collection;
 
+        },
+        editCollection: async (parent, args, context) => {
+            console.log("In edit collection")
+            const collection = await Collection.findOneAndUpdate(
+                { _id: "655870c95c434732ee1223bb" },
+                { $addToSet: { items: args }},
+                { new: true, runValidators: true }
+                )
+
+                return collection;
         }
 
     }

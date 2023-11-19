@@ -14,10 +14,10 @@ export const GET_ME = gql`
         image
         items {
           _id
-          name
-          description
-          image
-          tag
+          itemName
+          itemDescription
+          itemTag
+          itemImage
         }
         tag
       }
@@ -34,10 +34,10 @@ export const GET_USER_COLLECTIONS = gql`
       image
       items {
         _id
-        name
-        description
-        image
-        tag
+        itemName
+        itemDescription
+        itemTag
+        itemImage
       }
       tag
     }
