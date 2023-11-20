@@ -40,14 +40,14 @@ export const ADD_COLLECTION = gql`
 `;
 
 export const EDIT_COLLECTION = gql`
-    mutation editCollection($itemName: String!, $itemDescription: String!, $itemImage: String!, $itemTag: String!) {
-        editCollection(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, itemTag: $itemTag) {
+    mutation editCollection($itemName: String!, $itemDescription: String!, $itemImage: String!, $itemTag: String!, $collectionId: String!) {
+        editCollection(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, itemTag: $itemTag, collectionId: $collectionId) {
             items {
-                _id
                 itemName
                 itemDescription
                 itemTag
                 itemImage
+                collectionId
             }
         }
     }

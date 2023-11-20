@@ -13,7 +13,7 @@ export const GET_ME = gql`
         description
         image
         items {
-          _id
+          collectionId
           itemName
           itemDescription
           itemTag
@@ -33,7 +33,7 @@ export const GET_USER_COLLECTIONS = gql`
       description
       image
       items {
-        _id
+        collectionId
         itemName
         itemDescription
         itemTag

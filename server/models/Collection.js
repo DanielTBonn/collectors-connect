@@ -16,6 +16,10 @@ const itemSchema = new Schema(
   itemTag: {
     type: String,
   },
+  collectionId: {
+    type: String,
+    required: true,
+  },
   itemComments: [
     {
       commentText: {

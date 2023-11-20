@@ -44,34 +44,37 @@ const resolvers = {
             return { token, user };
         },
         addCollection: async (parent, args, context) => {
-            // console.log(args.username);
+            
 
-            console.log(mongoose.Types.ObjectId.isValid('6558310a08fa851ee7eb9106'));
-// true
+        
+        
+        const collection = await Collection.create({...args})
+        console.log(collection);
 
-                const collection = await Collection.create({...args})
-                console.log(collection);
-                await User.findOneAndUpdate(
-                    { _id: "655870232854a46fa97d21ec" },
-                    { $addToSet: { collections: collection._id }},
-                    );
-                // console.log(updateUser);
-                //     if (!updateUser) {
+        // ------------------------------------------------------------------------------------------------------------
+        // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
+        // ------------------------------------------------------------------------------------------------------------
+        await User.findOneAndUpdate(
+            { _id: "655a99a85e983aa404f4dfbc" },
+            { $addToSet: { collections: collection._id }},
+            );
+            // console.log(updateUser);
+            //     if (!updateUser) {
                 //         throw AuthenticationError;
                 //     }
-
-                    return collection;
-
+                
+                return collection;    
         },
-        editCollection: async (parent, args, context) => {
+        editCollection: async (parent, { itemName, itemDescription, itemImage, itemTag, collectionId}, context) => {
             console.log("In edit collection")
-            const collection = await Collection.findOneAndUpdate(
-                { _id: "655870c95c434732ee1223bb" },
-                { $addToSet: { items: args }},
-                { new: true, runValidators: true }
-                )
-
-                return collection;
+            if( context.user) {
+                const collection = await Collection.findOneAndUpdate(
+                    { _id: collectionId },
+                    { $addToSet: { items: { itemName, itemDescription, itemImage, itemTag, collectionId } }},
+                    { new: true, runValidators: true }
+                    )
+                    return collection;
+                }
         }
 
     }

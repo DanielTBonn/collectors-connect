@@ -18,7 +18,7 @@ const typeDefs = `
     }
 
     type Item {
-        _id: ID!
+        collectionId: ID!
         itemName: String
         itemDescription: String
         itemImage: String
@@ -42,7 +42,7 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addCollection(name: String!, description: String!, image: String!, tag: String!): Collection
-        editCollection(itemName: String!, itemDescription: String!, itemImage: String!, itemTag: String!): Collection
+        editCollection(itemName: String!, itemDescription: String!, itemImage: String!, itemTag: String!, collectionId: String!): Collection
         deleteCollection(collectionId: ID): User
     }
 `;

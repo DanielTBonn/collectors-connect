@@ -32,20 +32,27 @@ const TestPage = () => {
     if(user.collections) {
       key = 'users/' + user.username + '/collections/' + user.collections[0].name + '/' + file.name
     }
+
   }, [file])
 
   
   const handleFileUpload = () => {
     try {
+      console.log("hi")
+      console.log(user.collections[0]._id)
+      console.log(user.collections[0].name)
+
       const { data } = editCollection({
         variables: {
-            itemName: 'issa name',
-            itemDescription: 'issa description',
+            itemName: 'item name',
+            itemDescription: 'item description',
             itemImage: key,
-            itemTag: 'issa tag'
+            itemTag: 'item tag',
+            collectionId: user.collections[0]._id
         }
       })
       console.log("Success!")
+      console.log("data", data)
       
     } catch (err) {
       console.log("There was an error")
