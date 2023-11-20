@@ -1,36 +1,36 @@
 const { Schema, model } = require("mongoose");
 const dateFormat = require("../../client/src/utils/dateFormat.cjs");
 
-const itemSchema = new Schema({
-  name: {
+const itemSchema = new Schema(
+  {
+  itemName: {
     type: String,
     required: true,
   },
-  description: {
+  itemDescription: {
     type: String,
   },
-  image: {
+  itemImage: {
     type: String,
   },
-  tag: {
+  itemTag: {
     type: String,
   },
   collectionId: {
-    type: Schema.Types.ObjectId,
-      ref: "Collection",
-      required: true,
+    type: String
+
   },
-  comments: [
+  itemComments: [
     {
       commentText: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1,
         maxlength: 280,
       },
       commentAuthor: {
         type: String,
-        required: true,
+        // required: true,
       },
       createdAt: {
         type: Date,
@@ -57,23 +57,23 @@ const collectionSchema = new Schema(
       type: String,
     },
     // Owner of collection, reference to User model
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // userId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
     items: [itemSchema],
     comments: [
       {
         commentText: {
           type: String,
-          required: true,
+          // required: true,
           minlength: 1,
           maxlength: 280,
         },
         commentAuthor: {
           type: String,
-          required: true,
+          // required: true,
         },
         createdAt: {
           type: Date,

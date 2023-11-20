@@ -13,11 +13,11 @@ export const GET_ME = gql`
         description
         image
         items {
-          _id
-          name
-          description
-          image
-          tag
+          collectionId
+          itemName
+          itemDescription
+          itemTag
+          itemImage 
         }
         tag
         userId
@@ -34,11 +34,11 @@ export const GET_USER_COLLECTIONS = gql`
       description
       image
       items {
-        _id
-        name
-        description
-        image
-        tag
+        collectionId
+        itemName
+        itemDescription
+        itemTag
+        itemImage
       }
       tag
       userId
