@@ -12,9 +12,11 @@ const typeDefs = `
         _id: ID
         name: String
         description: String
-        tag: String
         image: String
+        tag: String
+        userId: ID!
         items: [Item]
+        comments: [Comment]
     }
 
     type Item {
@@ -23,6 +25,13 @@ const typeDefs = `
         itemDescription: String
         itemImage: String
         itemTag: String
+        comments: [Comment]
+    }
+
+    type Comment {
+        commentText: String
+        commentAuthor: String
+        createdAt: String
     }
 
     type Auth {

@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Collection 1",
+        "description": "Description One",
+        "image": "image url 1",
+        "tag": "tagOne"
+    },
+    {
+        "name": "Collection 2",
+        "description": "Description Two",
+        "image": "image url 2",
+        "tag": "tagTwo"
+    },
+    {
+        "name": "Collection 3",
+        "description": "Description Three",
+        "image": "image url 3",
+        "tag": "tagThree"
+    },
+    {
+        "name": "Collection 4",
+        "description": "Description Four",
+        "image": "image url 4",
+        "tag": "tagFour"
+    },
+    {
+        "name": "Collection 5",
+        "description": "Description Five",
+        "image": "image url 5",
+        "tag": "tagFive"
+    },
+    {
+        "name": "Collection 6",
+        "description": "Description Six",
+        "image": "image url 6",
+        "tag": "tagSix"
+    },
+    {
+        "name": "Collection 7",
+        "description": "Description Seven",
+        "image": "image url 7",
+        "tag": "tagSeven"
+    },
+    {
+        "name": "Collection 8",
+        "description": "Description Eight",
+        "image": "image url 8",
+        "tag": "tagEight"
+    },
+    {
+        "name": "Collection 9",
+        "description": "Description Nine",
+        "image": "image url 9",
+        "tag": "tagNine"
+    },
+    {
+        "name": "Collection 10",
+        "description": "Description Ten",
+        "image": "image url 10",
+        "tag": "tagTen"
+    }
+]

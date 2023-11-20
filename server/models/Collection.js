@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const dateFormat = require('../../client/src/utils/dateFormat.cjs');
+const dateFormat = require("../../client/src/utils/dateFormat.cjs");
 
 const itemSchema = new Schema(
   {
@@ -17,8 +17,9 @@ const itemSchema = new Schema(
     type: String,
   },
   collectionId: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+      ref: "Collection",
+      required: true,
   },
   itemComments: [
     {
@@ -39,8 +40,7 @@ const itemSchema = new Schema(
       },
     },
   ],
-}
-);
+});
 
 const collectionSchema = new Schema(
   {
@@ -51,11 +51,17 @@ const collectionSchema = new Schema(
     description: {
       type: String,
     },
+    image: {
+      type: String,
+    },
     tag: {
       type: String,
     },
-    image: {
-      type: String,
+    // Owner of collection, reference to User model
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     items: [itemSchema],
     comments: [
