@@ -57,11 +57,11 @@ const collectionSchema = new Schema(
       type: String,
     },
     // Owner of collection, reference to User model
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      // required: true,
-    },
+    // userId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
     items: [itemSchema],
     comments: [
       {

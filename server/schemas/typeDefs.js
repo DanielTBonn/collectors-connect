@@ -14,7 +14,7 @@ const typeDefs = `
         description: String
         image: String
         tag: String
-        userId: ID!
+        userId: ID
         items: [Item]
         comments: [Comment]
     }
