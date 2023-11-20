@@ -27,6 +27,31 @@ export const ADD_USER = gql`
 //write mutations for:
 
 //add a collection
+export const ADD_COLLECTION = gql`
+    mutation addCollection($name: String!, $description: String!, $image: String!, $tag: String!, $items: [String]!) {
+        addCollection(name: $name, description: $description, image: $image, tag: $tag, items: $items) {
+            _id
+            name
+            description
+            tag
+            image
+        }
+    }
+`;
+
+export const EDIT_COLLECTION = gql`
+    mutation editCollection($itemName: String!, $itemDescription: String!, $itemImage: String!, $itemTag: String!, $collectionId: String!) {
+        editCollection(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, itemTag: $itemTag, collectionId: $collectionId) {
+            items {
+                itemName
+                itemDescription
+                itemTag
+                itemImage
+                collectionId
+            }
+        }
+    }
+`;
 
 //edit a collection
 
