@@ -16,7 +16,12 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         collections: async (parent, args) => {
-            return await Collection.find();
+            try {
+            return await Collection.find().populate('items');
+            } catch (error) {
+                console.error(error);
+                throw error; // Rethrow the error to be caught by GraphQL
+            }
         }
     },
 

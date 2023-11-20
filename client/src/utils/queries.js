@@ -51,12 +51,13 @@ export const GET_USER_COLLECTIONS = gql`
 //query to get collections to be used on main page and via search form
 export const GET_COLLECTIONS = gql`
   query getCollections {
-    collection {
+    collections {
       _id
       name
       description
-      username
       image
+      tag
+      userId
       items {
         _id
         name
@@ -64,8 +65,11 @@ export const GET_COLLECTIONS = gql`
         image
         tag
       }
-      tag
-      userId
+      comments {
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
   }
 `;
