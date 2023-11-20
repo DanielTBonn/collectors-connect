@@ -17,7 +17,7 @@ export const GET_ME = gql`
           itemName
           itemDescription
           itemTag
-          itemImage
+          itemImage 
         }
         tag
         userId

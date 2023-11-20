@@ -17,21 +17,20 @@ const itemSchema = new Schema(
     type: String,
   },
   collectionId: {
-    type: Schema.Types.ObjectId,
-      ref: "Collection",
-      required: true,
+    type: String
+
   },
   itemComments: [
     {
       commentText: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1,
         maxlength: 280,
       },
       commentAuthor: {
         type: String,
-        required: true,
+        // required: true,
       },
       createdAt: {
         type: Date,
@@ -61,20 +60,20 @@ const collectionSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
     items: [itemSchema],
     comments: [
       {
         commentText: {
           type: String,
-          required: true,
+          // required: true,
           minlength: 1,
           maxlength: 280,
         },
         commentAuthor: {
           type: String,
-          required: true,
+          // required: true,
         },
         createdAt: {
           type: Date,
