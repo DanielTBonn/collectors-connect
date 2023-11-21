@@ -1,5 +1,6 @@
-const { User, Collection, Item } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User, Collection } = require('../models');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
 const mongoose = require('mongoose');
 
 
@@ -8,47 +9,53 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('collections').populate({
-                    path: 'collections',
-                    populate: ['items', 'userId']
-                });
+                return await User.findOne({ _id: context.user._id }).populate('collections');
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
         users: async () => {
-            const users = await User.find().populate('collections').populate({
+            const users = await User.find().populate({
                 path: 'collections',
-                populate: ['items', 'userId']
-            });
+                populate: {
+                  path: 'items',
+                  model: 'Item'
+                }
+              });
             console.log(users);
             return users;
         },
-        singleUser: async (parent, { username }) => {
-            const user = await User.findOne({ username: username }).populate('collections').populate({
+        singleUser: async (parent, { _id }) => {
+            const user = await User.findById(_id).populate({
                 path: 'collections',
-                populate: ['items', 'userId']
-            }
-            );
+                populate: {
+                  path: 'items',
+                  model: 'Item'
+                }
+              });
             return user;
         },
         collections: async (parent, { name }) => {
             try {
                 if (name) {
                     // If a tag is provided, filter collections by tag
-                    return await Collection.findOne({ name }).populate('userId', 'items');
+                    return await Collection.find({ name }).populate('items');
                   } else {
                     // If no tag is provided, return all collections
-                    return await Collection.find().populate(['userId', 'items']);
+                    return await Collection.find().populate('items');
                   }
             } catch (error) {
                 console.error(error);
                 throw error; // Rethrow the error to be caught by GraphQL
             }
         },
-        singleCollection: async () => {},
+        singleCollection: async (parent, { collectionId }) => {
+            const collection = await Collection.findById(collectionId).populate('items');
+              console.log(collection);
+              return collection;
+        },
         randomCollection: async () => {
             try {
-              const randomCollection = await Collection.find().populate('userId');
+              const randomCollection = await Collection.find().populate('items');
               
               const randNum = Math.floor(Math.random() * randomCollection.length);
               console.log(randNum);
