@@ -12,68 +12,94 @@ export const GET_ME = gql`
         name
         description
         image
+        userId
         items {
+          _id
           collectionId
           itemName
           itemDescription
-          itemTag
           itemImage 
         }
-        tag
-        userId
       }
     }
   }
 `;
 
-export const GET_USER_COLLECTIONS = gql`
-  query getUserCollections($userId: ID!) {
-    userCollections(userId: $userId) {
+export const GET_USERS = gql`
+  query users {
+    users {
       _id
-      name
-      description
-      image
-      items {
-        collectionId
-        itemName
-        itemDescription
-        itemTag
-        itemImage
+      username
+      email
+      collectionCount
+      collections {
+        _id
+        name
+        description
+        image
+        userId
+        items {
+          _id
+          collectionId
+          itemName
+          itemDescription
+          itemImage 
+        }
       }
-      tag
-      userId
     }
   }
 `;
-
-//query for all users? will this be necessary?
 
 //query to get collections to be used on main page and via search form
 export const GET_COLLECTIONS = gql`
-  query getCollections {
+  query collections {
     collections {
       _id
       name
       description
       image
-      tag
       userId
       items {
-        _id
-        name
-        description
-        image
-        tag
-      }
-      comments {
-        commentText
-        commentAuthor
-        createdAt
+        collectionId
+        itemName
+        itemDescription
+        itemImage
       }
     }
   }
 `;
 
-//query for a single collection
+export const GET_SINGLE_COLLECTION = gql`
+  query singleCollection {
+    singleCollection {
+      _id
+      name
+      description
+      image
+      userId
+      items {
+        collectionId
+        itemName
+        itemDescription
+        itemImage
+    }
+  }
+`;
 
-//query for a single item in a collection-to be accessed while viewing all items in a collection
+export const GET_RANDOM_COLLECTION = gql`
+  query getRandomCollection {
+    randomCollection {
+      _id
+      name
+      description
+      image
+      userId
+      items {
+        collectionId
+        itemName
+        itemDescription
+        itemImage
+      }
+    }
+  }
+`;

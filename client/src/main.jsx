@@ -7,7 +7,7 @@ import IndexPage from './pages/IndexPage'
 import LoggedInPage from './pages/LoggedInPage.jsx'
 import TestPage from './pages/TestPage';
 import TestImage from './pages/TestImage.jsx'
-import Search from './pages/Search';
+import SearchPage from './pages/SearchPage';
 
 const router = createBrowserRouter([
     {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         },
         {
           path: '/search',
-          element: <Search />
+          element: <SearchPage />
         }
       ]
     }
