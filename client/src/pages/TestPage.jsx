@@ -35,6 +35,7 @@ const TestPage = () => {
 
   }, [file])
 
+  console.log(key)
   
   const handleFileUpload = () => {
     try {
@@ -42,12 +43,12 @@ const TestPage = () => {
       console.log(user.collections[0]._id)
       console.log(user.collections[0].name)
 
+      console.log('inside handleFile', key)
       const { data } = addItem({
         variables: {
             itemName: 'item name',
             itemDescription: 'item description',
             itemImage: key,
-            itemTag: 'item tag',
             collectionId: user.collections[0]._id
         }
       })

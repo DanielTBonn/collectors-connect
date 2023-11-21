@@ -8,24 +8,37 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('collections')
+                return await User.findOne({ _id: context.user._id }).populate('collections').populate({
+                    path: 'collections',
+                    populate: 'items'
+                });
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
         users: async () => {
-            const users = await User.find().populate('collections');
+            const users = await User.find().populate('collections').populate({
+                path: 'collections',
+                populate: 'items'
+            });
             console.log(users);
             return users;
         },
-        singleUser: async () => {},
+        singleUser: async (parent, { username }) => {
+            const user = await User.findOne({ username: username }).populate('collections').populate({
+                path: 'collections',
+                populate: ['items', 'userId']
+            }
+            );
+            return user;
+        },
         collections: async (parent, { name }) => {
             try {
                 if (name) {
                     // If a tag is provided, filter collections by tag
-                    return await Collection.find({ name }).populate('userId', 'items');
+                    return await Collection.findOne({ name }).populate('userId', 'items');
                   } else {
                     // If no tag is provided, return all collections
-                    return await Collection.find().populate('userId', 'items');
+                    return await Collection.find().populate(['userId', 'items']);
                   }
             } catch (error) {
                 console.error(error);
@@ -76,14 +89,17 @@ const resolvers = {
         console.log('add collection?')
         
         
-        const collection = await Collection.create({...args})
+        const collection = await Collection.create({
+            ...args,
+            userId: context.user ? context.user._id : "655d1294b83a63f31771c154"
+        })
         console.log(collection);
 
         // ------------------------------------------------------------------------------------------------------------
         // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
         // ------------------------------------------------------------------------------------------------------------
         await User.findOneAndUpdate(
-            { _id: context.user ? context.user._id : "655bff908fae42c8976f9037" },
+            { _id: context.user ? context.user._id : "655d1294b83a63f31771c154" },
             { $addToSet: { collections: collection._id }},
             );
             // console.log(updateUser);
