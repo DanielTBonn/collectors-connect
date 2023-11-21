@@ -10,7 +10,7 @@ const resolvers = {
             if (context.user) {
                 return await User.findOne({ _id: context.user._id }).populate('collections').populate({
                     path: 'collections',
-                    populate: 'items'
+                    populate: ['items', 'userId']
                 });
             }            
             throw new AuthenticationError('You need to be logged in!');
@@ -18,7 +18,7 @@ const resolvers = {
         users: async () => {
             const users = await User.find().populate('collections').populate({
                 path: 'collections',
-                populate: 'items'
+                populate: ['items', 'userId']
             });
             console.log(users);
             return users;
