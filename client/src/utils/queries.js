@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
   query me {
@@ -17,7 +17,7 @@ export const GET_ME = gql`
           itemName
           itemDescription
           itemTag
-          itemImage 
+          itemImage
         }
         tag
         userId
@@ -50,22 +50,12 @@ export const GET_USER_COLLECTIONS = gql`
 
 //query to get collections to be used on main page and via search form
 export const GET_COLLECTIONS = gql`
-  query getCollections {
-    collection {
+  query Collections {
+    collections {
       _id
       name
-      description
-      username
       image
-      items {
-        _id
-        name
-        description
-        image
-        tag
-      }
-      tag
-      userId
+      description
     }
   }
 `;
