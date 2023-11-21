@@ -1,4 +1,4 @@
-const { User, Collection } = require('../models');
+const { User, Collection, Item } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require("apollo-server-express");
 const mongoose = require('mongoose');
@@ -9,7 +9,13 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('collections');
+                return await User.findOne({ _id: context.user._id }).populate({
+                    path: 'collections',
+                    populate: {
+                      path: 'items',
+                      model: 'Item'
+                    }
+            });
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
