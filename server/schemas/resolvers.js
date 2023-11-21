@@ -13,17 +13,19 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         users: async () => {
-            return await User.find().populate('collections');
+            const users = await User.find().populate('collections');
+            console.log(users);
+            return users;
         },
         singleUser: async () => {},
         collections: async (parent, { name }) => {
             try {
                 if (name) {
                     // If a tag is provided, filter collections by tag
-                    return await Collection.find({ name });
+                    return await Collection.find({ name }).populate('userId', 'items');
                   } else {
                     // If no tag is provided, return all collections
-                    return await Collection.find();
+                    return await Collection.find().populate('userId', 'items');
                   }
             } catch (error) {
                 console.error(error);

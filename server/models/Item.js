@@ -17,8 +17,6 @@ const itemSchema = new Schema(
         ref: "Collection",
         required: true,
       },
-    // set this to use virtual below
-
 });
 
 const Item = model("Item", itemSchema);
