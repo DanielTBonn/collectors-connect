@@ -6,7 +6,8 @@ import { ADD_COLLECTION, ADD_ITEM } from "../utils/mutations";
 
 
 
-const TestPage = () => {
+const EditCollectionButton = ({ collectionId }) => {
+    console.log(collectionId)
 
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
   console.log(userData)
@@ -30,26 +31,25 @@ const TestPage = () => {
   
   useEffect(() => {
     if(user.collections) {
-      key = 'users/' + user.username + '/collections/' + user.collections[0].name + '/' + file.name
+      key = 'users/' + user.username + '/collections/' + user.collections[collectionId].name + '/' + file.name
     }
 
   }, [file])
 
-  console.log(key)
   
   const handleFileUpload = () => {
     try {
       console.log("hi")
-      console.log(user.collections[0]._id)
-      console.log(user.collections[0].name)
+      console.log(user.collections[collectionId]._id)
+      console.log(user.collections[collectionId].name)
 
-      console.log('inside handleFile', key)
       const { data } = addItem({
         variables: {
             itemName: 'item name',
             itemDescription: 'item description',
             itemImage: key,
-            collectionId: user.collections[0]._id
+            itemTag: 'item tag',
+            collectionId: user.collections[collectionId]._id
         }
       })
       console.log("Success!")
@@ -71,7 +71,7 @@ const TestPage = () => {
               <input type="file" onChange={handleFileChange} />
               <button onClick={() => {
 
-                uploadFile(file, {username: user.username, collection: user.collections[0].name});
+                uploadFile(file, {username: user.username, collection: user.collections[collectionId].name});
                 handleFileUpload();
               }
                 }>Upload</button>
@@ -82,4 +82,4 @@ const TestPage = () => {
   );
 }
 
-export default TestPage;
+export default EditCollectionButton;

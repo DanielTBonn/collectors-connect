@@ -33,10 +33,11 @@ const typeDefs = `
     type Query {
         me: User
         users: [User]
-        singleUser(username: String): User
+        singleUser(_id: ID!): User
         collections(name: String): [Collection]
-        singleCollection(collectionId: ID): Collection
+        singleCollection(collectionId: ID!): Collection
         randomCollection: Collection
+        items: Item
     }
 
     type Mutation {

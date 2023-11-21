@@ -32,6 +32,7 @@ export const ADD_COLLECTION = gql`
             name
             description
             image
+
         }
     }
 `;
@@ -63,7 +64,9 @@ export const ADD_ITEM = gql`
     mutation addItem($itemName: String!, $itemDescription: String!, $itemImage: String!, $collectionId: String!) {
         addItem(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, collectionId: $collectionId) {
             _id
-            collectionId
+            collectionId {
+                _id
+            }
             itemName
             itemDescription
             itemImage

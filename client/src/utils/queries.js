@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_ME = gql`
-  query me {
+  query GET_ME {
     me {
       _id
       username
@@ -30,7 +30,7 @@ export const GET_ME = gql`
 `;
 
 export const GET_USERS = gql`
-  query users {
+  query GET_USERS {
     users {
       _id
       username
@@ -41,10 +41,14 @@ export const GET_USERS = gql`
         name
         description
         image
-        userId
+        userId {
+          _id
+        }
         items {
           _id
-          collectionId
+          collectionId {
+            _id
+          }
           itemName
           itemDescription
           itemImage 
@@ -55,8 +59,8 @@ export const GET_USERS = gql`
 `;
 
 export const GET_SINGLE_USER = gql`
-  query user {
-    user {
+  query GET_SINGLE_USER($id: ID!) {
+    singleUser(_id: $id) {
       _id
       username
       email
@@ -66,10 +70,14 @@ export const GET_SINGLE_USER = gql`
         name
         description
         image
-        userId
+        userId {
+          _id
+        }
         items {
           _id
-          collectionId
+          collectionId {
+            _id
+          }
           itemName
           itemDescription
           itemImage 
@@ -86,9 +94,13 @@ export const GET_COLLECTIONS = gql`
       name
       description
       image
-      userId
+      userId {
+        _id
+      }
       items {
-        collectionId
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
         itemImage
@@ -98,15 +110,20 @@ export const GET_COLLECTIONS = gql`
 `;
 
 export const GET_SINGLE_COLLECTION = gql`
-  query singleCollection {
-    singleCollection {
+  query GET_SINGLE_COLLECTION($collectionId: ID!) {
+    singleCollection(collectionId: $collectionId) {
       _id
       name
       description
       image
-      userId
+      userId {
+        _id
+      }
       items {
-        collectionId
+        _id
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
         itemImage
@@ -122,9 +139,14 @@ export const GET_RANDOM_COLLECTION = gql`
       name
       description
       image
-      userId
+      userId {
+        _id
+      }
       items {
-        collectionId
+        _id
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
         itemImage

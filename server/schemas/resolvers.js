@@ -1,5 +1,6 @@
-const { User, Collection } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User, Collection, Item } = require('../models');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
 const mongoose = require('mongoose');
 
 
@@ -8,34 +9,59 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('collections')
+                return await User.findOne({ _id: context.user._id }).populate({
+                    path: 'collections',
+                    populate: {
+                      path: 'items',
+                      model: 'Item'
+                    }
+            });
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
         users: async () => {
-            const users = await User.find().populate('collections');
+            const users = await User.find().populate({
+                path: 'collections',
+                populate: {
+                  path: 'items',
+                  model: 'Item'
+                }
+              });
             console.log(users);
             return users;
         },
-        singleUser: async () => {},
+        singleUser: async (parent, { _id }) => {
+            const user = await User.findById(_id).populate({
+                path: 'collections',
+                populate: {
+                  path: 'items',
+                  model: 'Item'
+                }
+              });
+            return user;
+        },
         collections: async (parent, { name }) => {
             try {
                 if (name) {
                     // If a tag is provided, filter collections by tag
-                    return await Collection.find({ name }).populate('userId', 'items');
+                    return await Collection.find({ name }).populate('items');
                   } else {
                     // If no tag is provided, return all collections
-                    return await Collection.find().populate('userId', 'items');
+                    return await Collection.find().populate('items');
                   }
             } catch (error) {
                 console.error(error);
                 throw error; // Rethrow the error to be caught by GraphQL
             }
         },
-        singleCollection: async () => {},
+        singleCollection: async (parent, { collectionId }) => {
+            const collection = await Collection.findById(collectionId).populate('items');
+              console.log(collection);
+              return collection;
+        },
         randomCollection: async () => {
             try {
-              const randomCollection = await Collection.find().populate('userId');
+              const randomCollection = await Collection.find().populate('items');
               
               const randNum = Math.floor(Math.random() * randomCollection.length);
               console.log(randNum);
@@ -48,7 +74,6 @@ const resolvers = {
             }
         },
     },
-
     Mutation: {
         login: async (parent, {email, password}) => {
             const user = await User.findOne({ email });
@@ -74,17 +99,20 @@ const resolvers = {
         },
         addCollection: async (parent, args, context) => {
             
-
+        console.log('add collection?')
         
         
-        const collection = await Collection.create({...args})
+        const collection = await Collection.create({
+            ...args,
+            userId: context.user ? context.user._id : "655d1294b83a63f31771c154"
+        })
         console.log(collection);
 
         // ------------------------------------------------------------------------------------------------------------
         // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
         // ------------------------------------------------------------------------------------------------------------
         await User.findOneAndUpdate(
-            { _id: "655a99a85e983aa404f4dfbc" },
+            { _id: context.user ? context.user._id : "655d1294b83a63f31771c154" },
             { $addToSet: { collections: collection._id }},
             );
             // console.log(updateUser);
@@ -92,10 +120,20 @@ const resolvers = {
                 //         throw AuthenticationError;
                 //     }
                 
-                return collection;    
+            return collection;    
         },
         deleteCollection: async () => {},
-        addItem: async () => {},
+        addItem: async (parent, args, context) => {
+
+            const item = await Item.create({...args})
+
+            await Collection.findOneAndUpdate(
+                { _id: args.collectionId },
+                { $addToSet: { items: item._id}},
+            )
+
+            return item;
+        },
         deleteItem: async () => {}
     }
 }
