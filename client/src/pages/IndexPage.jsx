@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 
-import Cards from "../components/Cards.jsx";
+import TestCards from "../components/TestCards.jsx";
 
 import { GET_COLLECTIONS } from "../utils/queries.js";
 
@@ -17,9 +17,11 @@ const IndexPage = () => {
 
   return (
     <>
-      <div>Hello World!</div>
       <div>
-        {loading ? <div>Loading...</div> : <Cards collections={collections} />}
+        <h1 style={{textAlign: "center"}}>Collections Feed</h1>
+      </div>
+      <div>
+        {loading ? <div>Loading...</div> : <TestCards collections={collections} />}
       </div>
     </>
   );
