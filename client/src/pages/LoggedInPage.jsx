@@ -1,34 +1,35 @@
-import { useQuery } from "@apollo/client";
-import { GET_ME, GET_COLLECTIONS } from "../utils/queries";
-import UserProfile from "../components/UserProfile";
-import Cards from "../components/Cards";
+import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+import UserProfile from '../components/UserProfile';
+import AuthService from '../utils/auth'; 
 
 const LoggedInPage = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
-  const { loading: collectionsLoading, data: collectionsData } = useQuery(GET_COLLECTIONS, {
-    variables: { userId: userData?.me?._id },
-  });
+
+  useEffect(() => {
+    // Check if the user is logged in using the AuthService
+    const userIsLoggedIn = AuthService.loggedIn();
+
+    // Update the state accordingly
+    setIsLoggedIn(userIsLoggedIn);
+  }, [userData]);
 
   const user = userData?.me || {};
-  const userCollections = collectionsData?.userCollections || [];
 
   return (
     <>
       <div>
-        Hello {user.username}
+        {isLoggedIn ? `Hello ${user.username}` : 'Log in to see your page'}
       </div>
       <UserProfile userProfile={user} />
-      <div className="collections-container">
-        {collectionsLoading ? (
-          <p>Loading collections...</p>
-        ) : (
-          <Cards collections={userCollections} />
-        )}
-      </div>
     </>
   );
 };
 
 export default LoggedInPage;
+
+
 
 

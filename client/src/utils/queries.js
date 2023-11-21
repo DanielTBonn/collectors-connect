@@ -12,10 +12,14 @@ export const GET_ME = gql`
         name
         description
         image
-        userId
+        userId {
+          _id
+        }
         items {
           _id
-          collectionId
+          collectionId {
+            _id
+          }
           itemName
           itemDescription
           itemImage 
