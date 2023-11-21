@@ -1,4 +1,4 @@
-const { User, Collection } = require('../models');
+const { User, Collection, Item } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const mongoose = require('mongoose');
 
@@ -94,7 +94,17 @@ const resolvers = {
             return collection;    
         },
         deleteCollection: async () => {},
-        addItem: async () => {},
+        addItem: async (parent, args, context) => {
+
+            const item = await Item.create({...args})
+
+            await Collection.findOneAndUpdate(
+                { _id: args.collectionId },
+                { $addToSet: { items: item._id}},
+            )
+
+            return item;
+        },
         deleteItem: async () => {}
     }
 }

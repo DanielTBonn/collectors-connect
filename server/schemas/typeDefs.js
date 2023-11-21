@@ -37,6 +37,7 @@ const typeDefs = `
         collections(name: String): [Collection]
         singleCollection(collectionId: ID): Collection
         randomCollection: Collection
+        items: Item
     }
 
     type Mutation {

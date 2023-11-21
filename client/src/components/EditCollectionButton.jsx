@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { uploadFile } from '../utils/uploadFile'
 import { GET_ME } from "../utils/queries";
-import { ADD_COLLECTION, EDIT_COLLECTION } from "../utils/mutations";
+import { ADD_COLLECTION, ADD_ITEM } from "../utils/mutations";
 
 
 
@@ -25,7 +25,7 @@ const EditCollectionButton = ({ collectionId }) => {
     setFile(file);
   };
 
-  const [editCollection, { error }] = useMutation(EDIT_COLLECTION)
+  const [addItem, { error }] = useMutation(ADD_ITEM)
 
   let key = 'users/' + user.username + '/collections/'
   
@@ -43,7 +43,7 @@ const EditCollectionButton = ({ collectionId }) => {
       console.log(user.collections[collectionId]._id)
       console.log(user.collections[collectionId].name)
 
-      const { data } = editCollection({
+      const { data } = addItem({
         variables: {
             itemName: 'item name',
             itemDescription: 'item description',
