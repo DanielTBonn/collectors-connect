@@ -9,29 +9,20 @@ const typeDefs = `
     }
 
     type Collection {
-        _id: ID
+        _id: ID!
         name: String
         description: String
         image: String
-        tag: String
-        userId: ID
+        userId: User
         items: [Item]
-        comments: [Comment]
     }
 
     type Item {
-        collectionId: ID!
+        _id: ID!
+        collectionId: Collection
         itemName: String
         itemDescription: String
         itemImage: String
-        itemTag: String
-        comments: [Comment]
-    }
-
-    type Comment {
-        commentText: String
-        commentAuthor: String
-        createdAt: String
     }
 
     type Auth {
@@ -40,19 +31,21 @@ const typeDefs = `
     }
 
     type Query {
-        users: [User]
         me: User
-        collections: [Collection]
-        collection: Collection
-        item: Item
+        users: [User]
+        singleUser(username: String): User
+        collections(name: String): [Collection]
+        singleCollection(collectionId: ID): Collection
+        randomCollection: Collection
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addCollection(name: String!, description: String!, image: String!, tag: String!): Collection
-        editCollection(itemName: String!, itemDescription: String!, itemImage: String!, itemTag: String!, collectionId: String!): Collection
-        deleteCollection(collectionId: ID): User
+        addCollection(name: String!, description: String!, image: String!): Collection
+        deleteCollection(collectionId: ID!): User
+        addItem(itemName: String!, itemDescription: String!, itemImage: String!, collectionId: String!): Item
+        deleteItem(itemId: ID!): Collection
     }
 `;
 

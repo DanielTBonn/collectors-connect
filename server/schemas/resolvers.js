@@ -6,18 +6,45 @@ const mongoose = require('mongoose');
 
 const resolvers = {
     Query: {
-        users: async () => {
-            return await User.find().populate('collections');
-        },
         me: async (parent, args, context) => {
             if (context.user) {
                 return await User.findOne({ _id: context.user._id }).populate('collections')
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
-        collections: async (parent, args) => {
-            return await Collection.find();
-        }
+        users: async () => {
+            return await User.find().populate('collections');
+        },
+        singleUser: async () => {},
+        collections: async (parent, { name }) => {
+            try {
+                if (name) {
+                    // If a tag is provided, filter collections by tag
+                    return await Collection.find({ name });
+                  } else {
+                    // If no tag is provided, return all collections
+                    return await Collection.find();
+                  }
+            } catch (error) {
+                console.error(error);
+                throw error; // Rethrow the error to be caught by GraphQL
+            }
+        },
+        singleCollection: async () => {},
+        randomCollection: async () => {
+            try {
+              const randomCollection = await Collection.find().populate('userId');
+              
+              const randNum = Math.floor(Math.random() * randomCollection.length);
+              console.log(randNum);
+              console.log(randomCollection[randNum]);
+
+             return randomCollection[randNum];
+            } catch (error) {
+                console.log(error);
+              throw new Error('Error fetching random collection');
+            }
+        },
     },
 
     Mutation: {
@@ -65,18 +92,9 @@ const resolvers = {
                 
                 return collection;    
         },
-        editCollection: async (parent, { itemName, itemDescription, itemImage, itemTag, collectionId}, context) => {
-            console.log("In edit collection")
-            if( context.user) {
-                const collection = await Collection.findOneAndUpdate(
-                    { _id: collectionId },
-                    { $addToSet: { items: { itemName, itemDescription, itemImage, itemTag, collectionId } }},
-                    { new: true, runValidators: true }
-                    )
-                    return collection;
-                }
-        }
-
+        deleteCollection: async () => {},
+        addItem: async () => {},
+        deleteItem: async () => {}
     }
 }
 

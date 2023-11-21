@@ -24,37 +24,67 @@ export const ADD_USER = gql`
     }
 `;
 
-//write mutations for:
-
 //add a collection
 export const ADD_COLLECTION = gql`
-    mutation addCollection($name: String!, $description: String!, $image: String!, $tag: String!, $items: [String]!) {
-        addCollection(name: $name, description: $description, image: $image, tag: $tag, items: $items) {
+    mutation addCollection($name: String!, $description: String!, $image: String!, $items: [String]!) {
+        addCollection(name: $name, description: $description, image: $image, items: $items) {
             _id
             name
             description
-            tag
             image
         }
     }
 `;
 
-export const EDIT_COLLECTION = gql`
-    mutation editCollection($itemName: String!, $itemDescription: String!, $itemImage: String!, $itemTag: String!, $collectionId: String!) {
-        editCollection(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, itemTag: $itemTag, collectionId: $collectionId) {
-            items {
-                itemName
-                itemDescription
-                itemTag
-                itemImage
-                collectionId
+export const DELETE_COLLECTION = gql`
+    mutation deleteCollection($collectionId: ID) {
+        deleteCollection(collectionId: ID) {
+            _id
+            username
+            collectionsCount
+            collections {
+                _id
+                name
+                description
+                image
+                userId {
+                    username
+                }
+                items {
+                    itemName
+                    collectionId
+                }
             }
         }
     }
 `;
 
-//edit a collection
+export const ADD_ITEM = gql`
+    mutation addItem($itemName: String!, $itemDescription: String!, $itemImage: String!, $collectionId: String!) {
+        addItem(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, collectionId: $collectionId) {
+            _id
+            collectionId
+            itemName
+            itemDescription
+            itemImage
+        }
+    }
+`;
 
-//delete a collection
-
-//suspect we will need mutations also for add an item, edit an item and delete an item? if so we'll need to add those to typedefs as well
+export const DELETE_ITEM = gql`
+    mutation deleteItem($itemId: ID!) {
+        deleteCollection(itemId: $itemId) {
+            _id
+            name
+            description
+            image
+            userId {
+                username
+            }
+            items {
+                itemName
+                collectionId
+            }
+        }
+    }
+`;
