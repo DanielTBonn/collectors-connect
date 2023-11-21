@@ -1,24 +1,18 @@
 import React from "react";
 import "./UserProfile.css";
+import "./Cards";
 
-const UserProfile = ({ userProfile }) => {
-  // Placeholder image URL for now until we enable user uploads...
-  const placeholderImage = "https://loremflickr.com/320/240";
-
+const UserProfile = ({ user }) => {
+ 
+console.log(user);
+const collectionArray = user.collections || []
   return (
     <div className="user-profile">
-      <img
-        src={userProfile.profilePicture || placeholderImage}
-        alt="Profile"
-        className="profile-image"
-      />
-      <div className="user-info">
-        <textarea
-          placeholder="Description of your collections/interests..."
-          defaultValue={userProfile.collectionNote}
-        ></textarea>
+      <div>Hello {user.username}!</div>
+      {user.collectionCount <= 0 ? <div> no collections </div> : collectionArray.map((collection, index)=>{
+        return <div key={index}>{collection.name}</div>
+      })}
       </div>
-    </div>
   );
 };
 

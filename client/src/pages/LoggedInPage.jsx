@@ -23,7 +23,7 @@ const LoggedInPage = () => {
       <div>
         {isLoggedIn ? `Hello ${user.username}` : 'Log in to see your page'}
       </div>
-      <UserProfile userProfile={user} />
+      {user && <UserProfile user={user} />}
     </>
   );
 };
