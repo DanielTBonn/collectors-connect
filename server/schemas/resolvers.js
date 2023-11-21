@@ -1,4 +1,4 @@
-const { User, Collection } = require('../models');
+const { User, Collection, Item } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require("apollo-server-express");
 const mongoose = require('mongoose');
@@ -9,7 +9,13 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('collections');
+                return await User.findOne({ _id: context.user._id }).populate({
+                    path: 'collections',
+                    populate: {
+                      path: 'items',
+                      model: 'Item'
+                    }
+            });
             }            
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -68,7 +74,6 @@ const resolvers = {
             }
         },
     },
-
     Mutation: {
         login: async (parent, {email, password}) => {
             const user = await User.findOne({ email });
@@ -94,17 +99,20 @@ const resolvers = {
         },
         addCollection: async (parent, args, context) => {
             
-
+        console.log('add collection?')
         
         
-        const collection = await Collection.create({...args})
+        const collection = await Collection.create({
+            ...args,
+            userId: context.user ? context.user._id : "655d1294b83a63f31771c154"
+        })
         console.log(collection);
 
         // ------------------------------------------------------------------------------------------------------------
         // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
         // ------------------------------------------------------------------------------------------------------------
         await User.findOneAndUpdate(
-            { _id: "655a99a85e983aa404f4dfbc" },
+            { _id: context.user ? context.user._id : "655d1294b83a63f31771c154" },
             { $addToSet: { collections: collection._id }},
             );
             // console.log(updateUser);
@@ -112,10 +120,20 @@ const resolvers = {
                 //         throw AuthenticationError;
                 //     }
                 
-                return collection;    
+            return collection;    
         },
         deleteCollection: async () => {},
-        addItem: async () => {},
+        addItem: async (parent, args, context) => {
+
+            const item = await Item.create({...args})
+
+            await Collection.findOneAndUpdate(
+                { _id: args.collectionId },
+                { $addToSet: { items: item._id}},
+            )
+
+            return item;
+        },
         deleteItem: async () => {}
     }
 }
