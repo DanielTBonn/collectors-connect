@@ -2,62 +2,52 @@
     {
         "name": "Collection 1",
         "description": "Description One",
-        "image": "image url 1",
-        "tag": "tagOne"
+        "image": "image url 1"
     },
     {
         "name": "Collection 2",
         "description": "Description Two",
-        "image": "image url 2",
-        "tag": "tagTwo"
+        "image": "image url 2"
     },
     {
         "name": "Collection 3",
         "description": "Description Three",
-        "image": "image url 3",
-        "tag": "tagThree"
+        "image": "image url 3"
     },
     {
         "name": "Collection 4",
         "description": "Description Four",
-        "image": "image url 4",
-        "tag": "tagFour"
+        "image": "image url 4"
     },
     {
         "name": "Collection 5",
         "description": "Description Five",
-        "image": "image url 5",
-        "tag": "tagFive"
+        "image": "image url 5"
     },
     {
         "name": "Collection 6",
         "description": "Description Six",
-        "image": "image url 6",
-        "tag": "tagSix"
+        "image": "image url 6"
     },
     {
         "name": "Collection 7",
         "description": "Description Seven",
-        "image": "image url 7",
-        "tag": "tagSeven"
+        "image": "image url 7"
     },
     {
         "name": "Collection 8",
         "description": "Description Eight",
-        "image": "image url 8",
-        "tag": "tagEight"
+        "image": "image url 8"
     },
     {
         "name": "Collection 9",
         "description": "Description Nine",
-        "image": "image url 9",
-        "tag": "tagNine"
+        "image": "image url 9"
     },
     {
         "name": "Collection 10",
         "description": "Description Ten",
-        "image": "image url 10",
-        "tag": "tagTen"
+        "image": "image url 10"
     }
 ]
 

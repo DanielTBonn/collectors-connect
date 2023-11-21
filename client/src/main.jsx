@@ -27,14 +27,14 @@ const router = createBrowserRouter([
             path: '/me',
             element: <LoggedInPage />
         },
-        {
-            path: '/testpage',
-            element: <TestPage />
-        },
-        {
-          path: '/testimage',
-          element: <TestImage />
-        },
+        // {
+        //     path: '/testpage',
+        //     element: <TestPage />
+        // },
+        // {
+        //   path: '/testimage',
+        //   element: <TestImage />
+        // },
         {
           path: '/search',
           element: <Search />
