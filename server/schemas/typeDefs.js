@@ -14,13 +14,13 @@ const typeDefs = `
         description: String
         image: String
         tag: String
-        userId: ID
+        userId: String
         items: [Item]
         comments: [Comment]
     }
 
     type Item {
-        collectionId: ID!
+        collectionId: ID
         itemName: String
         itemDescription: String
         itemImage: String

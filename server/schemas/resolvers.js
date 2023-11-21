@@ -19,7 +19,6 @@ const resolvers = {
             return await Collection.find();
         }
     },
-
     Mutation: {
         login: async (parent, {email, password}) => {
             const user = await User.findOne({ email });
@@ -45,7 +44,7 @@ const resolvers = {
         },
         addCollection: async (parent, args, context) => {
             
-
+        console.log('add collection?')
         
         
         const collection = await Collection.create({...args})
@@ -55,7 +54,7 @@ const resolvers = {
         // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
         // ------------------------------------------------------------------------------------------------------------
         await User.findOneAndUpdate(
-            { _id: "655a99a85e983aa404f4dfbc" },
+            { _id: context.user ? context.user._id : "655bff908fae42c8976f9037" },
             { $addToSet: { collections: collection._id }},
             );
             // console.log(updateUser);
@@ -63,7 +62,7 @@ const resolvers = {
                 //         throw AuthenticationError;
                 //     }
                 
-                return collection;    
+            return collection;    
         },
         editCollection: async (parent, { itemName, itemDescription, itemImage, itemTag, collectionId}, context) => {
             console.log("In edit collection")

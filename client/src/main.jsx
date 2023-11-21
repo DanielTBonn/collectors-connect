@@ -8,6 +8,10 @@ import LoggedInPage from './pages/LoggedInPage.jsx'
 import TestPage from './pages/TestPage';
 import TestImage from './pages/TestImage.jsx'
 import Search from './pages/Search';
+import Created from './pages/CreateCollection.jsx'
+import CreateCollection from './pages/CreateCollection.jsx'
+import ViewMyCollections from './pages/ViewMyCollections.jsx'
+import ViewSingleCollection from './pages/ViewSingleCollection.jsx'
 
 const router = createBrowserRouter([
     {
@@ -34,6 +38,18 @@ const router = createBrowserRouter([
         {
           path: '/search',
           element: <Search />
+        },
+        {
+          path: '/createcollection',
+          element: <CreateCollection />
+        },
+        {
+          path: '/mycollections',
+          element: <ViewMyCollections />
+        },
+        {
+          path: '/mycollections/:collectionId',
+          element: <ViewSingleCollection />
         }
       ]
     }

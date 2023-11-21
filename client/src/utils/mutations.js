@@ -28,13 +28,14 @@ export const ADD_USER = gql`
 
 //add a collection
 export const ADD_COLLECTION = gql`
-    mutation addCollection($name: String!, $description: String!, $image: String!, $tag: String!, $items: [String]!) {
-        addCollection(name: $name, description: $description, image: $image, tag: $tag, items: $items) {
+    mutation addCollection($name: String!, $description: String!, $image: String!, $tag: String!) {
+        addCollection(name: $name, description: $description, image: $image, tag: $tag) {
             _id
             name
             description
             tag
             image
+
         }
     }
 `;
