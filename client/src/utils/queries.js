@@ -84,6 +84,7 @@ export const GET_SINGLE_COLLECTION = gql`
         itemImage
     }
   }
+}
 `;
 
 export const GET_RANDOM_COLLECTION = gql`

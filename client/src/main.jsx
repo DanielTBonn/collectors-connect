@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
 import IndexPage from './pages/IndexPage'
 import LoggedInPage from './pages/LoggedInPage.jsx'
-import TestPage from './pages/TestPage';
-import TestImage from './pages/TestImage.jsx'
+// import TestPage from './pages/TestPage';
+// import TestImage from './pages/TestImage.jsx'
 import SearchPage from './pages/SearchPage';
 
 const router = createBrowserRouter([
@@ -23,14 +23,14 @@ const router = createBrowserRouter([
             path: '/me',
             element: <LoggedInPage />
         },
-        {
-            path: '/testpage',
-            element: <TestPage />
-        },
-        {
-          path: '/testimage',
-          element: <TestImage />
-        },
+        // {
+        //     path: '/testpage',
+        //     element: <TestPage />
+        // },
+        // {
+        //   path: '/testimage',
+        //   element: <TestImage />
+        // },
         {
           path: '/search',
           element: <SearchPage />

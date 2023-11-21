@@ -37,8 +37,8 @@ export const ADD_COLLECTION = gql`
 `;
 
 export const DELETE_COLLECTION = gql`
-    mutation deleteCollection($collectionId: ID!) {
-        deleteCollection(collectionId: ID!) {
+    mutation deleteCollection($collectionId: ID) {
+        deleteCollection(collectionId: ID) {
             _id
             username
             collectionsCount
