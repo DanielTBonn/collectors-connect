@@ -50,7 +50,31 @@ export const GET_USERS = gql`
   }
 `;
 
-//query to get collections to be used on main page and via search form
+export const GET_SINGLE_USER = gql`
+  query user {
+    user {
+      _id
+      username
+      email
+      collectionCount
+      collections {
+        _id
+        name
+        description
+        image
+        userId
+        items {
+          _id
+          collectionId
+          itemName
+          itemDescription
+          itemImage 
+        }
+      }
+    }
+  }
+`;
+
 export const GET_COLLECTIONS = gql`
   query collections {
     collections {

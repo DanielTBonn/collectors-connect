@@ -1,62 +1,52 @@
 [
-    {
-        "name": "Item 1",
-        "description": "Description One",
-        "image": "image url 1",
-        "tag": "tagOne"
-    },
-    {
-        "name": "Item 2",
-        "description": "Description Two",
-        "image": "image url 2",
-        "tag": "tagTwo"
-    },
-    {
-        "name": "Item 3",
-        "description": "Description Three",
-        "image": "image url 3",
-        "tag": "tagThree"
-    },
-    {
-        "name": "Item 4",
-        "description": "Description Four",
-        "image": "image url 4",
-        "tag": "tagFour"
-    },
-    {
-        "name": "Item 5",
-        "description": "Description Five",
-        "image": "image url 5",
-        "tag": "tagFive"
-    },
-    {
-        "name": "Item 6",
-        "description": "Description Six",
-        "image": "image url 6",
-        "tag": "tagSix"
-    },
-    {
-        "name": "Item 7",
-        "description": "Description Seven",
-        "image": "image url 7",
-        "tag": "tagSeven"
-    },
-    {
-        "name": "Item 8",
-        "description": "Description Eight",
-        "image": "image url 8",
-        "tag": "tagEight"
-    },
-    {
-        "name": "Item 9",
-        "description": "Description Nine",
-        "image": "image url 9",
-        "tag": "tagNine"
-    },
-    {
-        "name": "Item 10",
-        "description": "Description Ten",
-        "image": "image url 10",
-        "tag": "tagTen"
-    }
+  {
+    "itemName": "Item 1",
+    "itemDescription": "Description One",
+    "itemImage": "image url 1"
+  },
+  {
+    "itemName": "Item 2",
+    "itemDescription": "Description Two",
+    "itemImage": "image url 2"
+  },
+  {
+    "itemName": "Item 3",
+    "itemDescription": "Description Three",
+    "itemImage": "image url 3"
+  },
+  {
+    "itemName": "Item 4",
+    "itemDescription": "Description Four",
+    "itemImage": "image url 4"
+  },
+  {
+    "itemName": "Item 5",
+    "itemDescription": "Description Five",
+    "itemImage": "image url 5"
+  },
+  {
+    "itemName": "Item 6",
+    "itemDescription": "Description Six",
+    "itemImage": "image url 6"
+  },
+  {
+    "itemName": "Item 7",
+    "itemDescription": "Description Seven",
+    "itemImage": "image url 7"
+  },
+  {
+    "itemName": "Item 8",
+    "itemDescription": "Description Eight",
+    "itemImage": "image url 8"
+  },
+  {
+    "itemName": "Item 9",
+    "itemDescription": "Description Nine",
+    "itemImage": "image url 9"
+  },
+  {
+    "itemName": "Item 10",
+    "itemDescription": "Description Ten",
+    "itemImage": "image url 10"
+  }
 ]
