@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { Link, Route, Routes } from 'react-router-dom'; 
 import { GET_ME } from '../utils/queries';
-import UserProfile from '../components/UserProfile';
-import AuthService from '../utils/auth'; 
+import AuthService from '../utils/auth';
+import { Button } from 'react-bootstrap';
+import CreateCollection from './CreateCollection';
 
 const LoggedInPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,18 +20,42 @@ const LoggedInPage = () => {
 
   const user = userData?.me || {};
 
+  console.log(user);
+  const collectionArray = user.collections || [];
+
   return (
-    <>
-      <div>
-        {isLoggedIn ? `Hello ${user.username}` : 'Log in to see your page'}
-      </div>
-      {user && <UserProfile user={user} />}
-    </>
+    <div className="user-profile">
+      <div>{isLoggedIn ? `Hello ${user.username}` : 'Log in to see your page'}</div>
+      {user.collectionCount <= 0 ? (
+        <div>No collections</div>
+      ) : (
+        <div>
+          {collectionArray.map((collection, index) => (
+            <div key={index}>
+              <h3>{collection.name}</h3>
+              {collection.items.length <= 0 ? (
+                <div>No items in this collection</div>
+              ) : (
+                <ul>
+                  {collection.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>{item.itemImage}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <Link to="/createCollection">
+        <Button variant="primary">Add New Collection</Button>
+      </Link>
+
+      <Routes>
+        <Route path="/createCollection" element={<CreateCollection />} />
+      </Routes>
+    </div>
   );
 };
 
 export default LoggedInPage;
-
-
-
-
