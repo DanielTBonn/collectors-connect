@@ -5,6 +5,7 @@ import Cards from "../components/Cards";
 
 const LoggedInPage = () => {
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
+  console.log(userData)
   const { loading: collectionsLoading, data: collectionsData } = useQuery(GET_COLLECTIONS, {
     variables: { userId: userData?.me?._id },
   });

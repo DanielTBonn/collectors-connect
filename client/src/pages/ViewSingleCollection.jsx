@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 
 import ImageComponent from "../components/ImageCompontent";
-import EditCollectionButton from '../components/EditCollectionButton';
+import AddItemButton from '../components/AddItemButton';
 
 const ViewSingleCollection = () => {
     const { collectionId } = useParams();
@@ -14,7 +14,7 @@ const ViewSingleCollection = () => {
       return  (
           <div className="TestPage">
       <div>
-        <EditCollectionButton collectionId={collectionId}/>
+        <AddItemButton collectionId={collectionId}/>
         {userLoading ? (
           <p>Loading User...</p>
         ):
