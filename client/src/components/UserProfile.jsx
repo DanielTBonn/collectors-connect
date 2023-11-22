@@ -1,6 +1,5 @@
 import React from "react";
 import "./UserProfile.css";
-import "./Cards";
 
 const UserProfile = ({ user }) => {
  
@@ -17,3 +16,4 @@ const collectionArray = user.collections || []
 };
 
 export default UserProfile;
+
