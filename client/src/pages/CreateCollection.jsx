@@ -3,8 +3,10 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { ADD_COLLECTION } from '../utils/mutations';
 import { Container, Col, Form, Button, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'
 
 const CreateCollection = () => {
+  const navigate = useNavigate();
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
   const user = userData?.me || {};
 
@@ -49,6 +51,9 @@ const CreateCollection = () => {
   
       if (data && data.addCollection) {
         console.log("Collection added:", data.addCollection);
+
+        navigate('/me');
+
       } else {
         console.log("Collection not added. Check for errors in the response:", errors);
       }
