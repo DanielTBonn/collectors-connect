@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import "./TestCards.css";
 
 function TestCard({ collections }) {
+    const { collectionId } = useParams();
 
   return (
     <div className="feedContainer">
@@ -23,7 +24,7 @@ function TestCard({ collections }) {
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
-                  <Link>
+                  <Link to={`/mycollections/${collection._id}`}>
                     <Button variant="primary">See Collection</Button>
                   </Link>
                 </Card.Body>
