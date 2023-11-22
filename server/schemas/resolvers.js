@@ -97,31 +97,54 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addCollection: async (parent, args, context) => {
-            
-        console.log('add collection?')
-        
-        
-        const collection = await Collection.create({
-            ...args,
-            userId: context.user ? context.user._id : "655d1294b83a63f31771c154"
-        })
-        console.log(collection);
-
-        // ------------------------------------------------------------------------------------------------------------
-        // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
-        // ------------------------------------------------------------------------------------------------------------
-        await User.findOneAndUpdate(
-            { _id: context.user ? context.user._id : "655d1294b83a63f31771c154" },
-            { $addToSet: { collections: collection._id }},
+        addCollection: async (parent, { name, description, items, image }, context) => {
+            // Ensure that the user is authenticated
+            if (!context.user) {
+              throw new AuthenticationError('You need to be logged in!');
+            }
+      
+            // Use default values if not provided
+            const collection = await Collection.create({
+              name,
+              description,
+              items: items || [],
+              image: image || 'placeholder.jpg',
+              userId: context.user._id,
+            });
+      
+            // Add the new collection's id to the user's collections array
+            await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { $addToSet: { collections: collection._id } },
             );
-            // console.log(updateUser);
-            //     if (!updateUser) {
-                //         throw AuthenticationError;
-                //     }
+      
+            return collection;
+          },
+        // addCollection: async (parent, args, context) => {
+            
+        // console.log('add collection?')
+        
+        
+        // const collection = await Collection.create({
+        //     ...args,
+        //     userId: context.user ? context.user._id : "655d1294b83a63f31771c154"
+        // })
+        // console.log(collection);
+
+        // // ------------------------------------------------------------------------------------------------------------
+        // // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 
+        // // ------------------------------------------------------------------------------------------------------------
+        // await User.findOneAndUpdate(
+        //     { _id: context.user ? context.user._id : "655d1294b83a63f31771c154" },
+        //     { $addToSet: { collections: collection._id }},
+        //     );
+        //     // console.log(updateUser);
+        //     //     if (!updateUser) {
+        //         //         throw AuthenticationError;
+        //         //     }
                 
-            return collection;    
-        },
+        //     return collection;    
+        // },
         deleteCollection: async () => {},
         addItem: async (parent, args, context) => {
 
