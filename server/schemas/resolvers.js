@@ -123,6 +123,7 @@ const resolvers = {
             return collection;    
         },
         deleteCollection: async (parent, {collectionId}) => {
+            console.log('In delete collection')
             return Collection.findOneAndDelete({_id: collectionId})
         },
         addItem: async (parent, args, context) => {

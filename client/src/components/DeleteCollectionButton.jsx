@@ -6,19 +6,18 @@ import { Button } from "react-bootstrap";
 const DeleteCollectionButton = ({ collectionId }) => {
 
     const [ deleteCollection, {error}] = useMutation(DELETE_COLLECTION)
-
+    console.log(collectionId)
     const handleDelete = () => {
         const { data } = deleteCollection({
             variables: {
-                _id: collectionId
+                collectionId
             }
         })
     }
 
     return (
-
         <div>
-            <Button onClick={() => deleteCollection()} />
+            <Button onClick={() => handleDelete()} >Delete Collection</Button>
         </div>
     )
 }
