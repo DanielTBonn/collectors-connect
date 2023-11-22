@@ -22,7 +22,7 @@ export const GET_ME = gql`
           }
           itemName
           itemDescription
-          itemImage 
+          itemImage
         }
       }
     }
@@ -51,7 +51,7 @@ export const GET_USERS = gql`
           }
           itemName
           itemDescription
-          itemImage 
+          itemImage
         }
       }
     }
@@ -80,7 +80,7 @@ export const GET_SINGLE_USER = gql`
           }
           itemName
           itemDescription
-          itemImage 
+          itemImage
         }
       }
     }
@@ -109,30 +109,48 @@ export const GET_COLLECTIONS = gql`
   }
 `;
 
-//query for all users? will this be necessary?
-
-//query to get collections to be used on main page and via search form
-export const GET_COLLECTIONS = gql`
-  query getCollections {
-    collection {
+export const GET_SINGLE_COLLECTION = gql`
+  query GET_SINGLE_COLLECTION($collectionId: ID!) {
+    singleCollection(collectionId: $collectionId) {
       _id
       name
       description
-      username
       image
+      userId {
+        _id
+      }
       items {
         _id
-        name
-        description
-        image
-        tag
+        collectionId {
+          _id
+        }
+        itemName
+        itemDescription
+        itemImage
       }
-      tag
-      userId
     }
   }
 `;
 
-//query for a single collection
-
-//query for a single item in a collection-to be accessed while viewing all items in a collection
+export const GET_RANDOM_COLLECTION = gql`
+  query getRandomCollection {
+    randomCollection {
+      _id
+      name
+      description
+      image
+      userId {
+        _id
+      }
+      items {
+        _id
+        collectionId {
+          _id
+        }
+        itemName
+        itemDescription
+        itemImage
+      }
+    }
+  }
+`;
