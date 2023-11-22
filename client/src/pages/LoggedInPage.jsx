@@ -5,6 +5,7 @@ import { GET_ME } from '../utils/queries';
 import AuthService from '../utils/auth';
 import { Button } from 'react-bootstrap';
 import CreateCollection from './CreateCollection';
+import CollectionImage from '../components/CollectionImage';
 
 const LoggedInPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,12 +34,13 @@ const LoggedInPage = () => {
           {collectionArray.map((collection, index) => (
             <div key={index}>
               <h3>{collection.name}</h3>
+              <CollectionImage imageUrl={collection.image} />
               {collection.items.length <= 0 ? (
                 <div>No items in this collection</div>
               ) : (
                 <ul>
                   {collection.items.map((item, itemIndex) => (
-                    <li key={itemIndex}>{item.itemImage}</li>
+                    <li key={itemIndex}>{/* Render item details here */}</li>
                   ))}
                 </ul>
               )}
@@ -59,3 +61,5 @@ const LoggedInPage = () => {
 };
 
 export default LoggedInPage;
+
+
