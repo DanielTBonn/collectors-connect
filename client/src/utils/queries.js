@@ -41,10 +41,14 @@ export const GET_USERS = gql`
         name
         description
         image
-        userId
+        userId {
+          _id
+        }
         items {
           _id
-          collectionId
+          collectionId {
+            _id
+          }
           itemName
           itemDescription
           itemImage 
@@ -71,6 +75,12 @@ export const GET_SINGLE_USER = gql`
         }
         items {
           _id
+          collectionId {
+            _id
+          }
+          itemName
+          itemDescription
+          itemImage 
         }
       }
     }
@@ -84,9 +94,13 @@ export const GET_COLLECTIONS = gql`
       name
       description
       image
-      userId
+      userId {
+        _id
+      }
       items {
-        collectionId
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
         itemImage
@@ -107,6 +121,9 @@ export const GET_SINGLE_COLLECTION = gql`
       }
       items {
         _id
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
         itemImage
@@ -122,9 +139,14 @@ export const GET_RANDOM_COLLECTION = gql`
       name
       description
       image
-      userId
+      userId {
+        _id
+      }
       items {
-        collectionId
+        _id
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
         itemImage
