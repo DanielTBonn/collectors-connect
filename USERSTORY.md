@@ -111,3 +111,25 @@ When looking up in the searchbar, you get autofilled results from the databases
 Future a user will be able to add multiple tags 
 Implement colorblind mode 
 Change the order the photos are presented
+
+
+Home Page/IndexPage-Cody
+list of collections
+-query get all collections
+
+Profile Page-Kate
+User collections or "Click to add collections"
+-mutation add collection
+-mutation delete collection
+
+Other User Page-Kate/Paige
+-query single user
+
+Collection Page-Cody
+-query one collection's items
+--if loggedIn userId = collection userId
+-mutation add an item
+-mutation delete an item
+
+Search Page-Paige
+-query random collection

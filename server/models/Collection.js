@@ -1,45 +1,6 @@
-const { Schema, model } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 const dateFormat = require("../../client/src/utils/dateFormat.cjs");
 
-const itemSchema = new Schema(
-  {
-  itemName: {
-    type: String,
-    required: true,
-  },
-  itemDescription: {
-    type: String,
-  },
-  itemImage: {
-    type: String,
-  },
-  itemTag: {
-    type: String,
-  },
-  collectionId: {
-    type: String
-
-  },
-  itemComments: [
-    {
-      commentText: {
-        type: String,
-        // required: true,
-        minlength: 1,
-        maxlength: 280,
-      },
-      commentAuthor: {
-        type: String,
-        // required: true,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
-      },
-    },
-  ],
-});
 
 const collectionSchema = new Schema(
   {
@@ -53,33 +14,16 @@ const collectionSchema = new Schema(
     image: {
       type: String,
     },
-    tag: {
-      type: String,
+    //Owner of collection, reference to User model
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    // Owner of collection, reference to User model
-    // userId: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
-    items: [itemSchema],
-    comments: [
+    items: [
       {
-        commentText: {
-          type: String,
-          // required: true,
-          minlength: 1,
-          maxlength: 280,
-        },
-        commentAuthor: {
-          type: String,
-          // required: true,
-        },
-        createdAt: {
-          type: Date,
-          default: Date.now,
-          get: (timestamp) => dateFormat(timestamp),
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Item",
       },
     ],
   },

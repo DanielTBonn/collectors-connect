@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
-  query me {
+  query GET_ME {
     me {
       _id
       username
@@ -12,36 +12,99 @@ export const GET_ME = gql`
         name
         description
         image
+        userId {
+          _id
+        }
         items {
-          collectionId
+          _id
+          collectionId {
+            _id
+          }
           itemName
           itemDescription
-          itemTag
-          itemImage
+          itemImage 
         }
-        tag
-        userId
       }
     }
   }
 `;
 
-export const GET_USER_COLLECTIONS = gql`
-  query getUserCollections($userId: ID!) {
-    userCollections(userId: $userId) {
+export const GET_USERS = gql`
+  query GET_USERS {
+    users {
+      _id
+      username
+      email
+      collectionCount
+      collections {
+        _id
+        name
+        description
+        image
+        userId {
+          _id
+        }
+        items {
+          _id
+          collectionId {
+            _id
+          }
+          itemName
+          itemDescription
+          itemImage 
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SINGLE_USER = gql`
+  query GET_SINGLE_USER($id: ID!) {
+    singleUser(_id: $id) {
+      _id
+      username
+      email
+      collectionCount
+      collections {
+        _id
+        name
+        description
+        image
+        userId {
+          _id
+        }
+        items {
+          _id
+          collectionId {
+            _id
+          }
+          itemName
+          itemDescription
+          itemImage 
+        }
+      }
+    }
+  }
+`;
+
+export const GET_COLLECTIONS = gql`
+  query collections {
+    collections {
       _id
       name
       description
       image
+      userId {
+        _id
+      }
       items {
-        collectionId
+        collectionId {
+          _id
+        }
         itemName
         itemDescription
-        itemTag
         itemImage
       }
-      tag
-      userId
     }
   }
 `;
@@ -50,12 +113,22 @@ export const GET_USER_COLLECTIONS = gql`
 
 //query to get collections to be used on main page and via search form
 export const GET_COLLECTIONS = gql`
-  query Collections {
-    collections {
+  query getCollections {
+    collection {
       _id
       name
-      image
       description
+      username
+      image
+      items {
+        _id
+        name
+        description
+        image
+        tag
+      }
+      tag
+      userId
     }
   }
 `;
