@@ -99,14 +99,10 @@ const resolvers = {
         },
         addCollection: async (parent, args, context) => {
             
-        console.log('add collection?')
-        
-        
         const collection = await Collection.create({
             ...args,
             userId: context.user ? context.user._id : "655d1294b83a63f31771c154"
         })
-        console.log(collection);
 
         // ------------------------------------------------------------------------------------------------------------
         // --------------- CHANGE THE ID BELOW TO THE USER ID YOU ARE LOGGED INTO THAT YOU WANT TO TEST --------------- 

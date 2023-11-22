@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
+import { uploadFile } from '../utils/uploadFile'
 import { GET_ME } from '../utils/queries'
 import { ADD_COLLECTION } from '../utils/mutations';
 import {
@@ -21,6 +22,22 @@ const CreateCollection = () => {
 
     const [collectionName, setCollectionName] = useState('');
 
+
+    const [file, setFile] = useState(null);
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setFile(file);
+    };
+
+    let key = 'users/' + user.username + '/collections/'
+
+    useEffect(() => {
+      if(file) {
+        key = 'users/' + user.username + '/collections/' + collectionName + '/' + file.name
+      }
+  
+    }, [file, collectionName])
+
     let params = {
         name: "new-collection",
         description: "collection description",
@@ -29,32 +46,41 @@ const CreateCollection = () => {
 
     const handleInputChange = (e) => {
         const { value } = e.target;
-        console.log(value)
         setCollectionName(value)
     }
 
-    const handleCollectionUpload = () => {
+    const handleCollectionUpload = (e) => {
+      e.preventDefault();
         if (!collectionName) {
             alert('Collection needs a name!')
             return;
         }
         console.log("is it working?")
 
+        if (!file) {
+          alert('Must Add a file!')
+          return;
+        }
+
         try {
-            const { data } = addCollection({
+            const { data } =  addCollection({
                 variables: {
                     ...params,
-                    name: collectionName
+                    name: collectionName,
+                    image: key
                 }
             })
             
-            console.log("trying to work!")
-            
-        } catch (err) {
+          } catch (err) {
             console.log("There was an error")
             console.log(err)
-        }
-        
+          } finally {
+            uploadFile(file, {username: user.username, collection: collectionName});
+            setCollectionName('')
+            setFile(null)
+            window.location.reload;
+
+          }
     }
 
 
@@ -67,28 +93,35 @@ const CreateCollection = () => {
               ):
               <div>
                         <Container>
-          <h1>Search for Collections!</h1>
+          <h1>Add a Collection!</h1>
           <Form 
           // onSubmit={handleFormSubmit}
           >
             <Row>
               <Col xs={12} md={8}>
                 <Form.Control
-                  name="searchInput"
+                  name="collectionInput"
                   value={collectionName}
-                  onChange={(e) => setCollectionName(e.target.value)}
+                  onChange={(e) => handleInputChange(e)}
                   type="text"
                   size="lg"
                   placeholder="Set a collection name"
                 />
+                <Form.Control
+                  name="fileInput"
+                  onChange={handleFileChange}
+                  type="file"
+                  size="lg"
+                />
+                
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg" onClick={() => {
-    
-    handleCollectionUpload();
-  }}>
+                <button  size="lg" onClick={(e) => {
+                  // console.log(file)
+                  handleCollectionUpload(e);
+              }}>
                   Upload
-                </Button>
+                </button>
               </Col>
             </Row>
           </Form>

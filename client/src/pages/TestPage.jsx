@@ -23,25 +23,38 @@ const TestPage = () => {
     const file = e.target.files[0];
     setFile(file);
   };
-
-  const [addItem, { error }] = useMutation(ADD_ITEM)
+  const [collectionName, setCollectionName] = useState('');
+  const [addCollection, {error}] = useMutation(ADD_COLLECTION)
+  // const [addItem, { error }] = useMutation(ADD_ITEM)
 
   let key = 'users/' + user.username + '/collections/'
   
   useEffect(() => {
-    if(user.collections) {
-      key = 'users/' + user.username + '/collections/' + user.collections[0].name + '/' + file.name
+    if(file) {
+      key = 'users/' + user.username + '/collections/' + collectionName + '/' + file.name
     }
 
-  }, [file])
+  }, [file, collectionName])
 
   console.log(key)
   
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    console.log(value)
+    setCollectionName(value)
+}
+
+let params = {
+  name: "new-collection",
+  description: "collection description",
+  image: "none",
+}
+
   const handleFileUpload = () => {
     try {
       console.log("hi")
-      console.log(user.collections[0]._id)
-      console.log(user.collections[0].name)
+      // console.log(user.collections[0]._id)
+      // console.log(user.collections[0].name)
 
       console.log('inside handleFile', key)
       const { data } = addItem({
@@ -60,6 +73,36 @@ const TestPage = () => {
       console.log(err)
     }
   }
+
+  const handleCollectionUpload = () => {
+    if (!collectionName) {
+        alert('Collection needs a name!')
+        return;
+    }
+    console.log("is it working?")
+
+    if (!file) {
+      alert('Must Add a file!')
+      return;
+    }
+
+    try {
+        const { data } = addCollection({
+            variables: {
+                ...params,
+                name: collectionName,
+                image: key
+            }
+        })
+        console.log('before upload')
+        
+        console.log("trying to work!")
+        
+      } catch (err) {
+        console.log("There was an error")
+        console.log(err)
+      } 
+}
     
   return (
     <div className="TestPage">
@@ -68,11 +111,12 @@ const TestPage = () => {
           <p>Loading User...</p>
           ):
           <div>
+              <input type="text" onChange={handleInputChange} value={collectionName}/>
               <input type="file" onChange={handleFileChange} />
               <button onClick={() => {
 
-                uploadFile(file, {username: user.username, collection: user.collections[0].name});
-                handleFileUpload();
+                uploadFile(file, {username: user.username, collection: collectionName});
+                handleCollectionUpload();
               }
                 }>Upload</button>
           </div>
