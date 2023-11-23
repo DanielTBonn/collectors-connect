@@ -5,10 +5,10 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./CollectionsComponents.css";
+import "./CollectionsComponent.css";
 import CollectionImageComponent from "./CollectionImageComponent";
 
-function TestCard({ collections }) {
+function CollectionsComponent({ collections }) {
   const { collectionId } = useParams();
 
   return (
@@ -37,4 +37,4 @@ function TestCard({ collections }) {
   );
 }
 
-export default TestCard;
+export default CollectionsComponent;
