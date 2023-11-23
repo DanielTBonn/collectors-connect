@@ -19,7 +19,9 @@ const CreateCollection = () => {
   });
 
   const handleInputChange = (e) => {
+    console.log(e.target)
     const { name, value } = e.target;
+    console.log(name, value)
     setCollectionData({
       ...collectionData,
       [name]: value,
@@ -41,15 +43,15 @@ const CreateCollection = () => {
 
     useEffect(() => {
       if(file) {
-        key = 'users/' + user.username + '/collections/' + collectionName + '/' + file.name
+        key = 'users/' + user.username + '/collections/' + collectionData.name + '/' + file.name
       }
-    }, [file, collectionName])
+    }, [file, collectionData])
 
-    // let params = {
-    //     name: "new-collection",
-    //     description: "collection description",
-    //     image: "none",
-    // }
+    let params = {
+        name: "new-collection",
+        description: "collection description",
+        image: "none",
+    }
   
   //   try {
   //     const result = await addCollection({
@@ -82,7 +84,7 @@ const CreateCollection = () => {
 
     const handleCollectionUpload = (e) => {
       e.preventDefault();
-        if (!collectionName) {
+        if (!collectionData.name) {
             alert('Collection needs a name!')
             return;
         }
@@ -97,7 +99,8 @@ const CreateCollection = () => {
             const { data } =  addCollection({
                 variables: {
                     ...params,
-                    name: collectionName,
+                    name: collectionData.name,
+                    description: collectionData.description,
                     image: key
                 }
             })
@@ -106,11 +109,14 @@ const CreateCollection = () => {
             console.log("There was an error")
             console.log(err)
           } finally {
-            uploadFile(file, {username: user.username, collection: collectionName});
-            setCollectionName('')
+            uploadFile(file, {username: user.username, collection: collectionData.name});
+            setCollectionData({
+              name: '',
+              description: '',
+            })
             setFile(null)
             // window.location.reload;
-            navigate('/me');
+            // navigate('/me');
           }
     }
 
@@ -131,7 +137,7 @@ const CreateCollection = () => {
             <Row>
               <Col xs={12} md={8}>
                 <Form.Control
-                  name="collectionInput"
+                  name="name"
                   value={collectionData.name}
                   onChange={(e) => handleInputChange(e)}
                   type="text"
@@ -139,7 +145,7 @@ const CreateCollection = () => {
                   placeholder="Set a collection name"
                 />
                 <Form.Control
-                  name="descriptionInput"
+                  name="description"
                   value={collectionData.description}
                   onChange={(e) => handleInputChange(e)}
                   type="text"

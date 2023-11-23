@@ -10,18 +10,19 @@ async function urlResult (params) {
         .then((url) => {
             return url
         }, function(err) { console.log(err) })}
+console.log('hellworld')
 
-const ImageComponent = ({imageItem}) => {
+const CollectionImageComponent = ({collection}) => {
     
     const params = {
         Bucket: S3_BUCKET,
-        Key: imageItem.itemImage
+        Key: collection.image
       }
     
       const [picture, setPicture] = useState('');
 
     useEffect(() => {
-        if (imageItem.itemImage) {
+        if (collection.image) {
           urlResult(params)
           .then(picture => setPicture(picture))
           .catch(error => {
@@ -38,4 +39,4 @@ const ImageComponent = ({imageItem}) => {
 
 }
 
-export default ImageComponent;
+export default CollectionImageComponent;
