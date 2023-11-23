@@ -6,7 +6,7 @@ import { ADD_COLLECTION, ADD_ITEM } from "../utils/mutations";
 
 
 
-const EditCollectionButton = ({ collectionId }) => {
+const AddItemButton = ({ collectionId }) => {
     console.log(collectionId)
 
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
@@ -82,4 +82,4 @@ const EditCollectionButton = ({ collectionId }) => {
   );
 }
 
-export default EditCollectionButton;
+export default AddItemButton;

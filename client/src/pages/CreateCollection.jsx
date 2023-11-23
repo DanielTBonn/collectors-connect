@@ -25,7 +25,6 @@ const CreateCollection = () => {
         name: "new-collection",
         description: "collection description",
         image: "none",
-        tag: "none"
     }
 
     const handleInputChange = (e) => {
@@ -39,6 +38,7 @@ const CreateCollection = () => {
             alert('Collection needs a name!')
             return;
         }
+        console.log("is it working?")
 
         try {
             const { data } = addCollection({

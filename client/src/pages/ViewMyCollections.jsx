@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from '../utils/queries'
+import DeleteCollectionButton from "../components/DeleteCollectionButton";
 
 const ViewMyCollections = () => {
 
@@ -16,7 +17,12 @@ const ViewMyCollections = () => {
             <p>Loading User...</p>
           ):
           user.collections.map((collection) => {
-              return <a><p>{collection.name}</p></a>
+              return (
+                <div>
+                  <a><p>{collection.name}</p></a>
+                  <DeleteCollectionButton collectionId={collection._id}/>
+                </div>
+              )
           })
           }
         </div>
