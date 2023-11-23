@@ -21,6 +21,8 @@ const TestSingleCollection = () => {
 
   const { singleCollection } = collectionData;
 
+  console.log(singleCollection);
+
   return (
     <div>
       <h2>{singleCollection.name}</h2>
