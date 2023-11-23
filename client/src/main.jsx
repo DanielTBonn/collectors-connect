@@ -24,7 +24,7 @@ const router = createBrowserRouter([
             element: <IndexPage />
         },
         {
-            path: '/me/*',
+            path: '/me',
             element: <LoggedInPage />
         },
         {

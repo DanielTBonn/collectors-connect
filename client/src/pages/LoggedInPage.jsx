@@ -53,9 +53,6 @@ const LoggedInPage = () => {
         <Button variant="primary">Add New Collection</Button>
       </Link>
 
-      <Routes>
-        <Route path="/createCollection" element={<CreateCollection />} />
-      </Routes>
     </div>
   );
 };
