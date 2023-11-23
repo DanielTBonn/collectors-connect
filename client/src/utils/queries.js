@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
   query GET_ME {
@@ -22,7 +22,7 @@ export const GET_ME = gql`
           }
           itemName
           itemDescription
-          itemImage 
+          itemImage
         }
       }
     }
@@ -51,7 +51,7 @@ export const GET_USERS = gql`
           }
           itemName
           itemDescription
-          itemImage 
+          itemImage
         }
       }
     }
@@ -80,7 +80,7 @@ export const GET_SINGLE_USER = gql`
           }
           itemName
           itemDescription
-          itemImage 
+          itemImage
         }
       }
     }
@@ -128,9 +128,9 @@ export const GET_SINGLE_COLLECTION = gql`
         itemName
         itemDescription
         itemImage
+      }
     }
   }
-}
 `;
 
 export const GET_RANDOM_COLLECTION = gql`
