@@ -43,7 +43,7 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addCollection(name: String!, description: String!, image: String!): Collection
+        addCollection(name: String!, description: String, items: [String] = [], image: String = "placeholder.jpg"): Collection
         deleteCollection(collectionId: ID!): User
         addItem(itemName: String!, itemDescription: String!, itemImage: String!, collectionId: String!): Item
         deleteItem(itemId: ID!): Collection
