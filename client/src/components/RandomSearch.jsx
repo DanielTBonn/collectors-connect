@@ -12,8 +12,6 @@ const RandomSearch = () => {
 
   const { loading, error, data, refetch } = useQuery(GET_RANDOM_COLLECTION);
 
-  console.log(randomCollection);
-
   useEffect(() => {
     // Check if there is data and if the data has a random collection
     if (data && data.randomCollection) {
@@ -28,6 +26,8 @@ const RandomSearch = () => {
     // Set showRandomCollection to true to display the random collection
     setShowRandomCollection(true);
   };
+
+  // console.log(randomCollection.userId);
 
   // Check if the query is loading or if there's an error
   if (loading) {
@@ -53,8 +53,7 @@ const RandomSearch = () => {
             <h2>Random Collection</h2>
             <h3>{randomCollection.name}</h3>
             <p>{randomCollection.description}</p>
-            <p>{randomCollection.tag}</p>
-            <p>{randomCollection?.username}</p>
+            <p>{randomCollection.userId.username}</p>
             {/* Display other collection details... */}
           </div>
         )}

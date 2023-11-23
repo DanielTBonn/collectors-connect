@@ -26,8 +26,8 @@ export const ADD_USER = gql`
 
 //add a collection
 export const ADD_COLLECTION = gql`
-    mutation addCollection($name: String!, $description: String!, $image: String!, $items: [String]!) {
-        addCollection(name: $name, description: $description, image: $image, items: $items) {
+    mutation addCollection($name: String!, $description: String!, $image: String!) {
+        addCollection(name: $name, description: $description, image: $image) {
             _id
             name
             description
@@ -38,11 +38,11 @@ export const ADD_COLLECTION = gql`
 `;
 
 export const DELETE_COLLECTION = gql`
-    mutation deleteCollection($collectionId: ID) {
-        deleteCollection(collectionId: ID) {
+    mutation deleteCollection($collectionId: ID!) {
+        deleteCollection(collectionId: $collectionId) {
             _id
             username
-            collectionsCount
+            collectionCount
             collections {
                 _id
                 name
@@ -53,7 +53,9 @@ export const DELETE_COLLECTION = gql`
                 }
                 items {
                     itemName
-                    collectionId
+                    collectionId {
+                        _id
+                    }
                 }
             }
         }
@@ -76,7 +78,7 @@ export const ADD_ITEM = gql`
 
 export const DELETE_ITEM = gql`
     mutation deleteItem($itemId: ID!) {
-        deleteCollection(itemId: $itemId) {
+        deleteItem(itemId: $itemId) {
             _id
             name
             description
@@ -86,8 +88,28 @@ export const DELETE_ITEM = gql`
             }
             items {
                 itemName
-                collectionId
+                collectionId {
+                    _id
+                }
             }
         }
     }
 `;
+
+// export const DELETE_COLLECTION = gql`
+//     mutation deleteCollection($collectionId: ID!) {
+//         deleteCollection(_id: $collectionId) {
+//             _id
+//             name
+//             description
+//             image
+//             userId {
+//                 username
+//             }
+//             items {
+//                 itemName
+//                 collectionId
+//             }
+//         }
+//     }
+// `;

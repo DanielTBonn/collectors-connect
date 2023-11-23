@@ -42,12 +42,14 @@ const resolvers = {
         },
         collections: async (parent, { name }) => {
             try {
-                if (name) {
+                const regex = name ? new RegExp(name, 'i') : null;
+
+                if (regex) {
                     // If a tag is provided, filter collections by tag
-                    return await Collection.find({ name }).populate('items');
+                    return await Collection.find({ name: { $regex: regex } }).populate('items').populate('userId');
                   } else {
                     // If no tag is provided, return all collections
-                    return await Collection.find().populate('items');
+                    return await Collection.find().populate('items').populate('userId');
                   }
             } catch (error) {
                 console.error(error);
@@ -61,11 +63,11 @@ const resolvers = {
         },
         randomCollection: async () => {
             try {
-              const randomCollection = await Collection.find().populate('items');
+              const randomCollection = await Collection.find().populate('items').populate('userId');
               
               const randNum = Math.floor(Math.random() * randomCollection.length);
               console.log(randNum);
-              console.log(randomCollection[randNum]);
+              console.log(randomCollection[randNum].userId.username);
 
              return randomCollection[randNum];
             } catch (error) {
@@ -143,9 +145,15 @@ const resolvers = {
         //         //         throw AuthenticationError;
         //         //     }
                 
+
         //     return collection;    
         // },
-        deleteCollection: async () => {},
+
+        deleteCollection: async (parent, {collectionId}) => {
+            console.log('In delete collection')
+            return Collection.findOneAndDelete({_id: collectionId})
+        },
+
         addItem: async (parent, args, context) => {
 
             const item = await Item.create({...args})
@@ -157,7 +165,9 @@ const resolvers = {
 
             return item;
         },
-        deleteItem: async () => {}
+        deleteItem: async (parent, {itemId}) => {
+            return Item.findOneAndDelete({ _id: itemId})
+        }
     }
 }
 

@@ -25,6 +25,7 @@ const CreateCollection = () => {
     });
   };
 
+
   const handleCollectionUpload = async () => {
     const name = collectionData.name;
     const description = collectionData.description;
@@ -32,6 +33,7 @@ const CreateCollection = () => {
     if (!name) {
       alert('Collection needs a name!');
       return;
+
     }
   
     try {

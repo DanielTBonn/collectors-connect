@@ -88,14 +88,15 @@ export const GET_SINGLE_USER = gql`
 `;
 
 export const GET_COLLECTIONS = gql`
-  query collections {
-    collections {
+  query collections($name: String) {
+    collections(name: $name) {
       _id
       name
       description
       image
       userId {
         _id
+        username
       }
       items {
         collectionId {
@@ -141,6 +142,7 @@ export const GET_RANDOM_COLLECTION = gql`
       image
       userId {
         _id
+        username
       }
       items {
         _id

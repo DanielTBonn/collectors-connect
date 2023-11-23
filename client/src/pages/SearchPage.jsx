@@ -3,32 +3,35 @@ import { Container, Col, Form, Button, Row } from "react-bootstrap";
 //will need to import components to display search results
 import Auth from "../utils/auth";
 
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../utils/queries";
 import RandomSearch from "../components/RandomSearch";
-import TagSearch from "../components/TagSearch";
 
 //make button with capability to load some number of random collections or one random collection, similar to "i'm feelin lucky"
 const Search = () => {
+  const [searchInput, setSearchInput] = useState('');
   // useQuery hook to fetch collections
-  const { loading, error, data } = useQuery(GET_COLLECTIONS);
+  const [searchCollection, { loading, error, data }] = useLazyQuery(GET_COLLECTIONS);
 
-  const collections = data?.collections || [];
+  const results = data?.collections || [];
 
-  useEffect(() => {
-    console.log("collections:", collections);
-    console.log("collection 2:", collections[1]);
-    // console.log("collection 2 tag", collections[1].tag);
-  }, [collections]);
+  // useEffect(() => {
+  // }, [collections]);
 
-  //i think i will have handleTagFormSubmit, handleSearchFormSubmit and handleRandomFormSubmit
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-  //   if (!searchInput) {
-  //     return false;
-  //   }
-  // };
+    if (!searchInput) {
+      return false;
+    }
+
+    searchCollection({
+      variables: { name: `.*${searchInput}.*` },
+    });
+
+    //console.log(results[0].userId);
+
+  };
 
   return (
     <>
@@ -36,13 +39,12 @@ const Search = () => {
         <Container>
           <h1>Search for Collections!</h1>
           <RandomSearch />
-          <TagSearch />
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
                 <Form.Control
                   name="searchInput"
-                  // value={searchInput}
+                  value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
@@ -63,14 +65,14 @@ const Search = () => {
         {/* Render your search results here */}
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
-        {collections.length > 0 && (
+        {results.length > 0 && (
           <div>
-            <h2>All Collections</h2>
-            {collections.map((collection) => (
+            <h2>Search Results</h2>
+            {results.map((collection) => (
               <div key={collection._id}>
                 <h3>{collection.name}</h3>
                 <p>{collection.description}</p>
-                <p>{collection.tag}</p>
+                <p>{collection.userId.username}</p>
                 {/* Display other collection details... */}
               </div>
             ))}
