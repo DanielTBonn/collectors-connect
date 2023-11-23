@@ -122,7 +122,10 @@ const resolvers = {
                 
             return collection;    
         },
-        deleteCollection: async () => {},
+        deleteCollection: async (parent, {collectionId}) => {
+            console.log('In delete collection')
+            return Collection.findOneAndDelete({_id: collectionId})
+        },
         addItem: async (parent, args, context) => {
 
             const item = await Item.create({...args})
@@ -134,7 +137,9 @@ const resolvers = {
 
             return item;
         },
-        deleteItem: async () => {}
+        deleteItem: async (parent, {itemId}) => {
+            return Item.findOneAndDelete({ _id: itemId})
+        }
     }
 }
 
