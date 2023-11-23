@@ -5,10 +5,11 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./TestCards.css";
+import "./CollectionsComponents.css";
+import CollectionImageComponent from "./CollectionImageComponent";
 
 function TestCard({ collections }) {
-    const { collectionId } = useParams();
+  const { collectionId } = useParams();
 
   return (
     <div className="feedContainer">

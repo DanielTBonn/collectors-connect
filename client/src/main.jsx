@@ -11,7 +11,7 @@ import Search from "./pages/SearchPage";
 import Created from "./pages/CreateCollection.jsx";
 import CreateCollection from "./pages/CreateCollection.jsx";
 import ViewMyCollections from "./pages/ViewMyCollections.jsx";
-import TestSingleCollection from "./pages/TestSingleCollection.jsx";
+import SingleCollectionById from "./pages/SingleCollectionById.jsx";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/mycollections/:collectionId",
-        element: <TestSingleCollection />,
+        element: <SingleCollectionById />,
       },
     ],
   },
