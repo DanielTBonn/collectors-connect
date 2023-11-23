@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { uploadFile } from '../utils/uploadFile'
+import { GET_ME } from '../utils/queries'
 import { ADD_COLLECTION } from '../utils/mutations';
 import { Container, Col, Form, Button, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
@@ -18,99 +19,209 @@ const CreateCollection = () => {
   });
 
   const handleInputChange = (e) => {
+    console.log(e.target)
     const { name, value } = e.target;
+    console.log(name, value)
     setCollectionData({
       ...collectionData,
       [name]: value,
     });
   };
-
-
-  const handleCollectionUpload = async () => {
-    const name = collectionData.name;
-    const description = collectionData.description;
   
-    if (!name) {
-      alert('Collection needs a name!');
-      return;
+  
+  // const handleInputChange = (e) => {
+  //     const { value } = e.target;
+  //     setCollectionName(value)
+  // }
+    const [file, setFile] = useState(null);
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setFile(file);
+    };
 
-    }
-  
-    try {
-      const result = await addCollection({
-        variables: {
-          name,
-          description,
-          image: 'http://placekitten.com/200/300',
-          items: [],
-        },
-        refetchQueries: [{ query: GET_ME }],
-      });
-  
-      const { data, errors } = result;
-  
-      console.log("Mutation response:", data);
-  
-      if (data && data.addCollection) {
-        console.log("Collection added:", data.addCollection);
+    let key = 'users/' + user.username + '/collections/'
 
-        navigate('/me');
-
-      } else {
-        console.log("Collection not added. Check for errors in the response:", errors);
+    useEffect(() => {
+      if(file) {
+        key = 'users/' + user.username + '/collections/' + collectionData.name + '/' + file.name
       }
-    } catch (err) {
-      console.log("Error adding collection:", err.message);
+    }, [file, collectionData])
+
+    let params = {
+        name: "new-collection",
+        description: "collection description",
+        image: "none",
     }
-  };
+  
+  //   try {
+  //     const result = await addCollection({
+  //       variables: {
+  //         name,
+  //         description,
+  //         image: 'http://placekitten.com/200/300',
+  //         items: [],
+  //       },
+  //       refetchQueries: [{ query: GET_ME }],
+  //     });
+  
+  //     const { data, errors } = result;
+  
+  //     console.log("Mutation response:", data);
+  
+  //     if (data && data.addCollection) {
+  //       console.log("Collection added:", data.addCollection);
+
+
+  //     } else {
+  //       console.log("Collection not added. Check for errors in the response:", errors);
+  //     }
+  //   } catch (err) {
+  //     console.log("Error adding collection:", err.message);
+  //   }
+  // };
   
   
 
-  return (
-    <Container className="user-profile">
-      <div>{userLoading ? 'Loading User...' : `Hello ${user.username}`}</div>
+    const handleCollectionUpload = (e) => {
+      e.preventDefault();
+        if (!collectionData.name) {
+            alert('Collection needs a name!')
+            return;
+        }
+        console.log("is it working?")
 
-      <Form>
-        <Row>
-          <Col xs={12} md={6}>
-            <Form.Control
-              name="name"
-              value={collectionData.name}
-              onChange={handleInputChange}
-              type="text"
-              size="lg"
-              placeholder="Set a collection name"
-            />
-          </Col>
-          <Col xs={12} md={6}>
-            <Form.Control
-              name="description"
-              value={collectionData.description}
-              onChange={handleInputChange}
-              type="text"
-              size="lg"
-              placeholder="Set a collection description"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} md={12}>
-            <Button
-              type="button"  // Use "button" type to prevent form submission
-              variant="success"
-              size="lg"
-              onClick={handleCollectionUpload}
-            >
-              Upload
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Container>
-  );
-};
+        if (!file) {
+          alert('Must Add a file!')
+          return;
+        }
+
+        try {
+            const { data } =  addCollection({
+                variables: {
+                    ...params,
+                    name: collectionData.name,
+                    description: collectionData.description,
+                    image: key
+                }
+            })
+            
+          } catch (err) {
+            console.log("There was an error")
+            console.log(err)
+          } finally {
+            uploadFile(file, {username: user.username, collection: collectionData.name});
+            setCollectionData({
+              name: '',
+              description: '',
+            })
+            setFile(null)
+            // window.location.reload;
+            // navigate('/me');
+          }
+    }
+
+
+
+    return (
+        <div className="TestPage">
+          <div>
+            { userLoading ? (
+              <p>Loading User...</p>
+              ):
+              <div>
+                        <Container>
+          <h1>Add a Collection!</h1>
+          <Form 
+          // onSubmit={handleFormSubmit}
+          >
+            <Row>
+              <Col xs={12} md={8}>
+                <Form.Control
+                  name="name"
+                  value={collectionData.name}
+                  onChange={(e) => handleInputChange(e)}
+                  type="text"
+                  size="lg"
+                  placeholder="Set a collection name"
+                />
+                <Form.Control
+                  name="description"
+                  value={collectionData.description}
+                  onChange={(e) => handleInputChange(e)}
+                  type="text"
+                  size="lg"
+                  placeholder="Set a collection description"
+                />
+                <Form.Control
+                  name="fileInput"
+                  onChange={handleFileChange}
+                  type="file"
+                  size="lg"
+                />
+                
+              </Col>
+              <Col xs={12} md={4}>
+                <button  size="lg" onClick={(e) => {
+                  // console.log(file)
+                  handleCollectionUpload(e);
+              }}>
+                  Upload
+                </button>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
+                  {/* <input type="file" onChange={handleFileChange} /> */}
+                  {/* <input className="collections"> </input>
+                  <button >Upload</button> */}
+              </div>
+            }
+          </div>
+        </div>
+      );
+}
 
 export default CreateCollection;
+
+// =======
+//   return (
+//     <Container className="user-profile">
+//       <div>{userLoading ? 'Loading User...' : `Hello ${user.username}`}</div>
+
+//       <Form>
+//         <Row>
+//           <Col xs={12} md={6}>
+//             <Form.Control
+//               name="name"
+//               value={collectionData.name}
+//               onChange={handleInputChange}
+//               type="text"
+//               size="lg"
+//               placeholder="Set a collection name"
+//             />
+//           </Col>
+//           <Col xs={12} md={6}>
+
+//           </Col>
+//         </Row>
+//         <Row>
+//           <Col xs={12} md={12}>
+//             <Button
+//               type="button"  // Use "button" type to prevent form submission
+//               variant="success"
+//               size="lg"
+//               onClick={handleCollectionUpload}
+//             >
+//               Upload
+//             </Button>
+//           </Col>
+//         </Row>
+//       </Form>
+//     </Container>
+//   );
+// };
+
+// export default CreateCollection;
 
 
 
@@ -220,3 +331,4 @@ export default CreateCollection;
 // }
 
 // export default CreateCollection;
+// >>>>>>> e2cf008859afc9ddf702efc9619bf59cc20e4cee

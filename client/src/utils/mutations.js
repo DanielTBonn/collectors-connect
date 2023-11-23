@@ -95,21 +95,3 @@ export const DELETE_ITEM = gql`
         }
     }
 `;
-
-// export const DELETE_COLLECTION = gql`
-//     mutation deleteCollection($collectionId: ID!) {
-//         deleteCollection(_id: $collectionId) {
-//             _id
-//             name
-//             description
-//             image
-//             userId {
-//                 username
-//             }
-//             items {
-//                 itemName
-//                 collectionId
-//             }
-//         }
-//     }
-// `;
