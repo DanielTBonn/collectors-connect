@@ -1,0 +1,38 @@
+.feedContainer {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+  
+  .feedUl {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .feedLi {
+    width: 80%;
+    text-align: center;
+    margin-bottom: 10px; /* Adjust as needed for spacing between list items */
+  }
+  
+  .feedCard {
+    width: 45rem; /* Default width */
+  }
+  
+  /* Media query for screens under 900px */
+  @media (max-width: 900px) {
+    .feedCard {
+      width: 35rem;
+    }
+  }
+  
+  /* Media query for screens under 600px */
+  @media (max-width: 600px) {
+    .feedCard {
+      width: 25rem;
+    }
+  }
