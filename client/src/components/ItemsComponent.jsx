@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./CollectionsComponent.css";
+import "./ItemsComponent.css";
 import CollectionImageComponent from "./CollectionImageComponent";
 
 function ItemsComponent({ collections }) {
@@ -33,16 +33,33 @@ function ItemsComponent({ collections }) {
   console.log(singleCollection);
 
   return (
-    <ul>
-      {singleCollection.items.map((item) => (
-        <li key={item._id}>
-          <h4>{item.itemName}</h4>
-          <p>{item.itemDescription}</p>
-          <img src={item.itemImage} alt={item.itemName} />
-        </li>
-      ))}
+    <ul className="profileFeed">
+      {singleCollection &&
+        singleCollection.items.map((item) => (
+          <li key={item._id} className="profileFeedItem">
+            <Card>
+              <Card.Img variant="top" src={item.itemImage} />
+              <Card.Body>
+                <Card.Title>{item.itemName}</Card.Title>
+                <Card.Text>{item.itemDescription}</Card.Text>
+              </Card.Body>
+            </Card>
+          </li>
+        ))}
     </ul>
   );
 }
 
 export default ItemsComponent;
+
+/*
+<ul>
+{singleCollection.items.map((item) => (
+  <li key={item._id}>
+    <h4>{item.itemName}</h4>
+    <p>{item.itemDescription}</p>
+    <img src={item.itemImage} alt={item.itemName} />
+  </li>
+))}
+</ul>
+*/
