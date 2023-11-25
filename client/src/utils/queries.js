@@ -156,3 +156,14 @@ export const GET_RANDOM_COLLECTION = gql`
     }
   }
 `;
+
+
+export const GET_SINGLE_ITEM = gql`
+  query singleItem($itemId: ID!) {
+    singleItem(itemId: $itemId) {
+      _id
+      itemName
+      itemDescription
+      itemImage
+    }
+`;

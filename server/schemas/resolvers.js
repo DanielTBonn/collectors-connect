@@ -75,6 +75,14 @@ const resolvers = {
               throw new Error('Error fetching random collection');
             }
         },
+        items: async () => {
+            const items = await Item.find();
+            return items;
+        },
+        singleItem: async (parent, { itemId }) => {
+            const item = await Item.findById(itemId );
+            return item;
+        }
     },
     Mutation: {
         login: async (parent, {email, password}) => {
@@ -147,6 +155,13 @@ const resolvers = {
             console.log('In delete collection')
             return Collection.findOneAndDelete({_id: collectionId})
         },
+        editCollection: async (parent, args) => {
+            const collection = Collection.findOneAndUpdate(
+                { _id: args.collectionId },
+                { ...args }
+                )
+            return collection;
+        },
 
         addItem: async (parent, args, context) => {
 
@@ -160,7 +175,14 @@ const resolvers = {
             return item;
         },
         deleteItem: async (parent, {itemId}) => {
-            return Item.findOneAndDelete({ _id: itemId})
+            return Item.findOneAndDelete({ _id: itemId })
+        },
+        editItem: async (parent, args) => {
+            const item = Item.findOneAndUpdate(
+                { _id: args.itemId },
+                { ...args }
+                )
+            return item;
         }
     }
 }

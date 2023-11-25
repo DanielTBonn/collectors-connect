@@ -95,3 +95,16 @@ export const DELETE_ITEM = gql`
         }
     }
 `;
+
+export const EDIT_ITEM = gql`
+    mutation editItem($itemId: ID!, $itemName: String!, $itemDescription: String!, $itemImage: String!, $collectionId: String!) {
+        editItem(itemId: $itemId, itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, collectionId: $collectionId) {
+        items {
+            _id
+            itemName
+            itemDescription
+            itemImage
+        }
+        }
+    }
+`;
