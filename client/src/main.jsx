@@ -5,8 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage";
 import ProfilePage from "./pages/ProfilePage.jsx";
-import TestPage from "./pages/TestPage";
-import TestImage from "./pages/TestImage.jsx";
 import Search from "./pages/SearchPage";
 import Created from "./pages/CreateCollection.jsx";
 import CreateCollection from "./pages/CreateCollection.jsx";
