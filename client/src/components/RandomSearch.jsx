@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { Container, Col, Form, Button, Row } from "react-bootstrap";
-//will need to import components to display search results, cards?
+import { Link } from "react-router-dom";
+import { Card, Container, Col, Form, Button, Row } from "react-bootstrap";
 
-import { useQuery } from "@apollo/client";
+import CollectionsComponent from "./CollectionsComponent";
+
+import CollectionImageComponent from "./CollectionImageComponent";
+
+import { useLazyQuery } from "@apollo/client";
 import { GET_RANDOM_COLLECTION } from "../utils/queries";
 
 const RandomSearch = () => {
@@ -10,29 +14,25 @@ const RandomSearch = () => {
   const [randomCollection, setRandomCollection] = useState(null);
   const [showRandomCollection, setShowRandomCollection] = useState(false);
 
-  const { loading, error, data, refetch } = useQuery(GET_RANDOM_COLLECTION);
+  const [getRandomCollection, { loading, error, data, refetch }] = useLazyQuery(GET_RANDOM_COLLECTION);
 
   useEffect(() => {
     // Check if there is data and if the data has a random collection
     if (data && data.randomCollection) {
       // Set the random collection to the state
       setRandomCollection(data.randomCollection);
+      console.log(randomCollection, "randomCollection");
     }
-  }, [data]);
+  }, [data, randomCollection]);
 
   const handleRandomSubmit = async () => {
-    // Refetch the query to get a new random collection
+    // Use the refetch function to manually trigger a re-fetch
     await refetch();
     // Set showRandomCollection to true to display the random collection
     setShowRandomCollection(true);
   };
 
-  // console.log(randomCollection.userId);
-
   // Check if the query is loading or if there's an error
-  if (loading) {
-    return <p>Loading...</p>;
-  }
   if (error) {
     return <p>Error: {error.message}</p>;
   }
@@ -48,13 +48,21 @@ const RandomSearch = () => {
           </Form>
         </Container>
 
-        {showRandomCollection && randomCollection && (
+        {loading ? 
+        (<p>Loading...</p>)
+        : showRandomCollection && randomCollection && (
           <div>
             <h2>Random Collection</h2>
-            <h3>{randomCollection.name}</h3>
-            <p>{randomCollection.description}</p>
-            <p>{randomCollection.userId.username}</p>
-            {/* Display other collection details... */}
+            <Card className="feedCard">
+              <CollectionImageComponent variant="top" collection={randomCollection} />
+                <Card.Body>
+                  <Card.Title>{randomCollection.name}</Card.Title>
+                  <Card.Text>{randomCollection.description}</Card.Text>
+                  <Link to={`/mycollections/${randomCollection._id}`}>
+                    <Button variant="primary">See Collection</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
           </div>
         )}
       </div>
