@@ -28,14 +28,6 @@ const router = createBrowserRouter([
         element: <ProfilePage />,
       },
       {
-        path: "/testpage",
-        element: <TestPage />,
-      },
-      {
-        path: "/testimage",
-        element: <TestImage />,
-      },
-      {
         path: "/search",
         element: <Search />,
       },
