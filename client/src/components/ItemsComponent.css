@@ -1,0 +1,12 @@
+.profileFeed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.profileFeedItem {
+    width: 300px;
+    height: 400px;
+    list-style: none;
+
+}
