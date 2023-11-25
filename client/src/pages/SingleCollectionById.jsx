@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_COLLECTION } from "../utils/queries";
+import ItemsComponent from "../components/ItemsComponent";
 
-const TestSingleCollection = () => {
+const SingleCollectionById = () => {
   const { collectionId } = useParams();
   const {
     loading: collectionLoading,
@@ -30,17 +31,9 @@ const TestSingleCollection = () => {
 
       {/* Display the items for the collection */}
       <h3>Items:</h3>
-      <ul>
-        {singleCollection.items.map((item) => (
-          <li key={item._id}>
-            <h4>{item.itemName}</h4>
-            <p>{item.itemDescription}</p>
-            <img src={item.itemImage} alt={item.itemName} />
-          </li>
-        ))}
-      </ul>
+      <ItemsComponent />
     </div>
   );
 };
 
-export default TestSingleCollection;
+export default SingleCollectionById;

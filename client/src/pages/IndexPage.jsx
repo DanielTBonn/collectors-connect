@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import AuthService from "../utils/auth";
 
-import TestCards from "../components/TestCards.jsx";
+import CollectionsComponent from "../components/CollectionsComponent.jsx";
 
 import { GET_COLLECTIONS, GET_ME } from "../utils/queries.js";
 
@@ -39,7 +39,7 @@ const IndexPage = () => {
         {loading ? (
           <div>Loading...</div>
         ) : isLoggedIn ? (
-          <TestCards collections={collections} />
+          <CollectionsComponent collections={collections} />
         ) : (
           "Please log in."
         )}
