@@ -58,11 +58,26 @@ const CollectionImageComponent = ({collection}) => {
     // }, [])
 
     return (
-        <div>
-            <img src={picture} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '300px', 
+            overflow: 'hidden',
+          }}
+        >
+          <img
+            src={picture}
+            alt="Collection Image"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover', // this maintains aspect ratio without stretching
+            }}
+          />
         </div>
-    )
-
-}
+      );
+    };
 
 export default CollectionImageComponent;
