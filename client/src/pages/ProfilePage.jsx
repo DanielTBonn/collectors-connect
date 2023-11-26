@@ -27,18 +27,21 @@ const ProfilePage = () => {
 
   return (
     <div className="user-profile">
-      <div>
-        {isLoggedIn ? `Hello ${user.username}` : "Log in to see your page"}
-      </div>
-      {user.collectionCount <= 0 ? (
-        <div>No collections</div>
-      ) : (
-        <MyCollectionsComponent />
-      )}
-
-      <Link to="/createCollection">
-        <Button variant="primary">Add New Collection</Button>
-      </Link>
+        {isLoggedIn ? (
+          <div className="d-flex flex-column align-items-center">
+            <h3 className="mt-2"> Hello {user.username}!</h3>
+            <Link to="/createCollection" className="m-3">
+              <Button variant="primary">Add New Collection</Button>
+            </Link>
+            {user.collectionCount <= 0 ? (
+              <div>No collections</div>
+            ) : (
+              <MyCollectionsComponent />
+            )}
+          </div>
+        ) : (
+          "Log in to see your page"
+        )}
     </div>
   );
 };

@@ -29,7 +29,7 @@ function MyCollectionsComponent({ collections }) {
             <li key={collection._id} className="feedLi">
               <Card className="feedCard">
                 {/* <Card.Img variant="top"> */}
-                  <CollectionImageComponent collection={collection}></CollectionImageComponent>
+                  <CollectionImageComponent collection={collection} variant="top"></CollectionImageComponent>
                 {/* </Card.Img> */}
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>

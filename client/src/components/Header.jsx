@@ -15,7 +15,7 @@ const styles = {
 
 function Header() {
     return (
-      <div className="header d-flex align-items-center" style={styles.header}>
+      <div className="header d-flex align-items-center justify-content-center" style={styles.header}>
         <div className="container text-center">
             <Navbar />
         </div>

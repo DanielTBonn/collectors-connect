@@ -10,7 +10,6 @@ async function urlResult (params) {
         .then((url) => {
             return url
         }, function(err) { console.log(err) })}
-console.log('hellworld')
 
 const CollectionImageComponent = ({collection}) => {
     
