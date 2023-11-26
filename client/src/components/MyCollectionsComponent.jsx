@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import "./CollectionsComponent.css";
 import CollectionImageComponent from "./CollectionImageComponent";
 import { GET_ME } from "../utils/queries";
+import DeleteCollectionButton from "./DeleteCollectionButton";
 // import AddItemButton from "./AddItemButton";
 
 function MyCollectionsComponent({ collections }) {
@@ -28,15 +29,14 @@ function MyCollectionsComponent({ collections }) {
           myCollections.map((collection) => (
             <li key={collection._id} className="feedLi">
               <Card className="feedCard">
-                {/* <Card.Img variant="top"> */}
-                  <CollectionImageComponent collection={collection}></CollectionImageComponent>
-                {/* </Card.Img> */}
+                <CollectionImageComponent variant="top" collection={collection} />
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
                   <Link to={`/mycollections/${collection._id}`}>
                     <Button variant="primary">See Collection</Button>
                   </Link>
+                  <DeleteCollectionButton collectionId={collection._id} />
                 </Card.Body>
               </Card>
             </li>

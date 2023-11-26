@@ -151,10 +151,33 @@ const resolvers = {
         //     return collection;    
         // },
 
-        deleteCollection: async (parent, {collectionId}) => {
-            console.log('In delete collection')
-            return Collection.findOneAndDelete({_id: collectionId})
-        },
+        deleteCollection: async (parent, { collectionId }) => {
+            try {
+              console.log('In delete collection');
+          
+              // Find the collection to be deleted
+              const deletedCollection = await Collection.findOneAndDelete({ _id: collectionId });
+          
+              if (!deletedCollection) {
+                throw new Error("Collection not found for deletion");
+              }
+          
+              // Update the user to remove the deleted collection
+              const updatedUser = await User.findByIdAndUpdate(
+                deletedCollection.userId,
+                { $pull: { collections: collectionId } },
+                { new: true }
+              );
+          
+              console.log('Updated User:', updatedUser);
+          
+              return updatedUser;
+            } catch (error) {
+              console.error('Error deleting collection:', error);
+              throw error; 
+            }
+          },
+          
         editCollection: async (parent, args) => {
             const collection = Collection.findOneAndUpdate(
                 { _id: args.collectionId },
