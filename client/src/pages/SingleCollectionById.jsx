@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/client";
 import { GET_SINGLE_COLLECTION, GET_ME } from "../utils/queries";
 import ItemsComponent from "../components/ItemsComponent";
 import CollectionImageComponent from "../components/CollectionImageComponent";
+import AddItemButton from "../components/AddItemButton";
+
 
 const SingleCollectionById = () => {
   const { collectionId } = useParams();
@@ -26,8 +28,11 @@ const SingleCollectionById = () => {
     margin: "10px",
     padding: "15px",
     fontSize: "16px",
-    
   };
+
+  console.log("collectionData:", collectionData);
+  console.log("userData:", userData);
+  console.log("singleCollection:", singleCollection);
 
   return (
     <div style={inlineStyles}>
@@ -35,25 +40,17 @@ const SingleCollectionById = () => {
       <CollectionImageComponent collection={singleCollection} />
       <p>{singleCollection.description}</p>
       <h3>Items:</h3>
-        {collectionLoading ? (
-          <p>Loading Collection...</p>
-        ):
-        singleCollection.items.map((imageItem) => {
-            return (
-            <div>
-            <h2>{imageItem.imageName}</h2>
-            <p>{imageItem.imageDescription}</p>
-              <AddItemButton collectionId={collectionId}/>
-              <div>
-                <ImageComponent imageItem={imageItem} />
-                <DeleteItemButton itemId={imageItem._id} />
-              </div>
-            </div>)
-        })
-        }
+      {collectionLoading ? (
+        <p>Loading Collection...</p>
+      ) : (
+        <>
+          <AddItemButton collectionId={collectionId} />
+          <ItemsComponent collections={singleCollection.items} />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default SingleCollectionById;
 

@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./ItemsComponent.css";
 import CollectionImageComponent from "./CollectionImageComponent";
+import ImageComponent from "./ImageCompontent";
 
 function ItemsComponent({ collections }) {
   const { collectionId } = useParams();
@@ -38,7 +39,8 @@ function ItemsComponent({ collections }) {
         singleCollection.items.map((item) => (
           <li key={item._id} className="profileFeedItem">
             <Card>
-              <Card.Img variant="top" src={item.itemImage} />
+              {/* Pass 'item' directly to 'ImageComponent' as 'imageItem' prop */}
+              <ImageComponent variant="top" imageItem={item} />
               <Card.Body>
                 <Card.Title>{item.itemName}</Card.Title>
                 <Card.Text>{item.itemDescription}</Card.Text>
