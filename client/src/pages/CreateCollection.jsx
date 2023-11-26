@@ -11,7 +11,9 @@ const CreateCollection = () => {
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
   const user = userData?.me || {};
 
-  const [addCollection, { error }] = useMutation(ADD_COLLECTION);
+  const [addCollection, { error }] = useMutation(ADD_COLLECTION, {
+    refetchQueries: [{ query: GET_ME }],
+  });
 
   const [collectionData, setCollectionData] = useState({
     name: '',
@@ -25,75 +27,74 @@ const CreateCollection = () => {
       [name]: value,
     });
   };
-  
-    const [file, setFile] = useState(null);
-    const handleFileChange = (e) => {
-      const file = e.target.files[0];
-      setFile(file);
-    };
 
-    let key = 'users/' + user.username + '/collections/'
+  const [file, setFile] = useState(null);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+  };
 
-    useEffect(() => {
-      if(file) {
-        key = 'users/' + user.username + '/collections/' + collectionData.name + '/' + file.name
-      }
-    }, [file, collectionData])
+  let key = 'users/' + user.username + '/collections/';
 
-    let params = {
-        name: "new-collection",
-        description: "collection description",
-        image: "none",
+  useEffect(() => {
+    if (file) {
+      key = 'users/' + user.username + '/collections/' + collectionData.name + '/' + file.name;
+    }
+  }, [file, collectionData]);
+
+  let params = {
+    name: "new-collection",
+    description: "collection description",
+    image: "none",
+  };
+
+  const handleCollectionUpload = async (e) => {
+    e.preventDefault();
+
+    if (!collectionData.name) {
+      alert('Collection needs a name!');
+      return;
     }
 
-    const handleCollectionUpload = async (e) => {
-      e.preventDefault();
-    
-      if (!collectionData.name) {
-        alert('Collection needs a name!');
-        return;
-      }
-    
-      console.log("is it working?");
-    
-      if (!file) {
-        alert('Must add a file!');
-        return;
-      }
-    
-      try {
-        const { data } = await addCollection({
-          variables: {
-            ...params, 
-            name: collectionData.name,
-            description: collectionData.description,
-            image: key
-          },
-        });
-    
-        // Display success message
-        setSuccessMessage('Collection created successfully!');
-    
-        // Redirect to ProfilePage after successful collection creation
-        navigate('/me');
-      } catch (err) {
-        console.log("There was an error");
-        console.log(err);
-      } finally {
-        uploadFile(file, { username: user.username, collection: collectionData.name });
-    
-        // Reset form data and file state
-        setCollectionData({
-          name: '',
-          description: '',
-          image: '', 
-        });
-        setFile(null);
-      }
-    };
-    
-    const [successMessage, setSuccessMessage] = useState('');
-    
+    console.log("is it working?");
+
+    if (!file) {
+      alert('Must add a file!');
+      return;
+    }
+
+    try {
+      const { data } = await addCollection({
+        variables: {
+          ...params,
+          name: collectionData.name,
+          description: collectionData.description,
+          image: key,
+        },
+      });
+
+      // Display success message
+      setSuccessMessage('Collection created successfully!');
+
+      // Redirect to ProfilePage after successful collection creation
+      navigate('/me');
+    } catch (err) {
+      console.log("There was an error");
+      console.log(err);
+    } finally {
+      uploadFile(file, { username: user.username, collection: collectionData.name });
+
+      // Reset form data and file state
+      setCollectionData({
+        name: '',
+        description: '',
+        image: '',
+      });
+      setFile(null);
+    }
+  };
+
+  const [successMessage, setSuccessMessage] = useState('');
 
   return (
     <div className="TestPage">
