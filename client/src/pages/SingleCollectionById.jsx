@@ -35,10 +35,25 @@ const SingleCollectionById = () => {
       <CollectionImageComponent collection={singleCollection} />
       <p>{singleCollection.description}</p>
       <h3>Items:</h3>
-      <ItemsComponent />
+        {collectionLoading ? (
+          <p>Loading Collection...</p>
+        ):
+        singleCollection.items.map((imageItem) => {
+            return (
+            <div>
+            <h2>{imageItem.imageName}</h2>
+            <p>{imageItem.imageDescription}</p>
+              <AddItemButton collectionId={collectionId}/>
+              <div>
+                <ImageComponent imageItem={imageItem} />
+                <DeleteItemButton itemId={imageItem._id} />
+              </div>
+            </div>)
+        })
+        }
     </div>
   );
-};
+}
 
 export default SingleCollectionById;
 

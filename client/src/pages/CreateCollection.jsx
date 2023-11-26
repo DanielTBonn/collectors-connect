@@ -27,29 +27,34 @@ const CreateCollection = () => {
       [name]: value,
     });
   };
+  
+    const [file, setFile] = useState(null);
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setFile(file);
+    };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFile(file);
-  };
+    let key = 'users/' + user.username + '/collections/'
 
-  useEffect(() => {
-    if (file) {
-      const key = 'users/' + user.username + '/collections/' + collectionData.name + '/' + file.name;
-      setCollectionData({
-        ...collectionData,
-        image: key,
-      });
+    useEffect(() => {
+      if(file) {
+        key = 'users/' + user.username + '/collections/' + collectionData.name + '/' + file.name
+      }
+    }, [file, collectionData])
+
+    let params = {
+        name: "new-collection",
+        description: "collection description",
+        image: "none",
     }
-  }, [file, collectionData.name, user.username]);
 
-  const handleCollectionUpload = async (e) => {
-    e.preventDefault();
-
-    if (!collectionData.name) {
-      alert('Collection needs a name!');
-      return;
-    }
+    const handleCollectionUpload = (e) => {
+      e.preventDefault();
+        if (!collectionData.name) {
+            alert('Collection needs a name!')
+            return;
+        }
+        console.log("is it working?")
 
     if (!file) {
       alert('Must add a file!');
