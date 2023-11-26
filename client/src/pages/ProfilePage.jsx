@@ -36,9 +36,11 @@ const ProfilePage = () => {
         <MyCollectionsComponent />
       )}
 
-      <Link to="/createCollection">
-        <Button variant="primary">Add New Collection</Button>
-      </Link>
+{isLoggedIn && (
+        <Link to="/createCollection">
+          <Button variant="primary">Add New Collection</Button>
+        </Link>
+      )}
     </div>
   );
 };

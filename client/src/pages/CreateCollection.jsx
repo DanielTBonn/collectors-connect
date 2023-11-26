@@ -4,10 +4,9 @@ import { uploadFile } from '../utils/uploadFile'
 import { GET_ME } from '../utils/queries'
 import { ADD_COLLECTION } from '../utils/mutations';
 import { Container, Col, Form, Button, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'
+
 
 const CreateCollection = () => {
-  const navigate = useNavigate();
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
   const user = userData?.me || {};
 
@@ -28,11 +27,7 @@ const CreateCollection = () => {
     });
   };
   
-  
-  // const handleInputChange = (e) => {
-  //     const { value } = e.target;
-  //     setCollectionName(value)
-  // }
+
     const [file, setFile] = useState(null);
     const handleFileChange = (e) => {
       const file = e.target.files[0];
@@ -52,33 +47,6 @@ const CreateCollection = () => {
         description: "collection description",
         image: "none",
     }
-  
-  //   try {
-  //     const result = await addCollection({
-  //       variables: {
-  //         name,
-  //         description,
-  //         image: 'http://placekitten.com/200/300',
-  //         items: [],
-  //       },
-  //       refetchQueries: [{ query: GET_ME }],
-  //     });
-  
-  //     const { data, errors } = result;
-  
-  //     console.log("Mutation response:", data);
-  
-  //     if (data && data.addCollection) {
-  //       console.log("Collection added:", data.addCollection);
-
-
-  //     } else {
-  //       console.log("Collection not added. Check for errors in the response:", errors);
-  //     }
-  //   } catch (err) {
-  //     console.log("Error adding collection:", err.message);
-  //   }
-  // };
   
   
 
@@ -115,8 +83,7 @@ const CreateCollection = () => {
               description: '',
             })
             setFile(null)
-            // window.location.reload;
-            // navigate('/me');
+        
           }
     }
 
@@ -132,7 +99,7 @@ const CreateCollection = () => {
                         <Container>
           <h1>Add a Collection!</h1>
           <Form 
-          // onSubmit={handleFormSubmit}
+       
           >
             <Row>
               <Col xs={12} md={8}>
@@ -162,7 +129,7 @@ const CreateCollection = () => {
               </Col>
               <Col xs={12} md={4}>
                 <button  size="lg" onClick={(e) => {
-                  // console.log(file)
+              
                   handleCollectionUpload(e);
               }}>
                   Upload
@@ -171,9 +138,6 @@ const CreateCollection = () => {
             </Row>
           </Form>
         </Container>
-                  {/* <input type="file" onChange={handleFileChange} /> */}
-                  {/* <input className="collections"> </input>
-                  <button >Upload</button> */}
               </div>
             }
           </div>
