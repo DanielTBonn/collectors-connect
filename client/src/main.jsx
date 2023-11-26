@@ -4,16 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage";
-import LoggedInPage from "./pages/LoggedInPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 import TestPage from "./pages/TestPage";
 import TestImage from "./pages/TestImage.jsx";
 import Search from "./pages/SearchPage";
 import Created from "./pages/CreateCollection.jsx";
 import CreateCollection from "./pages/CreateCollection.jsx";
 import ViewMyCollections from "./pages/ViewMyCollections.jsx";
-import TestSingleCollection from "./pages/TestSingleCollection.jsx";
 import EditSingleCollection from "./pages/EditSingleCollection.jsx"
 import EditSingleItem from "./pages/EditSingleItem.jsx";
+import SingleCollectionById from "./pages/SingleCollectionById.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/me",
-        element: <LoggedInPage />,
+        element: <ProfilePage />,
       },
       {
         path: "/testpage",
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/mycollections/:collectionId",
-        element: <TestSingleCollection />,
+        element: <SingleCollectionById />,
       },
       {
         path: "/editcollection/:collectionId",
