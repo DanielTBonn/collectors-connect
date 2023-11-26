@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AWS from '../../aws.config'
 
-const S3_BUCKET = import.meta.env.VITE_S3_BUCKET
+const S3_BUCKET = process.env.S3_BUCKET || import.meta.env.VITE_S3_BUCKET
 const s3 = new AWS.S3();
 
 async function urlResult (params) {
