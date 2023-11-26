@@ -6,13 +6,13 @@ import { ADD_COLLECTION, ADD_ITEM } from "../utils/mutations";
 
 
 
-const AddItemButton = ({ collectionId }) => {
-    console.log(collectionId)
+const AddItemButton = (collection) => {
+    console.log(collection)
 
-  const { loading: userLoading, data: userData } = useQuery(GET_ME);
-  console.log(userData)
-  const user = userData?.me || {};
-  console.log(user)
+  // const { loading: userLoading, data: userData } = useQuery(GET_ME);
+  // console.log(userData)
+  // const user = userData?.me || {};
+  // console.log(user)
   // const userInfo = {
   //   username: user.username,
   //   collection: user.collections[0].name,

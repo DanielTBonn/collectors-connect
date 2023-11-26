@@ -11,6 +11,8 @@ import Search from "./pages/SearchPage";
 import Created from "./pages/CreateCollection.jsx";
 import CreateCollection from "./pages/CreateCollection.jsx";
 import ViewMyCollections from "./pages/ViewMyCollections.jsx";
+import EditSingleCollection from "./pages/EditSingleCollection.jsx"
+import EditSingleItem from "./pages/EditSingleItem.jsx";
 import SingleCollectionById from "./pages/SingleCollectionById.jsx";
 
 const router = createBrowserRouter([
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
         path: "/mycollections/:collectionId",
         element: <SingleCollectionById />,
       },
+      {
+        path: "/editcollection/:collectionId",
+        element: <EditSingleCollection />
+      },
+      {
+        path: "/edititem/:itemId",
+        element: <EditSingleItem />
+      }
     ],
   },
 ]);
