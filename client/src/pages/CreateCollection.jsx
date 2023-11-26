@@ -18,8 +18,6 @@ const CreateCollection = () => {
     description: '',
   });
 
-  const [file, setFile] = useState(null);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCollectionData({
@@ -48,47 +46,54 @@ const CreateCollection = () => {
         image: "none",
     }
 
-    const handleCollectionUpload = (e) => {
+    const handleCollectionUpload = async (e) => {
       e.preventDefault();
-        if (!collectionData.name) {
-            alert('Collection needs a name!')
-            return;
-        }
-        console.log("is it working?")
-
-    if (!file) {
-      alert('Must add a file!');
-      return;
-    }
-
-    try {
-      const { data } = await addCollection({
-        variables: {
-          name: collectionData.name,
-          description: collectionData.description,
-          image: collectionData.image,
-        },
-      });
-
-      setSuccessMessage('Collection created successfully!');
-
-      // Redirect to ProfilePage after successful collection creation
-      navigate('/me');
-    } catch (err) {
-      console.log("There was an error");
-      console.log(err);
-    } finally {
-      uploadFile(file, { username: user.username, collection: collectionData.name });
-      setCollectionData({
-        name: '',
-        description: '',
-        image: '',
-      });
-      setFile(null);
-    }
-  };
-
-  const [successMessage, setSuccessMessage] = useState('');
+    
+      if (!collectionData.name) {
+        alert('Collection needs a name!');
+        return;
+      }
+    
+      console.log("is it working?");
+    
+      if (!file) {
+        alert('Must add a file!');
+        return;
+      }
+    
+      try {
+        const { data } = await addCollection({
+          variables: {
+            ...params, 
+            name: collectionData.name,
+            description: collectionData.description,
+            image: key
+          },
+        });
+    
+        // Display success message
+        setSuccessMessage('Collection created successfully!');
+    
+        // Redirect to ProfilePage after successful collection creation
+        navigate('/me');
+      } catch (err) {
+        console.log("There was an error");
+        console.log(err);
+      } finally {
+        uploadFile(file, { username: user.username, collection: collectionData.name });
+    
+        // Reset form data and file state
+        setCollectionData({
+          name: '',
+          description: '',
+          image: '', 
+        });
+        setFile(null);
+      }
+    };
+    
+    const [successMessage, setSuccessMessage] = useState('');
+    
 
   return (
     <div className="TestPage">
