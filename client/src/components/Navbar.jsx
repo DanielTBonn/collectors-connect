@@ -35,7 +35,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar expand="lg" style={{backgroundColor: "rgba(255, 250, 255, 0.771)", marginLeft: "-150px", paddingLeft: "150px", borderRadius: "0 10px 10px 0" }}>
+      <Navbar expand="lg" style={{backgroundColor: "rgba(255, 250, 255, 0.771)", marginLeft: "-350px", paddingLeft: "350px", borderRadius: "0 10px 10px 0" }}>
         <Container fluid>
           <Navbar.Brand as={Link} to="/" >Collectors Connect</Navbar.Brand>
             <Nav className="ml-auto" style={{ flexDirection: 'row', }}>

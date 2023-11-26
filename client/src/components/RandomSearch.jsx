@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, Container, Col, Form, Button, Row } from "react-bootstrap";
-
-import CollectionsComponent from "./CollectionsComponent";
-
-import CollectionImageComponent from "./CollectionImageComponent";
-
 import { useLazyQuery } from "@apollo/client";
 import { GET_RANDOM_COLLECTION } from "../utils/queries";
+
+import CollectionImageComponent from "./CollectionImageComponent";
 
 const RandomSearch = () => {
   // Code for random search

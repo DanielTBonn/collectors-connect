@@ -9,10 +9,9 @@ const styles = {
         backgroundRepeat: "no-repeat",
         backgroundImage: "url(../../assets/eran-menashri-Ae7pSsfzEHs-unsplash.jpg)",
         position: "relative",
-        backgroundPosition: "center 20%"
+        backgroundPosition: "center 23%"
     },
 }
-
 
 function Header() {
     return (

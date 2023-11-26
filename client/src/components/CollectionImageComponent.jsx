@@ -60,7 +60,7 @@ const CollectionImageComponent = ({collection}) => {
 
     return (
         <div>
-            <img src={picture}></img>
+            <img src={picture} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
         </div>
     )
 
