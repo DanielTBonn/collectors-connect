@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import "./CollectionsComponent.css";
 import CollectionImageComponent from "./CollectionImageComponent";
 import { GET_ME } from "../utils/queries";
+import DeleteCollectionButton from "./DeleteCollectionButton";
 // import AddItemButton from "./AddItemButton";
 
 function MyCollectionsComponent({ collections }) {
@@ -35,6 +36,7 @@ function MyCollectionsComponent({ collections }) {
                   <Link to={`/mycollections/${collection._id}`}>
                     <Button variant="primary">See Collection</Button>
                   </Link>
+                  <DeleteCollectionButton collectionId={collection._id} />
                 </Card.Body>
               </Card>
             </li>
