@@ -28,6 +28,7 @@ const SingleCollectionById = () => {
     <div>
 
       {/* Display the items for the collection */}
+      <AddItemButton collectionId={collectionId}></AddItemButton>
       <h3>Items:</h3>
         {collectionLoading ? (
           <p>Loading Collection...</p>
@@ -37,7 +38,6 @@ const SingleCollectionById = () => {
             <div>
             <h2>{imageItem.imageName}</h2>
             <p>{imageItem.imageDescription}</p>
-              <AddItemButton collectionId={collectionId}/>
               <div>
                 <ImageComponent imageItem={imageItem} />
                 <DeleteItemButton itemId={imageItem._id} />
