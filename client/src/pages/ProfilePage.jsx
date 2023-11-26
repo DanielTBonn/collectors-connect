@@ -27,22 +27,31 @@ const ProfilePage = () => {
 
   return (
     <div className="user-profile">
+    <div>
+      {isLoggedIn && `Hello ${user.username}`}
+    </div>
+    
+    {isLoggedIn && (
       <div>
-        {isLoggedIn ? `Hello ${user.username}` : "Log in to see your page"}
-      </div>
-      {user.collectionCount <= 0 ? (
-        <div>No collections</div>
-      ) : (
-        <MyCollectionsComponent />
-      )}
-
-{isLoggedIn && (
-        <Link to="/createCollection">
+        <Link
+          to="/createCollection"
+          style={{
+            marginTop: '10px', 
+            display: 'inline-block',
+          }}
+        >
           <Button variant="primary">Add New Collection</Button>
         </Link>
-      )}
-    </div>
-  );
+      </div>
+    )}
+
+    {user.collectionCount <= 0 ? (
+      <div>No collections</div>
+    ) : (
+      <MyCollectionsComponent />
+    )}
+  </div>
+);
 };
 
 export default ProfilePage;
