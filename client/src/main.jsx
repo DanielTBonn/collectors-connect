@@ -12,6 +12,7 @@ import Created from "./pages/CreateCollection.jsx";
 import CreateCollection from "./pages/CreateCollection.jsx";
 import ViewMyCollections from "./pages/ViewMyCollections.jsx";
 import TestSingleCollection from "./pages/TestSingleCollection.jsx";
+import EditSingleItem from "./pages/EditSingleItem.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         path: "/mycollections/:collectionId",
         element: <TestSingleCollection />,
       },
+      {
+        path: "/edititem/:itemId",
+        element: <EditSingleItem />
+      }
     ],
   },
 ]);

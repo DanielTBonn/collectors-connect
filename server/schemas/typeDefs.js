@@ -49,7 +49,7 @@ const typeDefs = `
         editCollection(collectionId: ID!, name: String!, description: String!, image: String!): Collection
         addItem(itemName: String!, itemDescription: String!, itemImage: String!, collectionId: String!): Item
         deleteItem(itemId: ID!): Collection
-        editItem(itemId: ID!, itemName: String!, itemDescription: String!, itemImage: String!, collectionId: String!): Collection
+        editItem(itemId: ID!, itemName: String!, itemDescription: String!, itemImage: String!): Collection
     }
 `;
 

@@ -166,4 +166,5 @@ export const GET_SINGLE_ITEM = gql`
       itemDescription
       itemImage
     }
+  }
 `;

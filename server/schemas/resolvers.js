@@ -178,9 +178,14 @@ const resolvers = {
             return Item.findOneAndDelete({ _id: itemId })
         },
         editItem: async (parent, args) => {
+            console.log('here?')
             const item = Item.findOneAndUpdate(
                 { _id: args.itemId },
-                { ...args }
+                { 
+                    itemName: args.itemName,
+                    itemDescription: args.itemDescription,
+                    itemImage: args.itemImage,
+                 }
                 )
             return item;
         }
