@@ -1,6 +1,5 @@
 import AWS from '../../aws.config'
-import { useMutation } from '@apollo/client';
-const S3_BUCKET = import.meta.env.VITE_S3_BUCKET
+const S3_BUCKET = process.env.S3_BUCKET || import.meta.env.VITE_S3_BUCKET 
 
 // const {
 //   S3Client,

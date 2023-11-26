@@ -62,6 +62,17 @@ export const DELETE_COLLECTION = gql`
     }
 `;
 
+export const EDIT_COLLECTION = gql`
+    mutation editCollection($collectionId: ID!, $name: String!, $description: String!, $image: String!) {
+        editCollection(collectionId: $collectionId, name: $name, description: $description, image: $image) {
+        _id
+        name
+        description
+        image
+        }
+    }
+`;
+
 export const ADD_ITEM = gql`
     mutation addItem($itemName: String!, $itemDescription: String!, $itemImage: String!, $collectionId: String!) {
         addItem(itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage, collectionId: $collectionId) {
@@ -92,6 +103,19 @@ export const DELETE_ITEM = gql`
                     _id
                 }
             }
+        }
+    }
+`;
+
+export const EDIT_ITEM = gql`
+    mutation editItem($itemId: ID!, $itemName: String!, $itemDescription: String!, $itemImage: String!) {
+        editItem(itemId: $itemId, itemName: $itemName, itemDescription: $itemDescription, itemImage: $itemImage) {
+        items {
+            _id
+            itemName
+            itemDescription
+            itemImage
+        }
         }
     }
 `;
