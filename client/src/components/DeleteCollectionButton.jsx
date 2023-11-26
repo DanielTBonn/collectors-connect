@@ -9,13 +9,20 @@ const DeleteCollectionButton = ({ collectionId }) => {
     refetchQueries: [{ query: GET_ME }],
   });
 
-  const handleDelete = () => {
-    const { data } = deleteCollection({
-      variables: {
-        collectionId,
-      },
-    });
+  const handleDelete = async () => {
+    try {
+      const { data } = await deleteCollection({
+        variables: {
+          collectionId,
+        },
+      });
+  
+      console.log(data);
+    } catch (error) {
+      console.error("Error deleting collection:", error);
+    }
   };
+  
 
   return (
     <div>
