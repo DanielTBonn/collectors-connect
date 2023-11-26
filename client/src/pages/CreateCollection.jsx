@@ -28,11 +28,6 @@ const CreateCollection = () => {
     });
   };
   
-  
-  // const handleInputChange = (e) => {
-  //     const { value } = e.target;
-  //     setCollectionName(value)
-  // }
     const [file, setFile] = useState(null);
     const handleFileChange = (e) => {
       const file = e.target.files[0];
@@ -52,35 +47,6 @@ const CreateCollection = () => {
         description: "collection description",
         image: "none",
     }
-  
-  //   try {
-  //     const result = await addCollection({
-  //       variables: {
-  //         name,
-  //         description,
-  //         image: 'http://placekitten.com/200/300',
-  //         items: [],
-  //       },
-  //       refetchQueries: [{ query: GET_ME }],
-  //     });
-  
-  //     const { data, errors } = result;
-  
-  //     console.log("Mutation response:", data);
-  
-  //     if (data && data.addCollection) {
-  //       console.log("Collection added:", data.addCollection);
-
-
-  //     } else {
-  //       console.log("Collection not added. Check for errors in the response:", errors);
-  //     }
-  //   } catch (err) {
-  //     console.log("Error adding collection:", err.message);
-  //   }
-  // };
-  
-  
 
     const handleCollectionUpload = (e) => {
       e.preventDefault();

@@ -28,7 +28,9 @@ function MyCollectionsComponent({ collections }) {
           myCollections.map((collection) => (
             <li key={collection._id} className="feedLi">
               <Card className="feedCard">
-                <CollectionImageComponent variant="top" collection={collection} />
+                {/* <Card.Img variant="top"> */}
+                  <CollectionImageComponent collection={collection}></CollectionImageComponent>
+                {/* </Card.Img> */}
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
