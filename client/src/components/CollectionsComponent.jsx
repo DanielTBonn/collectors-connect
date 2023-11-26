@@ -18,10 +18,7 @@ function CollectionsComponent({ collections }) {
           collections.map((collection) => (
             <li key={collection._id} className="feedLi">
               <Card className="feedCard">
-                <Card.Img
-                  variant="top"
-                  src="../../assets/jakob-owens-ZBadHaTUkP0-unsplash.jpg"
-                />
+              <CollectionImageComponent variant="top" collection={collection} />
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>

@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
-//will need to import components to display search results
-import Auth from "../utils/auth";
-
 import { useLazyQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../utils/queries";
 import RandomSearch from "../components/RandomSearch";
+import CollectionsComponent from "../components/CollectionsComponent";
 
-//make button with capability to load some number of random collections or one random collection, similar to "i'm feelin lucky"
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
   // useQuery hook to fetch collections
   const [searchCollection, { loading, error, data }] = useLazyQuery(GET_COLLECTIONS);
 
   const results = data?.collections || [];
-
-  // useEffect(() => {
-  // }, [collections]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -28,8 +22,6 @@ const Search = () => {
     searchCollection({
       variables: { name: `.*${searchInput}.*` },
     });
-
-    //console.log(results[0].userId);
 
   };
 
@@ -68,14 +60,9 @@ const Search = () => {
         {results.length > 0 && (
           <div>
             <h2>Search Results</h2>
-            {results.map((collection) => (
-              <div key={collection._id}>
-                <h3>{collection.name}</h3>
-                <p>{collection.description}</p>
-                <p>{collection.userId.username}</p>
-                {/* Display other collection details... */}
+              <div key={results._id}>
+                <CollectionsComponent collections={results} />
               </div>
-            ))}
           </div>
         )}
 
