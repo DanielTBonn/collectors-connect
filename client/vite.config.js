@@ -40,6 +40,7 @@ export default defineConfig (({ mode }) => {
 
    return {
     build: {
+      assetsInclude: ['src/assets/**/*'],
       sourcemap: true,
       commonjsOptions: {
         include: [/node_modules/],

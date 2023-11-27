@@ -7,7 +7,7 @@ const styles = {
         overflow: "hidden",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundImage: "url(../../assets/eran-menashri-Ae7pSsfzEHs-unsplash.jpg)",
+        backgroundImage: "url(../assets/eran-menashri-Ae7pSsfzEHs-unsplash.jpg)",
         position: "relative",
         backgroundPosition: "center 20%"
     },
