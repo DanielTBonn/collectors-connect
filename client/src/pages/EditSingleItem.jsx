@@ -15,35 +15,20 @@ const EditSingleItem = () => {
     },
     fetchPolicy: 'cache-and-network',
   });
-  
+
   const [editItem, { error }] = useMutation(EDIT_ITEM, {
-    onCompleted: async (data) => {
-    
-      const editedItem = data?.editItem?.items;
-  
-      // Log the mutation result
-      console.log('Mutation Result:', data);
-  
-      if (editedItem && editedItem.collectionId) {
-        console.log('Before navigate');
-  
-        // Log the structure of editedItem
-        console.log('editedItem:', editedItem);
-  
-        // Log the equality check result
-        console.log('Equality Check:', item.collectionId === editedItem.collectionId);
-  
-        try {
-          await navigate(`/myCollections/${editedItem.collectionId}`);
-          console.log('After navigate');
-        } catch (error) {
-          console.error('Navigation error:', error);
-        }
-      } else {
-        console.log('CollectionId is undefined in the edited item.');
-      }
+    onCompleted: () => {
+      // Redirect to SingleCollectionById page after successful update
+      navigate(`/mycollections/${item.collectionId._id}`);
     },
-  });  
+    onError: (error) => {
+      console.error("Mutation error:", error);
+   
+    },
+  refetchQueries: [
+    { query: GET_SINGLE_ITEM, variables: { itemId } },
+  ],
+});
 
   const item = data?.singleItem || {};
   console.log(item);
@@ -51,7 +36,7 @@ const EditSingleItem = () => {
   const [itemData, setItemData] = useState({
     itemName: item.itemName || '',
     itemDescription: item.itemDescription || '',
-    collectionId: item.collectionId || null
+    collectionId: item.collectionId || null,
   });
 
   console.log('item.collectionId:', item.collectionId);
