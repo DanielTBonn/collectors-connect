@@ -8,11 +8,14 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateCollection = () => {
   const navigate = useNavigate();
-  const { loading: userLoading, data: userData } = useQuery(GET_ME);
+  const { loading: userLoading, data: userData, refetch } = useQuery(GET_ME);
   const user = userData?.me || {};
 
   const [addCollection, { error }] = useMutation(ADD_COLLECTION, {
-    refetchQueries: [{ query: GET_ME }],
+    onCompleted: async () => {
+      // Refetch the data
+      await refetch();
+    },
   });
 
   const [collectionData, setCollectionData] = useState({
@@ -56,8 +59,6 @@ const CreateCollection = () => {
       return;
     }
 
-    console.log("is it working?");
-
     if (!file) {
       alert('Must add a file!');
       return;
@@ -73,14 +74,16 @@ const CreateCollection = () => {
         },
       });
 
+      // Refetch the user data
+      await refetch();
+
       // Display success message
       setSuccessMessage('Collection created successfully!');
 
       // Redirect to ProfilePage after successful collection creation
       navigate('/me');
     } catch (err) {
-      console.log("There was an error");
-      console.log(err);
+      console.error("There was an error", err);
     } finally {
       uploadFile(file, { username: user.username, collection: collectionData.name });
 
@@ -93,7 +96,7 @@ const CreateCollection = () => {
       setFile(null);
     }
   };
-
+  
   const [successMessage, setSuccessMessage] = useState('');
 
   return (

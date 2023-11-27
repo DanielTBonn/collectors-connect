@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import "./ItemsComponent.css";
 import CollectionImageComponent from "./CollectionImageComponent";
 import ImageComponent from "./ImageCompontent";
+import DeleteItemButton from "./DeleteItemButton";
 
 function ItemsComponent({ collections }) {
   const { collectionId } = useParams();
@@ -44,6 +45,11 @@ function ItemsComponent({ collections }) {
               <Card.Body>
                 <Card.Title>{item.itemName}</Card.Title>
                 <Card.Text>{item.itemDescription}</Card.Text>
+                <DeleteItemButton itemId={item._id} collectionId={collectionId} />
+                {/* Edit button - link to the edit page */}
+                <Link to={`/edititem/${item._id}`}>
+                  <Button>Edit</Button>
+                </Link>
               </Card.Body>
             </Card>
           </li>
