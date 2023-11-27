@@ -65,6 +65,10 @@ const CreateCollection = () => {
     }
 
     try {
+      // Upload the file first
+      await uploadFile(file, { username: user.username, collection: collectionData.name });
+
+      // then...add the collection
       const { data } = await addCollection({
         variables: {
           ...params,
@@ -74,7 +78,7 @@ const CreateCollection = () => {
         },
       });
 
-      // Refetch the user data
+      // Refetch user data
       await refetch();
 
       // Display success message
@@ -85,8 +89,6 @@ const CreateCollection = () => {
     } catch (err) {
       console.error("There was an error", err);
     } finally {
-      uploadFile(file, { username: user.username, collection: collectionData.name });
-
       // Reset form data and file state
       setCollectionData({
         name: '',
@@ -96,9 +98,8 @@ const CreateCollection = () => {
       setFile(null);
     }
   };
-  
-  const [successMessage, setSuccessMessage] = useState('');
 
+  const [successMessage, setSuccessMessage] = useState('');
   return (
     <div className="TestPage">
       <div>
