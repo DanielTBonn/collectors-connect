@@ -9,37 +9,52 @@ import { Container, Col, Form, Button, Row } from 'react-bootstrap';
 const EditSingleItem = () => {
   const { itemId } = useParams();
   const navigate = useNavigate();
-
+  const { loading: userLoading, data } = useQuery(GET_SINGLE_ITEM, {
+    variables: {
+      itemId,
+    },
+    fetchPolicy: 'cache-and-network',
+  });
+  
   const [editItem, { error }] = useMutation(EDIT_ITEM, {
-    onCompleted: (data) => {
-      const editedItem = data?.editItem;
-
+    onCompleted: async (data) => {
+    
+      const editedItem = data?.editItem?.items;
+  
+      // Log the mutation result
+      console.log('Mutation Result:', data);
+  
       if (editedItem && editedItem.collectionId) {
         console.log('Before navigate');
-        navigate(`/singleCollectionById/${editedItem.collectionId}`);
-        console.log('After navigate');
+  
+        // Log the structure of editedItem
+        console.log('editedItem:', editedItem);
+  
+        // Log the equality check result
+        console.log('Equality Check:', item.collectionId === editedItem.collectionId);
+  
+        try {
+          await navigate(`/myCollections/${editedItem.collectionId}`);
+          console.log('After navigate');
+        } catch (error) {
+          console.error('Navigation error:', error);
+        }
       } else {
         console.log('CollectionId is undefined in the edited item.');
       }
     },
-  });
-
-  const { loading: userLoading, data} = useQuery(GET_SINGLE_ITEM, {
-    variables: {
-      itemId
-    },
-    fetchPolicy: "cache-and-network",
-  });
+  });  
 
   const item = data?.singleItem || {};
   console.log(item);
 
   const [itemData, setItemData] = useState({
-    itemName: item.itemName || '',  
-    itemDescription: item.itemDescription || ''
+    itemName: item.itemName || '',
+    itemDescription: item.itemDescription || '',
+    collectionId: item.collectionId || null
   });
 
-  console.log("item.collectionId:", item.collectionId);
+  console.log('item.collectionId:', item.collectionId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,27 +68,27 @@ const EditSingleItem = () => {
     e.preventDefault();
 
     if (!itemData.itemName) {
-        alert('Item needs a name!');
-        return;
+      alert('Item needs a name!');
+      return;
     }
 
     if (!itemData.itemDescription) {
-        alert('Item needs a description!');
-        return;
+      alert('Item needs a description!');
+      return;
     }
 
     try {
-        const variables = {
-            itemId: item._id,
-            itemName: itemData.itemName,
-            itemDescription: itemData.itemDescription,
-            collectionId: item.collectionId ? item.collectionId : null
-        };
+      const variables = {
+        itemId: item._id,
+        itemName: itemData.itemName,
+        itemDescription: itemData.itemDescription,
+        collectionId: itemData.collectionId ? itemData.collectionId : null,
+      };
 
-        await editItem({ variables });
+      await editItem({ variables });
     } catch (err) {
-        console.error('There was an error:', err);
-        console.log('GraphQL Error Details:', err.graphQLErrors, err.networkError);
+      console.error('There was an error:', err);
+      console.log('GraphQL Error Details:', err.graphQLErrors, err.networkError);
     }
   };
 
