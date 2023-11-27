@@ -24,7 +24,7 @@ function MyCollectionsComponent({ collections }) {
 
   return (
     <div className="feedContainer">
-      <ul className="feedUl">
+      <ul className="feedUl d-flex">
         {myCollections &&
           myCollections.map((collection) => (
             <li key={collection._id} className="feedLi">

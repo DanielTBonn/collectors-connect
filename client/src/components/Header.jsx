@@ -9,13 +9,16 @@ const styles = {
         backgroundRepeat: "no-repeat",
         backgroundImage: "url(../../assets/eran-menashri-Ae7pSsfzEHs-unsplash.jpg)",
         position: "relative",
-        backgroundPosition: "center 23%"
+        backgroundPosition: "center 23%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     },
 }
 
 function Header() {
     return (
-      <div className="header d-flex align-items-center justify-content-center" style={styles.header}>
+      <div style={styles.header}>
         <div className="container text-center">
             <Navbar />
         </div>

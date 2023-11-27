@@ -26,7 +26,7 @@ const Search = () => {
   };
 
   return (
-    <>
+    <div className="d-flex">
       <div>
         <Container>
           <h1>Search for Collections!</h1>
@@ -67,7 +67,7 @@ const Search = () => {
         )}
 
       </div>
-    </>
+    </div>
   );
 };
 

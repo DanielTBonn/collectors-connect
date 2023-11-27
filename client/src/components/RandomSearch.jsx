@@ -6,6 +6,19 @@ import { GET_RANDOM_COLLECTION } from "../utils/queries";
 
 import CollectionImageComponent from "./CollectionImageComponent";
 
+const styles = {
+  container: {
+    margin: 0,
+    padding: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: "100vw",
+  },
+}
+
+
+
 const RandomSearch = () => {
   // Code for random search
   const [randomCollection, setRandomCollection] = useState(null);
@@ -37,7 +50,7 @@ const RandomSearch = () => {
   return (
     <>
       <div>
-        <Container>
+        <Container className="d-flex justify-content-center">
           <Form>
             <Button onClick={handleRandomSubmit} variant="success" size="lg">
               Random
@@ -48,8 +61,9 @@ const RandomSearch = () => {
         {loading ? 
         (<p>Loading...</p>)
         : showRandomCollection && randomCollection && (
-          <div>
+          <div className="container d-flex flex-column align-items-center" style={styles.container}>
             <h2>Random Collection</h2>
+            <div className="feedLi">
             <Card className="feedCard">
               <CollectionImageComponent variant="top" collection={randomCollection} />
                 <Card.Body>
@@ -60,6 +74,7 @@ const RandomSearch = () => {
                   </Link>
                 </Card.Body>
               </Card>
+            </div>
           </div>
         )}
       </div>

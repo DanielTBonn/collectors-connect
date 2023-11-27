@@ -59,13 +59,13 @@ const CollectionImageComponent = ({collection}) => {
 
     return (
         <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '300px', 
-            overflow: 'hidden',
-          }}
+          // style={{
+          //   display: 'flex',
+          //   justifyContent: 'center',
+          //   alignItems: 'center',
+          //   height: '300px', 
+          //   overflow: 'hidden',
+          // }}
         >
           <img
             src={picture}
