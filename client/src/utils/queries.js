@@ -165,6 +165,9 @@ export const GET_SINGLE_ITEM = gql`
       itemName
       itemDescription
       itemImage
+      collectionId {
+        _id
+      }
     }
   }
 `;
