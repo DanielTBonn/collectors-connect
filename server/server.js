@@ -7,10 +7,6 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const AWS = require('aws-sdk');
-
-
-const { getImage } = require('./controllers/image-controller');
 
 const app = express();
 const PORT = process.env.PORT || 3001;

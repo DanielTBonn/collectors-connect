@@ -26,7 +26,7 @@ const DeleteCollectionButton = ({ collectionId }) => {
 
   return (
     <div>
-      <Button onClick={() => handleDelete()}>Delete Collection</Button>
+      <Button style={{backgroundColor: "#e7321a", borderColor: "#e7321a"}} onClick={() => handleDelete()}>Delete Collection</Button>
     </div>
   );
 };

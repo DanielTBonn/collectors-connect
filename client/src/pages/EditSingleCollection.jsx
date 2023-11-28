@@ -1,68 +1,89 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect} from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_COLLECTION } from "../utils/queries";
 import { EDIT_COLLECTION } from "../utils/mutations";
 import { Container, Col, Form, Button, Row } from 'react-bootstrap';
 
-
 const EditSingleCollection = () => {
-    const { collectionId } = useParams();
-    const [editCollection, { error }] = useMutation(EDIT_COLLECTION);
-    const { loading: userLoading, data} = useQuery(GET_SINGLE_COLLECTION, {
-        variables: {
-            collectionId
-        }
-    });
-    const collection = data?.singleCollection || {}
+  const { collectionId } = useParams();
+  const navigate = useNavigate(); 
+  
+  const [editCollection, { error }] = useMutation(EDIT_COLLECTION, {
+    onCompleted: () => {
+      refetch();
+      navigate('/me');
+    },
+  });
 
-    const [collectionData, setCollectionData] = useState({
-        name: '',
-        description: '',
-    });
+  const { loading: userLoading, data, refetch } = useQuery(GET_SINGLE_COLLECTION, {
+    variables: {
+      collectionId
+    }
+  });
+    const collection = data?.singleCollection || {};
 
-    useEffect(() => {
+  const initialCollectionData = {
+    name: collection.name || '',
+    description: collection.description || '',
+  };
 
-        setCollectionData({
-            name: collection.name,
-            description: collection.description
-        })
-    }, [collection])
+  const [collectionData, setCollectionData] = useState(initialCollectionData);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setCollectionData({
-          ...collectionData,
-          [name]: value,
-        });
+  useEffect(() => {
+    setCollectionData((prevData) => {
+      const updatedData = {
+        name: collection.name || '',
+        description: collection.description || '',
       };
-
-      const handleCollectionEdit = (e) => {
-        e.preventDefault();
-
-        if (!collectionData.name) {
-            alert('Collection needs a name!')
-            return;
-        }
-
-        if (!collectionData.description) {
-            alert('Collection needs a description!')
-            return;
-        }
-
-        try {
-            const { data } = editCollection({
-                variables: {
-                    ...collection,
-                    collectionId: collection._id,
-                    ...collectionData
-                }
-            })
-        } catch (err) {
-            console.log("There was an error.")
-            console.log(err)
-        }
+  
+      // Only update if there is a change
+      if (
+        updatedData.name !== prevData.name ||
+        updatedData.description !== prevData.description
+      ) {
+        return updatedData;
       }
+  
+      // No change, return the previous data
+      return prevData;
+    });
+  }, [collection]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCollectionData({
+      ...collectionData,
+      [name]: value,
+    });
+  };
+
+  const handleCollectionEdit = (e) => {
+    e.preventDefault();
+
+    if (!collectionData.name) {
+            alert('Collection needs a name!');
+      return;
+    }
+
+    if (!collectionData.description) {
+            alert('Collection needs a description!');
+      return;
+    }
+
+    try {
+      const { data } = editCollection({
+        variables: {
+          ...collection,
+          collectionId: collection._id,
+          ...collectionData
+        }
+      });
+    } catch (err) {
+            console.log('There was an error.');
+            console.log(err);
+    }
+  };
 
       return ( 
         <div className="TestPage">
@@ -72,7 +93,7 @@ const EditSingleCollection = () => {
               ):
               <div>
                         <Container>
-          <h1>Add a Collection!</h1>
+          <h1>Edit Collection!</h1>
           <Form 
           // onSubmit={handleFormSubmit}
           >

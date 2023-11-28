@@ -39,12 +39,18 @@ const SingleCollectionById = () => {
     <div style={inlineStyles}>
       <h2>{singleCollection.name}</h2>
       <CollectionImageComponent collection={singleCollection} />
-      <p>{singleCollection.description}</p>
-      <h3>Items:</h3>
+      <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (
-        <AddItemButton collectionId={collectionId} />
+        <AddItemButton collectionId={collectionId} /> )}
+      <h2>Items:</h2>
+      {collectionLoading ? (
+        <p>Loading Collection...</p>
+      ) : (
+        <>
+          {/* <AddItemButton collectionId={collectionId} /> */}
+          <ItemsComponent collections={singleCollection.items} />
+        </>
       )}
-      <ItemsComponent collections={singleCollection.items} />
     </div>
   );
 };
