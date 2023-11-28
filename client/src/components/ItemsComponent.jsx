@@ -41,7 +41,7 @@ function ItemsComponent() {
   console.log('isOwner:', isOwner);
 
   return (
-    <ul className="profileFeed">
+    <ul className="profileFeed d-flex" style={{ listStyleType: 'none' }}>
       {singleCollection &&
         singleCollection.items.map((item) => (
           <li key={item._id} className="profileFeedItem">

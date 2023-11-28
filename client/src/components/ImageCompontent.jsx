@@ -32,7 +32,11 @@ const ImageComponent = ({imageItem}) => {
 
     return (
         <div>
-            <img src={picture}></img>
+            <img src={picture}style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover', // this maintains aspect ratio without stretching
+            }}></img>
         </div>
     )
 

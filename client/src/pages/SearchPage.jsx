@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
-//will need to import components to display search results
-import Auth from "../utils/auth";
-
 import { useLazyQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../utils/queries";
 import RandomSearch from "../components/RandomSearch";
+import CollectionsComponent from "../components/CollectionsComponent";
 
-//make button with capability to load some number of random collections or one random collection, similar to "i'm feelin lucky"
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
   // useQuery hook to fetch collections
   const [searchCollection, { loading, error, data }] = useLazyQuery(GET_COLLECTIONS);
 
   const results = data?.collections || [];
-
-  // useEffect(() => {
-  // }, [collections]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -29,18 +23,18 @@ const Search = () => {
       variables: { name: `.*${searchInput}.*` },
     });
 
-    //console.log(results[0].userId);
-
+    setSearchInput('');
   };
 
   return (
-    <>
+    <div className="d-flex justify-content-center flex-column">
       <div>
-        <Container>
+        <Container className="d-flex flex-column align-items-center">
           <h1>Search for Collections!</h1>
           <RandomSearch />
-          <Form onSubmit={handleFormSubmit}>
-            <Row>
+          <div style={{maxWidth: "100%", display: "flex"}}>
+          <Form onSubmit={handleFormSubmit} style={{maxWidth: "100%"}}>
+            <Row className="flex-wrap">
               <Col xs={12} md={8}>
                 <Form.Control
                   name="searchInput"
@@ -52,12 +46,13 @@ const Search = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
+                <Button type="submit" size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c"}}>
+                  Search
                 </Button>
               </Col>
             </Row>
           </Form>
+          </div>
         </Container>
       </div>
 
@@ -66,21 +61,16 @@ const Search = () => {
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
         {results.length > 0 && (
-          <div>
+          <div className="d-flex flex-column align-items-center">
             <h2>Search Results</h2>
-            {results.map((collection) => (
-              <div key={collection._id}>
-                <h3>{collection.name}</h3>
-                <p>{collection.description}</p>
-                <p>{collection.userId.username}</p>
-                {/* Display other collection details... */}
+              <div key={results._id}>
+                <CollectionsComponent collections={results} />
               </div>
-            ))}
           </div>
         )}
 
       </div>
-    </>
+    </div>
   );
 };
 

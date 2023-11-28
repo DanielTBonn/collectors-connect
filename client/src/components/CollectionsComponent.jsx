@@ -18,15 +18,12 @@ function CollectionsComponent({ collections }) {
           collections.map((collection) => (
             <li key={collection._id} className="feedLi">
               <Card className="feedCard">
-                <Card.Img
-                  variant="top"
-                  src="../../assets/jakob-owens-ZBadHaTUkP0-unsplash.jpg"
-                />
+              <CollectionImageComponent variant="top" collection={collection} />
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
                   <Link to={`/mycollections/${collection._id}`}>
-                    <Button variant="primary">See Collection</Button>
+                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
                   </Link>
                 </Card.Body>
               </Card>
