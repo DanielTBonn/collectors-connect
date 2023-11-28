@@ -23,6 +23,7 @@ const SingleCollectionById = () => {
   if (collectionError) return <p>Error: {collectionError.message}</p>;
 
   const { singleCollection } = collectionData;
+  const currentUser = userData?.me;
 
   const inlineStyles = {
     margin: "10px",
@@ -49,6 +50,7 @@ const SingleCollectionById = () => {
           <ItemsComponent collections={singleCollection.items} />
         </>
       )}
+      <ItemsComponent collections={singleCollection.items} />
     </div>
   );
 };

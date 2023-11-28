@@ -8,11 +8,14 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateCollection = () => {
   const navigate = useNavigate();
-  const { loading: userLoading, data: userData } = useQuery(GET_ME);
+  const { loading: userLoading, data: userData, refetch } = useQuery(GET_ME);
   const user = userData?.me || {};
 
   const [addCollection, { error }] = useMutation(ADD_COLLECTION, {
-    refetchQueries: [{ query: GET_ME }],
+    onCompleted: async () => {
+      // Refetch the data
+      await refetch();
+    },
   });
 
   const [collectionData, setCollectionData] = useState({
@@ -56,14 +59,16 @@ const CreateCollection = () => {
       return;
     }
 
-    console.log("is it working?");
-
     if (!file) {
       alert('Must add a file!');
       return;
     }
 
     try {
+      // Upload the file first
+      await uploadFile(file, { username: user.username, collection: collectionData.name });
+
+      // then...add the collection
       const { data } = await addCollection({
         variables: {
           ...params,
@@ -73,17 +78,17 @@ const CreateCollection = () => {
         },
       });
 
+      // Refetch user data
+      await refetch();
+
       // Display success message
       setSuccessMessage('Collection created successfully!');
 
       // Redirect to ProfilePage after successful collection creation
       navigate('/me');
     } catch (err) {
-      console.log("There was an error");
-      console.log(err);
+      console.error("There was an error", err);
     } finally {
-      uploadFile(file, { username: user.username, collection: collectionData.name });
-
       // Reset form data and file state
       setCollectionData({
         name: '',
@@ -95,7 +100,6 @@ const CreateCollection = () => {
   };
 
   const [successMessage, setSuccessMessage] = useState('');
-
   return (
     <div className="TestPage">
       <div>
