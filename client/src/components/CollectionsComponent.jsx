@@ -23,7 +23,7 @@ function CollectionsComponent({ collections }) {
               <CollectionImageComponent variant="top" collection={collection}/>
                 <Card.Body className="text-center">
                   <Card.Title>{collection.name}</Card.Title>
-                  <Card.Text>Owner: {collection.userId.username}</Card.Text>
+                  {/* <Card.Text>Owner: {collection.userId.username}</Card.Text> */}
                   <Link to={`/mycollections/${collection._id}`}>
                     <Button style={{backgroundColor: "#35778a", borderColor: "#35778a", transition: "background-color 0.3s"}}
                     onMouseOver={(e) => {

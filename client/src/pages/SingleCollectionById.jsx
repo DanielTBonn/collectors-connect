@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_COLLECTION, GET_ME } from "../utils/queries";
@@ -16,6 +16,9 @@ const SingleCollectionById = () => {
   } = useQuery(GET_SINGLE_COLLECTION, {
     variables: { collectionId },
   });
+
+  const [addButtonClicked, setAddButtonClicked] = useState(false);
+
 
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
 
@@ -50,6 +53,7 @@ const SingleCollectionById = () => {
       </div>
       <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (
+        
         <AddItemButton collectionId={collectionId} /> )}
       <h2>Items:</h2>
       {collectionLoading ? (
