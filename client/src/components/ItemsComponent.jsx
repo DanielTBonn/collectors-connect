@@ -60,7 +60,13 @@ function ItemsComponent() {
                 {/* Conditionally render the edit button based on 'isOwner' */}
                 {isOwner && (
                   <Link to={`/edititem/${item._id}`}>
-                    <Button>Edit</Button>
+                    <Button style={{backgroundColor: "#80669d", borderColor: "#80669d", transition: "background-color 0.3s"}}
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = "#5b4a72"; // Change to the desired darker color
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = "#80669d"; // Restore the original color
+                    }}>Edit</Button>
                   </Link>
                 )}
               </Card.Body>

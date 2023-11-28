@@ -60,7 +60,14 @@ const AddItemButton = ({ collectionId }) => {
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <Button style={{backgroundColor: "#029455", borderColor: "#029455", transition: "background-color 0.3s"}} 
+      onMouseOver={(e) => {
+        e.target.style.backgroundColor = "#01733e"; // Change to the desired darker color
+      }}
+      onMouseOut={(e) => {
+        e.target.style.backgroundColor = "#029455"; // Restore the original color
+      }}
+      onClick={handleUpload}>Upload</Button>
     </div>
   );
 };

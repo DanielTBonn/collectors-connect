@@ -137,15 +137,21 @@ Search Page-Paige
 11/27
 Final To-Do’s
 
--All components are in correct places and working/functioning as intended
--all images are rendering from bucket correctly, without error
--user is redirected after uploading a collection or image(redirection OR page reload OR refetch due to state change)
--certain buttons only render when user is logged in and looking at collections and items that belong to them
+DONE-All components are in correct places and working/functioning as intended
+DONE-all images are rendering from bucket correctly, without error
+DONE-user is redirected after uploading a collection or image(redirection OR page reload OR refetch due to state change)
+DONE-certain buttons only render when user is logged in and looking at collections and items that belong to them
 -all pages are styled uniformly and have clean appearance
 
 -powerpoint is made
 -presentation plan laid out and reviewed
 -readme for project repo is written and pushed to main
--change name to GitHub repo(Daniel has to do this :p)
+WILL BE DONE-change name to GitHub repo(Daniel has to do this :p)
 
 -if we have time: I love Daniel’s idea to go back in and add comments if we have the time! That would be awesome for all of us to have for the future
+
+11/28 6:30
+
+-checkin styling
+-checkin with README
+-go over prezzy

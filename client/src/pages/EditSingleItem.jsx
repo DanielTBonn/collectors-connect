@@ -85,7 +85,7 @@ const EditSingleItem = () => {
         ) : (
           <div>
             <Container>
-              <h1>Edit Item</h1>
+              <h1 className="text-center">Edit Item</h1>
               <Form>
                 <Row>
                   <Col xs={12} md={8}>
@@ -107,7 +107,14 @@ const EditSingleItem = () => {
                     />
                   </Col>
                   <Col xs={12} md={4}>
-                    <Button size="lg" onClick={(e) => handleItemEdit(e)}>
+                    <Button style={{backgroundColor: "#029455", borderColor: "#029455", transition: "background-color 0.3s"}} size="lg" 
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = "#01733e"; // Change to the desired darker color
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = "#029455"; // Restore the original color
+                    }}
+                    onClick={(e) => handleItemEdit(e)}>
                       Save Changes
                     </Button>
                   </Col>

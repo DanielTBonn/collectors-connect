@@ -124,12 +124,19 @@ const EditSingleCollection = () => {
                 
               </Col>
               <Col xs={12} md={4}>
-                <button  size="lg" onClick={(e) => {
+                <Button style={{backgroundColor: "#029455", borderColor: "#029455", transition: "background-color 0.3s"}} size="lg" 
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = "#01733e"; // Change to the desired darker color
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = "#029455"; // Restore the original color
+                }}
+                onClick={(e) => {
                   // console.log(file)
                   handleCollectionEdit(e);
               }}>
                   Upload
-                </button>
+                </Button>
               </Col>
             </Row>
           </Form>
