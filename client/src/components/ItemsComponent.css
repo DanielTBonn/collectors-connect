@@ -40,7 +40,16 @@
     margin: 20px;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
+
+  /* Add margin to conditionally rendered buttons and links */
+.profileFeedItem .card .card-body button,
+.profileFeedItem .card .card-body a {
+  margin-top: 15px;
+}
   
   /* Add styles for the Card component inside the profileFeedItem */
   .profileFeedItem .card {
