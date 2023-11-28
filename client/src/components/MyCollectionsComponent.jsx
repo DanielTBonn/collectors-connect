@@ -40,16 +40,30 @@ function MyCollectionsComponent({ collections }) {
                 <CollectionImageComponent variant="top" collection={collection} />
                 </div>
                 <Card.Body className="text-center">
-                  <Card.Title>{collection.name}</Card.Title>
-                  <Card.Text>{collection.description}</Card.Text>
+                  <Card.Title style={{marginBottom: "16px"}}>{collection.name}</Card.Title>
                   <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
                   <Link to={`/mycollections/${collection._id}`}>
-                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
+                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a", transition: "background-color 0.3s", margin: "10px"}} 
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = "#0f3940"; // Change to the desired darker color
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = "#35778a"; // Restore the original color
+                    }}>See Collection</Button>
                   </Link>
                   <Link to={`/editcollection/${collection._id}`}>
-                    <Button variant="secondary">Edit Collection</Button>
+                    <Button style={{backgroundColor: "#80669d", borderColor: "#80669d", transition: "background-color 0.3s", margin: "10px"}}
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = "#5b4a72"; // Change to the desired darker color
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = "#80669d"; // Restore the original color
+                    }}
+                    >Edit Collection</Button>
                   </Link>
+                  <div style={{margin: "10px"}}>
                   <DeleteCollectionButton collectionId={collection._id} />
+                  </div>
                   </div>
                 </Card.Body>
               </Card>

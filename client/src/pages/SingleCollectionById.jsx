@@ -46,9 +46,7 @@ const SingleCollectionById = () => {
             width: '100%',
             overflow: 'hidden',
           }}>
-        <CollectionImageComponent collection={singleCollection} 
-        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-        />
+        <CollectionImageComponent collection={singleCollection} />
       </div>
       <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (

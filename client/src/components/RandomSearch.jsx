@@ -52,7 +52,13 @@ const RandomSearch = () => {
       <div>
         <Container className="d-flex justify-content-center">
           <Form>
-            <Button onClick={handleRandomSubmit} size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c", marginBottom: "0.7rem"}}>
+            <Button onClick={handleRandomSubmit} size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c", transition: "background-color 0.3s", marginBottom: "0.7rem"}}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = "#62370f"; // Change to the desired darker color
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = "#8a4f1c"; // Restore the original color
+            }}>
               Random
             </Button>
           </Form>
@@ -68,9 +74,15 @@ const RandomSearch = () => {
               <CollectionImageComponent variant="top" collection={randomCollection} />
                 <Card.Body>
                   <Card.Title>{randomCollection.name}</Card.Title>
-                  <Card.Text>{randomCollection.description}</Card.Text>
+                  <Card.Text>Owner: {randomCollection.userId.username}</Card.Text>
                   <Link to={`/mycollections/${randomCollection._id}`}>
-                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
+                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a", transition: "background-color 0.3s"}}
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = "#0f3940"; // Change to the desired darker color
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = "#35778a"; // Restore the original color
+                    }}>See Collection</Button>
                   </Link>
                 </Card.Body>
               </Card>
