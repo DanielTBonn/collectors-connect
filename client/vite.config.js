@@ -39,9 +39,17 @@ export default defineConfig (({ mode }) => {
     }
 
    return {
-      build: {
-        sourcemap: true,
+    build: {
+      assetsInclude: ['src/assets/**/*'],
+      sourcemap: true,
+      commonjsOptions: {
+        include: [/node_modules/],
+        extensions: ['.js', '.cjs'],
+        strictRequires: true,
+        // https://stackoverflow.com/questions/62770883/how-to-include-both-import-and-require-statements-in-the-bundle-using-rollup
+        transformMixedEsModules: true,
       },
+    },
       plugins: [react()],
       define: processEnvValues,
       server: {
