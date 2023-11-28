@@ -40,7 +40,8 @@ const SingleCollectionById = () => {
       <h2>{singleCollection.name}</h2>
       <CollectionImageComponent collection={singleCollection} />
       <p className="text-center">{singleCollection.description}</p>
-      <AddItemButton collectionId={collectionId} />
+      {currentUser && currentUser._id === singleCollection.userId._id && (
+        <AddItemButton collectionId={collectionId} /> )}
       <h2>Items:</h2>
       {collectionLoading ? (
         <p>Loading Collection...</p>
@@ -50,7 +51,6 @@ const SingleCollectionById = () => {
           <ItemsComponent collections={singleCollection.items} />
         </>
       )}
-      <ItemsComponent collections={singleCollection.items} />
     </div>
   );
 };
