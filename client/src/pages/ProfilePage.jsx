@@ -26,32 +26,24 @@ const ProfilePage = () => {
   const collectionArray = user.collections || [];
 
   return (
-    <div className="user-profile">
-    <div>
-      {isLoggedIn && `Hello ${user.username}`}
+    <div className="user-profile d-flex align-items-center flex-column">
+        {isLoggedIn ? (
+          <div className="d-flex align-items-center flex-column">
+            <h3 className="mt-2"> Hello {user.username}!</h3>
+            <Link to="/createCollection" className="m-3">
+              <Button style={{backgroundColor: "#029455", borderColor: "#029455"}}>Add New Collection</Button>
+            </Link>
+            {user.collectionCount <= 0 ? (
+              <div>No collections</div>
+            ) : (
+              <MyCollectionsComponent />
+            )}
+          </div>
+        ) : (
+          "Log in to see your page"
+        )}
     </div>
-    
-    {isLoggedIn && (
-      <div>
-        <Link
-          to="/createCollection"
-          style={{
-            marginTop: '10px', 
-            display: 'inline-block',
-          }}
-        >
-          <Button variant="primary">Add New Collection</Button>
-        </Link>
-      </div>
-    )}
-
-    {user.collectionCount <= 0 ? (
-      <div>No collections</div>
-    ) : (
-      <MyCollectionsComponent />
-    )}
-  </div>
-);
+  );
 };
 
 export default ProfilePage;

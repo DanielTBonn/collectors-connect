@@ -4,13 +4,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    min-width: 100vw;
+    min-height: 100%;
+    min-width: 100%;
   }
   
   .feedUl {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
   }
   
   .feedLi {
@@ -20,7 +22,7 @@
   }
   
   .feedCard {
-    width: 45rem; /* Default width */
+    width: 40rem; /* Default width */
   }
   
   /* Media query for screens under 900px */

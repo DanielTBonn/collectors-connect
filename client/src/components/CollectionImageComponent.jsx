@@ -10,7 +10,6 @@ async function urlResult (params) {
         .then((url) => {
             return url
         }, function(err) { console.log(err) })}
-console.log('hellworld')
 
 const CollectionImageComponent = ({collection}) => {
     
@@ -21,15 +20,42 @@ const CollectionImageComponent = ({collection}) => {
     
       const [picture, setPicture] = useState('');
 
-    useEffect(() => {
-        if (collection.image) {
-          urlResult(params)
-          .then(picture => setPicture(picture))
-          .catch(error => {
+      useEffect(() => {
+        // Cleanup function to cancel ongoing fetch requests when the component is unmounted
+        let isMounted = true;
+    
+        const fetchData = async () => {
+          try {
+            const result = await urlResult(params);
+            if (isMounted) {
+              setPicture(result);
+            }
+          } catch (error) {
             console.log(error);
-          })
+          }
+        };
+    
+        if (collection.image) {
+          fetchData();
         }
-    }, [])
+    
+        // Cleanup function
+        return () => {
+          isMounted = false;
+        };
+      }, [collection.image]);
+
+
+
+    // useEffect(() => {
+    //     if (collection.image) {
+    //       urlResult(params)
+    //       .then(picture => setPicture(picture))
+    //       .catch(error => {
+    //         console.log(error);
+    //       })
+    //     }
+    // }, [])
 
     return (
         <div
