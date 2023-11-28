@@ -23,6 +23,7 @@ const SingleCollectionById = () => {
   if (collectionError) return <p>Error: {collectionError.message}</p>;
 
   const { singleCollection } = collectionData;
+  const currentUser = userData?.me;
 
   const inlineStyles = {
     margin: "10px",
@@ -40,14 +41,10 @@ const SingleCollectionById = () => {
       <CollectionImageComponent collection={singleCollection} />
       <p>{singleCollection.description}</p>
       <h3>Items:</h3>
-      {collectionLoading ? (
-        <p>Loading Collection...</p>
-      ) : (
-        <>
-          <AddItemButton collectionId={collectionId} />
-          <ItemsComponent collections={singleCollection.items} />
-        </>
+      {currentUser && currentUser._id === singleCollection.userId._id && (
+        <AddItemButton collectionId={collectionId} />
       )}
+      <ItemsComponent collections={singleCollection.items} />
     </div>
   );
 };
