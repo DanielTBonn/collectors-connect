@@ -36,6 +36,9 @@ function MyCollectionsComponent({ collections }) {
                   <Link to={`/mycollections/${collection._id}`}>
                     <Button variant="primary">See Collection</Button>
                   </Link>
+                  <Link to={`/editcollection/${collection._id}`}>
+                    <Button variant="secondary">Edit Collection</Button>
+                  </Link>
                   <DeleteCollectionButton collectionId={collection._id} />
                 </Card.Body>
               </Card>
