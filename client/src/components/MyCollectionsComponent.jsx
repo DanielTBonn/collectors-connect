@@ -27,7 +27,7 @@ function MyCollectionsComponent({ collections }) {
       <ul className="feedUl">
         {myCollections &&
           myCollections.map((collection) => (
-            <li key={collection._id}>
+            <li key={collection._id} className="feedLi">
               <Card className="feedCard">
                 <div style={
                   {

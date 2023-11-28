@@ -18,9 +18,9 @@ function CollectionsComponent({ collections }) {
       <ul className="feedUl">
         {collections &&
           collections.map((collection) => (
-            <li key={collection._id} >
-              <Card className="feedCard">
-              <CollectionImageComponent variant="top" collection={collection} />
+            <li key={collection._id} className="feedLi">
+              <Card className="feedCard" >
+              <CollectionImageComponent variant="top" collection={collection}/>
                 <Card.Body className="text-center">
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>Owner: {collection.userId.username}</Card.Text>
