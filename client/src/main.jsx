@@ -6,7 +6,6 @@ import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import Search from "./pages/SearchPage";
-import Created from "./pages/CreateCollection.jsx";
 import CreateCollection from "./pages/CreateCollection.jsx";
 import ViewMyCollections from "./pages/ViewMyCollections.jsx";
 import EditSingleCollection from "./pages/EditSingleCollection.jsx"
