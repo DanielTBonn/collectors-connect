@@ -5,7 +5,7 @@ import { uploadFile } from '../utils/uploadFile';
 import { GET_ME } from "../utils/queries";
 import { ADD_ITEM } from "../utils/mutations";
 
-const AddItemButton = ({ collectionId, onUploadSuccess }) => {
+const AddItemButton = ({ collectionId }) => {
   const { loading: userLoading, data: userData, refetch } = useQuery(GET_ME);
   const user = userData?.me || {};
 
@@ -18,10 +18,7 @@ const AddItemButton = ({ collectionId, onUploadSuccess }) => {
 
   const [addItem, { error }] = useMutation(ADD_ITEM, {
     onCompleted: () => {
-      // Trigger the callback on successful upload and database update
-      if (onUploadSuccess && typeof onUploadSuccess === 'function') {
-        onUploadSuccess();
-      }
+  
 
       // Refetch the data
       refetch();
