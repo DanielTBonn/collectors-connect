@@ -33,7 +33,7 @@ const IndexPage = () => {
   return (
     <>
       <div>
-        <h1 style={{ textAlign: "center" }}>Collections Feed</h1>
+        <h1 style={{ textAlign: "center", marginTop: "8px"}}>Collections Feed</h1>
       </div>
       <div>
         {loading ? (
@@ -41,7 +41,9 @@ const IndexPage = () => {
         ) : isLoggedIn ? (
           <CollectionsComponent collections={collections} />
         ) : (
-          "Please log in."
+          <div className="text-center">
+            "Please log in to view collections."
+          </div>
         )}
       </div>
     </>

@@ -30,7 +30,7 @@ const Search = () => {
     <div className="d-flex justify-content-center flex-column">
       <div>
         <Container className="d-flex flex-column align-items-center">
-          <h1>Search for Collections!</h1>
+          <h1 style={{marginTop: "8px"}}>Search for Collections!</h1>
           <RandomSearch />
           <div style={{maxWidth: "100%", display: "flex"}}>
           <Form onSubmit={handleFormSubmit} style={{maxWidth: "100%"}}>
@@ -46,7 +46,13 @@ const Search = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c"}}>
+                <Button type="submit" size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c", transition: "background-color 0.3s"}}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = "#62370f"; // Change to the desired darker color
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = "#8a4f1c"; // Restore the original color
+                }}>
                   Search
                 </Button>
               </Col>

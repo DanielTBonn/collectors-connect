@@ -26,7 +26,14 @@ const DeleteCollectionButton = ({ collectionId }) => {
 
   return (
     <div>
-      <Button style={{backgroundColor: "#e7321a", borderColor: "#e7321a"}} onClick={() => handleDelete()}>Delete Collection</Button>
+      <Button style={{backgroundColor: "#e7321a", borderColor: "#e7321a", transition: "background-color 0.3s"}} onClick={() => handleDelete()}
+      onMouseOver={(e) => {
+        e.target.style.backgroundColor = "#b62416"; // Change to the desired darker color
+      }}
+      onMouseOut={(e) => {
+        e.target.style.backgroundColor = "#e7321a"; // Restore the original color
+      }}
+      >Delete Collection</Button>
     </div>
   );
 };
