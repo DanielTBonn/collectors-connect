@@ -1,0 +1,22 @@
+.navbar {
+    background-color: rgba(255, 250, 255, 0.771); 
+    margin-left: -300px; 
+    padding-left: 300px; 
+    border-radius: 0 10px 10px 0; 
+    width: 100% 
+}
+
+/* Media query for screens under 600px */
+@media (max-width: 768px) {
+    .navbar {
+      margin-left: -100px; 
+      padding-left: 100px;
+    }
+}
+
+@media (max-width: 430px) {
+    .navbar {
+        margin-left: -25px;
+        padding-left: 25px;
+    }
+}

@@ -23,16 +23,18 @@ const Search = () => {
       variables: { name: `.*${searchInput}.*` },
     });
 
+    setSearchInput('');
   };
 
   return (
-    <div className="d-flex">
+    <div className="d-flex justify-content-center flex-column">
       <div>
-        <Container>
+        <Container className="d-flex flex-column align-items-center">
           <h1>Search for Collections!</h1>
           <RandomSearch />
-          <Form onSubmit={handleFormSubmit}>
-            <Row>
+          <div style={{maxWidth: "100%", display: "flex"}}>
+          <Form onSubmit={handleFormSubmit} style={{maxWidth: "100%"}}>
+            <Row className="flex-wrap">
               <Col xs={12} md={8}>
                 <Form.Control
                   name="searchInput"
@@ -44,12 +46,13 @@ const Search = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
+                <Button type="submit" size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c"}}>
+                  Search
                 </Button>
               </Col>
             </Row>
           </Form>
+          </div>
         </Container>
       </div>
 
@@ -58,7 +61,7 @@ const Search = () => {
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
         {results.length > 0 && (
-          <div>
+          <div className="d-flex flex-column align-items-center">
             <h2>Search Results</h2>
               <div key={results._id}>
                 <CollectionsComponent collections={results} />

@@ -52,7 +52,7 @@ const RandomSearch = () => {
       <div>
         <Container className="d-flex justify-content-center">
           <Form>
-            <Button onClick={handleRandomSubmit} variant="success" size="lg">
+            <Button onClick={handleRandomSubmit} size="lg" style={{backgroundColor: "#8a4f1c", borderColor: "#8a4f1c", marginBottom: "0.7rem"}}>
               Random
             </Button>
           </Form>
@@ -61,8 +61,8 @@ const RandomSearch = () => {
         {loading ? 
         (<p>Loading...</p>)
         : showRandomCollection && randomCollection && (
-          <div className="container d-flex flex-column align-items-center" style={styles.container}>
-            <h2>Random Collection</h2>
+          <div className="container">
+            <h2 className="text-center">Random Collection</h2>
             <div className="feedLi">
             <Card className="feedCard">
               <CollectionImageComponent variant="top" collection={randomCollection} />
@@ -70,7 +70,7 @@ const RandomSearch = () => {
                   <Card.Title>{randomCollection.name}</Card.Title>
                   <Card.Text>{randomCollection.description}</Card.Text>
                   <Link to={`/mycollections/${randomCollection._id}`}>
-                    <Button variant="primary">See Collection</Button>
+                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
                   </Link>
                 </Card.Body>
               </Card>

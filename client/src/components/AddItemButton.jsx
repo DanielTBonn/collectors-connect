@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
+import { Button } from "react-bootstrap";
 import { uploadFile } from '../utils/uploadFile';
 import { GET_ME } from "../utils/queries";
 import { ADD_ITEM } from "../utils/mutations";
@@ -60,7 +61,8 @@ const AddItemButton = ({ collectionId }) => {
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
 
-      {/* Render the ImageComponent only if the file has been uploaded and item added to the database */}
+      {/* Render the ImageComponent only if the file has been uploaded and item added to the database 
+      i dont believe this part of the code is necessary? */}
       {isFileUploaded && file && (
         <ImageComponent imageItem={{ itemImage: file.name }} />
       )}

@@ -38,13 +38,14 @@ const SingleCollectionById = () => {
     <div style={inlineStyles}>
       <h2>{singleCollection.name}</h2>
       <CollectionImageComponent collection={singleCollection} />
-      <p>{singleCollection.description}</p>
-      <h3>Items:</h3>
+      <p className="text-center">{singleCollection.description}</p>
+      <AddItemButton collectionId={collectionId} />
+      <h2>Items:</h2>
       {collectionLoading ? (
         <p>Loading Collection...</p>
       ) : (
         <>
-          <AddItemButton collectionId={collectionId} />
+          {/* <AddItemButton collectionId={collectionId} /> */}
           <ItemsComponent collections={singleCollection.items} />
         </>
       )}

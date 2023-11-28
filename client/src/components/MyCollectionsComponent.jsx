@@ -33,10 +33,12 @@ function MyCollectionsComponent({ collections }) {
                 <Card.Body>
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
+                  <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
                   <Link to={`/mycollections/${collection._id}`}>
-                    <Button variant="primary">See Collection</Button>
+                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
                   </Link>
                   <DeleteCollectionButton collectionId={collection._id} />
+                  </div>
                 </Card.Body>
               </Card>
             </li>

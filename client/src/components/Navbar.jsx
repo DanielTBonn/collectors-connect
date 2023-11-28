@@ -10,6 +10,7 @@ import {
 import { AiOutlineHome, AiOutlineUser, AiOutlineLogin, AiOutlineLogout, AiOutlineSearch } from "react-icons/ai";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import './Navbar.css';
 
 import Auth from "../utils/auth";
 
@@ -19,7 +20,7 @@ const styles = {
   },
   
   iconLinkHover: {
-    transform: "translateY(-5px)", /* Move up by 5 pixels on hover */
+    transform: "translateY(-10px)", /* Move up by 5 pixels on hover */
   }
 }
 
@@ -35,37 +36,37 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar expand="lg" style={{backgroundColor: "rgba(255, 250, 255, 0.771)", marginLeft: "-350px", paddingLeft: "350px", borderRadius: "0 10px 10px 0" }}>
+      <Navbar expand="lg" className="navbar">
         <Container fluid>
-          <Navbar.Brand as={Link} to="/" >Collectors Connect</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px"}}>Collectors Connect</Navbar.Brand>
             <Nav className="ml-auto" style={{ flexDirection: 'row', }}>
               <Nav.Link as={Link} to="/" style={isHoveredHome ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
       onMouseEnter={() => setIsHoveredHome(true)}
       onMouseLeave={() => setIsHoveredHome(false)}>
-                <AiOutlineHome />
+                <AiOutlineHome className="fs-2"/>
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
+              {/* if user is logged in show profile, search and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to="/me" style={isHoveredUser ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
       onMouseEnter={() => setIsHoveredUser(true)}
       onMouseLeave={() => setIsHoveredUser(false)}>
-                   <AiOutlineUser />
+                   <AiOutlineUser className="fs-2"/>
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout} style={isHoveredOut ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
       onMouseEnter={() => setIsHoveredOut(true)}
-      onMouseLeave={() => setIsHoveredOut(false)}><AiOutlineLogout /></Nav.Link>
+      onMouseLeave={() => setIsHoveredOut(false)}><AiOutlineLogout className="fs-2"/></Nav.Link>
                   <Nav.Link as={Link} to="/search" style={isHoveredSearch ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
       onMouseEnter={() => setIsHoveredSearch(true)}
       onMouseLeave={() => setIsHoveredSearch(false)}>
-                  <AiOutlineSearch />
+                  <AiOutlineSearch className="fs-2"/>
                   </Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)} style={isHoveredIn ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
                 onMouseEnter={() => setIsHoveredIn(true)}
                 onMouseLeave={() => setIsHoveredIn(false)}>
-                  <AiOutlineLogin />
+                  <AiOutlineLogin className="fs-2"/>
                 </Nav.Link>
               )}
             </Nav>
