@@ -45,38 +45,29 @@ const CollectionImageComponent = ({collection}) => {
         };
       }, [collection.image]);
 
-
-
-    // useEffect(() => {
-    //     if (collection.image) {
-    //       urlResult(params)
-    //       .then(picture => setPicture(picture))
-    //       .catch(error => {
-    //         console.log(error);
-    //       })
-    //     }
-    // }, [])
-
     return (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '300px', 
-            overflow: 'hidden',
-          }}
-        >
+        // <div
+        //   // style={{
+        //   // //   display: 'flex',
+        //   // //   justifyContent: 'center',
+        //   // //   alignItems: 'center',
+        //   // //   height: '300px', 
+        //   // //   overflow: 'hidden',
+        //   // width: '100%',
+        //   // height: 'auto',
+        //   // objectFit: 'contain',
+        //   // }}
+        // >
           <img
             src={picture}
             alt="Collection Image"
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover', // this maintains aspect ratio without stretching
+              objectFit: 'contain', // this maintains aspect ratio without stretching
             }}
           />
-        </div>
+        //</div>
       );
     };
 

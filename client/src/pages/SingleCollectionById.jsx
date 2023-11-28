@@ -37,8 +37,19 @@ const SingleCollectionById = () => {
 
   return (
     <div style={inlineStyles}>
-      <h2>{singleCollection.name}</h2>
-      <CollectionImageComponent collection={singleCollection} />
+      <h2 className="text-center">{singleCollection.name}</h2>
+      <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '300px',
+            width: '100%',
+            overflow: 'hidden',
+          }}>
+        <CollectionImageComponent collection={singleCollection} 
+        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+        />
+      </div>
       <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (
         <AddItemButton collectionId={collectionId} /> )}

@@ -24,13 +24,22 @@ function MyCollectionsComponent({ collections }) {
 
   return (
     <div className="feedContainer">
-      <ul className="feedUl d-flex">
+      <ul className="feedUl">
         {myCollections &&
           myCollections.map((collection) => (
-            <li key={collection._id} className="feedLi">
+            <li key={collection._id}>
               <Card className="feedCard">
+                <div style={
+                  {
+                    width: "100%", 
+                    height: "auto", 
+                    display: "block", 
+                    margin: "0 auto"
+                  }
+                  }>
                 <CollectionImageComponent variant="top" collection={collection} />
-                <Card.Body>
+                </div>
+                <Card.Body className="text-center">
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
                   <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>

@@ -16,10 +16,10 @@ function CollectionsComponent({ collections }) {
       <ul className="feedUl">
         {collections &&
           collections.map((collection) => (
-            <li key={collection._id} className="feedLi">
+            <li key={collection._id} >
               <Card className="feedCard">
               <CollectionImageComponent variant="top" collection={collection} />
-                <Card.Body>
+                <Card.Body className="text-center">
                   <Card.Title>{collection.name}</Card.Title>
                   <Card.Text>{collection.description}</Card.Text>
                   <Link to={`/mycollections/${collection._id}`}>

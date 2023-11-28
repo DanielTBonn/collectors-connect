@@ -38,7 +38,7 @@ const AppNavbar = () => {
     <>
       <Navbar expand="lg" className="navbar">
         <Container fluid>
-          <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px"}}>Collectors Connect</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px"}}>COLLECTCONNECT</Navbar.Brand>
             <Nav className="ml-auto" style={{ flexDirection: 'row', }}>
               <Nav.Link as={Link} to="/" style={isHoveredHome ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
       onMouseEnter={() => setIsHoveredHome(true)}
