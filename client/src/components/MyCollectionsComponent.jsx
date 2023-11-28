@@ -37,6 +37,9 @@ function MyCollectionsComponent({ collections }) {
                   <Link to={`/mycollections/${collection._id}`}>
                     <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
                   </Link>
+                  <Link to={`/editcollection/${collection._id}`}>
+                    <Button variant="secondary">Edit Collection</Button>
+                  </Link>
                   <DeleteCollectionButton collectionId={collection._id} />
                   </div>
                 </Card.Body>
