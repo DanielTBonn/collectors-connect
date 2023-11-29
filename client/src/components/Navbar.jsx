@@ -37,9 +37,10 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar expand="lg" className="navbar">
-        <Container fluid> 
-          <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px", fontFamily: "jazz-let fantasy", fontWeight: "bold"}}><div style={{display: "flex"}}><div style={{color: "#29524A"}}>COLLECT</div><div style={{color: "#702632"}}>CONNECT</div></div></Navbar.Brand>
-          <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px"}}></Navbar.Brand>
+        <Container fluid>
+          {/* FONTS: impact, jazz-let (fontWeight: "bold"),  */}
+          {/* <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px", fontFamily: "jazz-let fantasy", fontWeight: "bold"}}><div style={{display: "flex"}}><div style={{color: "#29524A"}}>COLLECT</div><div style={{color: "#702632"}}>CONNECT</div></div></Navbar.Brand> */}
+          <Navbar.Brand as={Link} to="/" className="fs-2" style={{margin: "0 10px 0 10px"}}>COLLECTCONNECT</Navbar.Brand>
             <Nav className="ml-auto" style={{ flexDirection: 'row', }}>
               <Nav.Link as={Link} to="/" style={isHoveredHome ? { ...styles.iconLink, ...styles.iconLinkHover } : styles.iconLink}
       onMouseEnter={() => setIsHoveredHome(true)}
