@@ -11,19 +11,27 @@ import CollectionImageComponent from "./CollectionImageComponent";
 function CollectionsComponent({ collections }) {
   const { collectionId } = useParams();
 
+  console.log(collections);
+
   return (
     <div className="feedContainer">
       <ul className="feedUl">
         {collections &&
           collections.map((collection) => (
             <li key={collection._id} className="feedLi">
-              <Card className="feedCard">
-              <CollectionImageComponent variant="top" collection={collection} />
-                <Card.Body>
+              <Card className="feedCard" >
+              <CollectionImageComponent variant="top" collection={collection}/>
+                <Card.Body className="text-center">
                   <Card.Title>{collection.name}</Card.Title>
-                  <Card.Text>{collection.description}</Card.Text>
+                  {/* <Card.Text>Owner: {collection.userId.username}</Card.Text> */}
                   <Link to={`/mycollections/${collection._id}`}>
-                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a"}}>See Collection</Button>
+                    <Button style={{backgroundColor: "#35778a", borderColor: "#35778a", transition: "background-color 0.3s"}}
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = "#0f3940"; // Change to the desired darker color
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = "#35778a"; // Restore the original color
+                    }}>See Collection</Button>
                   </Link>
                 </Card.Body>
               </Card>

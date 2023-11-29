@@ -29,9 +29,15 @@ const ProfilePage = () => {
     <div className="user-profile d-flex align-items-center flex-column">
         {isLoggedIn ? (
           <div className="d-flex align-items-center flex-column">
-            <h3 className="mt-2"> Hello {user.username}!</h3>
+            <h1 className="mt-2"> Hello {user.username}!</h1>
             <Link to="/createCollection" className="m-3">
-              <Button style={{backgroundColor: "#029455", borderColor: "#029455"}}>Add New Collection</Button>
+              <Button style={{backgroundColor: "#029455", borderColor: "#029455", transition: "background-color 0.3s"}}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = "#01733e"; // Change to the desired darker color
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = "#029455"; // Restore the original color
+              }}>Add New Collection</Button>
             </Link>
             {user.collectionCount <= 0 ? (
               <div>No collections</div>
