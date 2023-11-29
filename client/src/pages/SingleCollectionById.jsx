@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_COLLECTION, GET_ME } from "../utils/queries";
 import ItemsComponent from "../components/ItemsComponent";
 import CollectionImageComponent from "../components/CollectionImageComponent";
 import AddItemButton from "../components/AddItemButton";
+import { Button } from "react-bootstrap";
 
 
 const SingleCollectionById = () => {
@@ -16,6 +17,17 @@ const SingleCollectionById = () => {
   } = useQuery(GET_SINGLE_COLLECTION, {
     variables: { collectionId },
   });
+
+  const [addButtonClicked, setAddButtonClicked] = useState(false);
+
+  function ShowAddItemButton(props) {
+    const clicked = props.clicked;
+    if(!clicked) {
+      return <Button  onClick={() => {setAddButtonClicked(true)}}>Add an Image</Button>
+    } else {
+      return <AddItemButton collectionId={collectionId} />
+    }
+  }
 
   const { loading: userLoading, data: userData } = useQuery(GET_ME);
 
@@ -50,7 +62,10 @@ const SingleCollectionById = () => {
       </div>
       <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (
-        <AddItemButton collectionId={collectionId} /> )}
+        
+        <ShowAddItemButton clicked={addButtonClicked} />
+        // <AddItemButton collectionId={collectionId} /> 
+        )}
       <h2>Items:</h2>
       {collectionLoading ? (
         <p>Loading Collection...</p>
