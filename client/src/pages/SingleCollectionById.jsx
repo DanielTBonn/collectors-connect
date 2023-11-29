@@ -23,7 +23,13 @@ const SingleCollectionById = () => {
   function ShowAddItemButton(props) {
     const clicked = props.clicked;
     if(!clicked) {
-      return <Button  onClick={() => {setAddButtonClicked(true)}}>Add an Image</Button>
+      return <Button style={{backgroundColor: "#029455", borderColor: "#029455", transition: "background-color 0.3s"}} 
+      onMouseOver={(e) => {
+        e.target.style.backgroundColor = "#01733e"; // Change to the desired darker color
+      }}
+      onMouseOut={(e) => {
+        e.target.style.backgroundColor = "#029455"; // Restore the original color
+      }} onClick={() => {setAddButtonClicked(true)}}>Add an Image</Button>
     } else {
       return <AddItemButton collectionId={collectionId} />
     }
