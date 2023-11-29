@@ -1,0 +1,25 @@
+.collection-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    overflow: hidden;
+    margin: 0 25px 25px 0;
+}
+
+.collection-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* Media query for screens under 600px */
+@media (max-width: 600px) {
+    .collection-image {
+        margin: 0 
+    }
+    
+    .collection-div {
+        flex-direction: column;
+    }
+  }

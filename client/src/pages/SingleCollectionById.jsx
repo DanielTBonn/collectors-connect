@@ -6,7 +6,7 @@ import ItemsComponent from "../components/ItemsComponent";
 import CollectionImageComponent from "../components/CollectionImageComponent";
 import AddItemButton from "../components/AddItemButton";
 import { Button } from "react-bootstrap";
-
+import "./SingleCollectionById.css";
 
 const SingleCollectionById = () => {
   const { collectionId } = useParams();
@@ -23,7 +23,13 @@ const SingleCollectionById = () => {
   function ShowAddItemButton(props) {
     const clicked = props.clicked;
     if(!clicked) {
-      return <Button  onClick={() => {setAddButtonClicked(true)}}>Add an Image</Button>
+      return <Button style={{backgroundColor: "#029455", borderColor: "#029455", transition: "background-color 0.3s"}} 
+      onMouseOver={(e) => {
+        e.target.style.backgroundColor = "#01733e"; // Change to the desired darker color
+      }}
+      onMouseOut={(e) => {
+        e.target.style.backgroundColor = "#029455"; // Restore the original color
+      }} onClick={() => {setAddButtonClicked(true)}}>Add an Image</Button>
     } else {
       return <AddItemButton collectionId={collectionId} />
     }
@@ -49,18 +55,15 @@ const SingleCollectionById = () => {
 
   return (
     <div style={inlineStyles}>
-      <h2 className="text-center">{singleCollection.name}</h2>
-      <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '300px',
-            width: '100%',
-            overflow: 'hidden',
-          }}>
-        <CollectionImageComponent collection={singleCollection} />
+      <div className="collection-div">
+        <div className="collection-image">
+          <CollectionImageComponent collection={singleCollection} />
+        </div>
+        <div style={{margin: "10px 10px 25px 10px"}}>
+          <h2 className="text-center">{singleCollection.name}</h2>
+          <p className="text-center">{singleCollection.description}</p>
+        </div>
       </div>
-      <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (
         
         <ShowAddItemButton clicked={addButtonClicked} />
@@ -80,4 +83,3 @@ const SingleCollectionById = () => {
 };
 
 export default SingleCollectionById;
-
