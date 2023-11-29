@@ -9,7 +9,7 @@ import CollectionsComponent from "../components/CollectionsComponent.jsx";
 import { GET_COLLECTIONS, GET_ME } from "../utils/queries.js";
 
 const IndexPage = () => {
-  const { loading, data, error } = useQuery(GET_COLLECTIONS);
+  const { loading, data, error, refetch } = useQuery(GET_COLLECTIONS);
 
   if (error) {
     console.error("GraphQL Error:", error);
@@ -29,6 +29,9 @@ const IndexPage = () => {
     // Update the state accordingly
     setIsLoggedIn(userIsLoggedIn);
   }, [userData]);
+ 
+    refetch();
+
 
   return (
     <>
