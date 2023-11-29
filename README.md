@@ -81,7 +81,7 @@ When I click the log out option,
 Then I am redirected to the home page. 
 
 ## Preview
-![Preview of application](add link to screenshot of application)
+![Preview of application](./client/src/collectconnect.png)
 
 ## Future Development
 Now that the essential structure of the site is in place, we look forward to implementing additional features…
