@@ -70,7 +70,7 @@ const RandomSearch = () => {
           <div className="container">
             <h2 className="text-center">Random Collection</h2>
             <div className="feedLi">
-            <Card className="feedCard">
+            <Card className="feedCard align-items-center">
               <CollectionImageComponent variant="top" collection={randomCollection} />
                 <Card.Body>
                   <Card.Title>{randomCollection.name}</Card.Title>

@@ -5,7 +5,7 @@ import { GET_SINGLE_COLLECTION, GET_ME } from "../utils/queries";
 import ItemsComponent from "../components/ItemsComponent";
 import CollectionImageComponent from "../components/CollectionImageComponent";
 import AddItemButton from "../components/AddItemButton";
-
+import "./SingleCollectionById.css";
 
 const SingleCollectionById = () => {
   const { collectionId } = useParams();
@@ -37,20 +37,18 @@ const SingleCollectionById = () => {
 
   return (
     <div style={inlineStyles}>
-      <h2 className="text-center">{singleCollection.name}</h2>
-      <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '300px',
-            width: '100%',
-            overflow: 'hidden',
-          }}>
-        <CollectionImageComponent collection={singleCollection} />
+      <div className="collection-div">
+        <div className="collection-image">
+          <CollectionImageComponent collection={singleCollection} />
+        </div>
+        <div style={{margin: "10px 10px 25px 10px"}}>
+          <h2 className="text-center">{singleCollection.name}</h2>
+          <p className="text-center">{singleCollection.description}</p>
+        </div>
       </div>
-      <p className="text-center">{singleCollection.description}</p>
       {currentUser && currentUser._id === singleCollection.userId._id && (
-        <AddItemButton collectionId={collectionId} /> )}
+        <AddItemButton collectionId={collectionId} />
+      )}
       <h2>Items:</h2>
       {collectionLoading ? (
         <p>Loading Collection...</p>
@@ -65,4 +63,3 @@ const SingleCollectionById = () => {
 };
 
 export default SingleCollectionById;
-
