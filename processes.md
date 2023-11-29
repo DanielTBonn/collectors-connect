@@ -15,4 +15,6 @@ Challenges:
 
 Successes: 
 - Our image hosting service AWS S3 turned out to be much easier to operate than previously thought, after getting some guidance on how to set it up in relation to MongoDB and graphql it was actually pretty simple to get and post images. 
+- Overcame github issues.
+- We spent so much time fixing our broken code that we became well versed in front end and backend
 

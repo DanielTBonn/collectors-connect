@@ -23,7 +23,7 @@ const SingleCollectionById = () => {
   function ShowAddItemButton(props) {
     const clicked = props.clicked;
     if(!clicked) {
-      return <Button  onClick={() => {setAddButtonClicked(true)}}>Not Clicked Yet</Button>
+      return <Button  onClick={() => {setAddButtonClicked(true)}}>Add an Image</Button>
     } else {
       return <AddItemButton collectionId={collectionId} />
     }
