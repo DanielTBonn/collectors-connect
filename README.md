@@ -5,7 +5,7 @@ an application dedicated to collectors, COLLECTCONNECT provides collectors with 
 
 [🚀 Repo on Github](https://github.com/DanielTBonn/collectors-connect)
 
-[🚀Deployed Site](https://boiling-anchorage-11027-d19406c04dfb.herokuapp.com/)
+[🚀Deployed Site](https://collectors-connect.onrender.com/)
 
 ## Table of Contents
 - [How to Get Started](#how-to-get-started)

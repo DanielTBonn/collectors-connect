@@ -4,7 +4,7 @@ The technologies we implemented for this project were as follows:
 - MongoDB for the database using Mongoose
 - Node.js for running javascript outside of the browser
 - Express to create a server for our web app
-- Vite to create a server that could communicate with our backend.
+- Vite to create a local development server.
 - AWS S3 for storage and retrieval of images.
 
 Tasks and Roles:
@@ -16,5 +16,5 @@ Challenges:
 Successes: 
 - Our image hosting service AWS S3 turned out to be much easier to operate than previously thought, after getting some guidance on how to set it up in relation to MongoDB and graphql it was actually pretty simple to get and post images. 
 - Overcame github issues.
-- We spent so much time fixing our broken code that we became well versed in front end and backend
+- We spent so much time fixing our broken code that we became well versed in front end and backend.
 
